@@ -31,7 +31,6 @@
     display: flex;
     border-radius : 30px;
     background: #fff;
-    width : 100%;
     height : 150%;
     margin: 10%;
 }
@@ -39,4 +38,8 @@
 .mainContainer {
     display: flex;
     height : 300%;
+}
+
+#portfolio{
+    width: 50%
 }
