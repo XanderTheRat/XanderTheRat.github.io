@@ -1,0 +1,15 @@
+.footerMainContainer {
+    background: radial-gradient(circle, var(--couleur-upperContainer), #1b1b22);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.lienFooter {
+    padding: 1%;
+}

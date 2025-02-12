@@ -37,3 +37,6 @@ th {
 .droite{
     float : right !important;
 }
+.gauche{
+    float : left !important;
+}
