@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style/cssReset.css">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/header.css">
+    <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/tab.css">
     <link rel="stylesheet" href="style/horloge.css">
     <title>Main Hub</title>
 </head>
-<body>
+<header>
     <div class = "upperContainer">
         <div class="upperContainerMain">
             <a href="https://github.com/XanderTheRat" class="imageProfil"> </a>
@@ -16,6 +17,27 @@
             <div class="blanc date"><span id="dateHorloge">Aujourd'hui</span> - <span id="heure">00:00:00</span> </div>
             <div class="upperContainerDivider">
             </div>
+        </div>
+    </div>
+</header>
+<body>
+    <div class="mainChoiceContainer">
+        <div class="choiceContainer">
+            <aside class="tabs vertical droite">
+                <div class="tab active" data-tab="tab1">
+                    <img class="enLigne"></img><h1 class="enLigne">Projet 1</h1>
+                </div>
+                <div class="tab" data-tab="tab2">
+                    <img class="enLigne"></img><h1 class="enLigne">Projet 2</h1>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="mainContainer">
+        <div id="tab1" class="tab-content active noir">
+            <div>Hello World</div>
+        <div id="tab2" class="tab-content noir">
+            <div>Hello World</div>
         </div>
     </div>
 

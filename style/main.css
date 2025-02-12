@@ -1,0 +1,42 @@
+.enLigne {
+    display: inline-block;
+}
+
+.mainChoiceContainer {
+    display: flex;
+}
+.choiceContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: auto;
+    font-size: 14px;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    border-radius : 30px;
+    background: #fff;
+    width : 100%;
+    height : 150%;
+    margin: 10%;
+}
+
+.mainContainer {
+    display: flex;
+    heigt : 300%;
+}

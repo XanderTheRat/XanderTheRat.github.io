@@ -2,7 +2,7 @@
     --background-color : #202023;
     --couleur-De-Surlignage : #f59012;
     --couleur-De-Fond-Tab-Active : #696464;
-    --couleur-De-Fond-Tab : #6e6975;
+    --couleur-De-Fond-Tab : #37353b;
     --couleur-upperContainer : rgb(32, 32, 35);
     --couleur-ombre-upperContainer : rgba(65, 69, 65, 0.99);
     --document-background-color: 253, 253, 253;
@@ -32,4 +32,8 @@ th, td {
 
 th {
     background-color: #f4f4f4;
+}
+
+.droite{
+    float : right !important;
 }

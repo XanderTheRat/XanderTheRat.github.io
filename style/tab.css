@@ -3,13 +3,16 @@
     cursor: pointer;
     margin-bottom: 10px;
     width:100%;
+    height:20%;
 }
 
 /*Ici la classe pour les onglets */
 .tab {
     position: relative;
+    display: flex;
     flex:1;
     text-align: center;
+    justify-content: center;
     padding: 10px 20px;
     border: 1px solid #ccc;
     border-bottom: 1px solid white;
@@ -28,12 +31,12 @@
 .tab.active::after {
     content: '';
     position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 8px solid transparent;
+    top : 50%;
+    left: -5px;
+    transform: rotate(0.12turn);
+    border-left: 8px solid var(--couleur-De-Fond-Tab-Active);
     border-right: 8px solid transparent;
-    border-top: 8px solid var(--couleur-De-Fond-Tab-Active);
+    border-top: 8px solid transparent;
 }
 
 /*Ici c'est le contenue de l'onglet qui est à afficher*/
@@ -44,5 +47,10 @@
 
 /*On change son display lorsqu'il est actif*/
 .tab-content.active {
-    display: block;
+    display: flex;
+    border-radius : 30px;
+    background: #fff;
+    width : 100%;
+    height : 150%;
+    margin: 10%;
 }

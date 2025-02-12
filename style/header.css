@@ -65,13 +65,13 @@
     border-radius : 60%;
     border : 1px solid var(--couleur-upperContainer);
     transition: transform 0.3s ease-in-out;
-    margin-left : 3%;
+    margin-left : 5%;
 }
 .imageProfil:hover {
     transform: scale(1.1);
 }
 
 .ContainerTitle{
-    margin-right: 3%;
+    //TODO
 }
 /*Les IDs*/
