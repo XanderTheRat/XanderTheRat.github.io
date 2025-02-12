@@ -1,0 +1,35 @@
+:root{
+    --background-color : #202023;
+    --couleur-De-Surlignage : #f59012;
+    --couleur-De-Fond-Tab-Active : #696464;
+    --couleur-De-Fond-Tab : #6e6975;
+    --couleur-upperContainer : rgb(32, 32, 35);
+    --couleur-ombre-upperContainer : rgba(65, 69, 65, 0.99);
+    --document-background-color: 253, 253, 253;
+    --darkdocument-background-color: 30, 30, 35;
+}
+body {
+    background: radial-gradient(circle,var(--background-color), #434047);
+    background-size: 100% 100vh;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
