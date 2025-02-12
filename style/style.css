@@ -34,7 +34,7 @@
     color : #FFFFFF;
 }
 /*Main*/
-.upperContainer{
+.upperContainer .upperContainerMain{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -42,7 +42,9 @@
     align-items: center;
     background: radial-gradient(circle, var(--couleur-upperContainer), #1b1b22);
     box-shadow: 0px 4px 7px var(--couleur-ombre-upperContainer);
+    /*position : fixed;*/
 }
+
 .upperContainerDivider {
     display: flex;
     padding-bottom: 1%;
