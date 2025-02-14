@@ -1,4 +1,4 @@
-.sousTabs {
+.tabs {
     display: flex;
     margin-bottom: 10px;
     width:100%;
@@ -6,7 +6,7 @@
 }
 
 /*Ici la classe pour les onglets */
-.sousTab {
+.tab {
     position: relative;
     display: flex;
     flex:1;
@@ -22,14 +22,14 @@
 }
 /* -------------------------------------------------------------------------------------------------------------------- */
 /*Ici la classe pour l'onglet actuellement actif*/
-.sousTab.active {
+.tab.active {
     background-color: var(--couleur-De-Fond-Tab-Active);
     font-weight: bold;
     border-bottom: 1px solid white;
 }
 
 /*On ajout sous l'onglet actif une fleche de la même couleur que son background color*/
-.sousTab.active::after {
+.tab.active::after {
     content: '';
     position: absolute;
     top : 50%;

@@ -1,4 +1,4 @@
-const tabs = document.querySelectorAll('.sousTab');
+const tabs = document.querySelectorAll('.tabs');
 const tabContents = document.querySelectorAll('.tab-content');
 const sousTabs = document.querySelectorAll('.sous-tabs');
 const sousTabContents = document.querySelectorAll('.sous-tab-content');
