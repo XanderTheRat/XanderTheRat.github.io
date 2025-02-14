@@ -14,7 +14,7 @@ tabs.forEach(tab => {
         document.getElementById(tab.dataset.tab).classList.add('active');
     });
 });
-/*
+
 sousTabs.forEach(sousTab => {
     sousTab.addEventListener('click', () => {
         sousTabs.forEach(t => t.classList.remove('sousTabActive'));
@@ -24,4 +24,3 @@ sousTabs.forEach(sousTab => {
         document.getElementById(sousTab.dataset.sousTab).classList.add('sousTabActive');
     });
 });
-*/
