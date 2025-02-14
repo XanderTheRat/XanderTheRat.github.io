@@ -47,7 +47,7 @@
 }
 
 /*On change son display lorsqu'il est actif*/
-.tab-content.active {
+.tab-content.sousTabActive {
     display: flex;
     border-radius : 30px;
     background: #fff;
