@@ -1,7 +1,6 @@
 const tabs = document.querySelectorAll('.tab');
 const tabContents = document.querySelectorAll('.tab-content');
 const sousTabs = document.querySelectorAll('.sousTab');
-const sousTabContents = document.querySelectorAll('.sousTab-content');
 
 tabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -15,13 +14,20 @@ tabs.forEach(tab => {
 sousTabs.forEach(sousTab => {
     sousTab.addEventListener('click', (event) => {
         const isActive = sousTab.classList.contains('sousTabActive');
+        const targetId = sousTab.getAttribute('data-tab');
+        const targetDiv = document.querySelector(`.sousTab-content[id = "${targetId}"]`);
 
         if (isActive) {
             sousTab.classList.remove('sousTabActive');
-            event.target.classList.remove('sousTabActive');
-        } else {
+            if (targetDiv) {
+                targetDiv.classList.remove("sousTabActive");
+            }
+        }
+        else {
             sousTab.classList.add('sousTabActive');
-            document.getElementById(event.target.id).classList.add('sousTabActive');
+            if (targetDiv) {
+                targetDiv.classList.add("sousTabActive");
+            }
         }
     });
 });
