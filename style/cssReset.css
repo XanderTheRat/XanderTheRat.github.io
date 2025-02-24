@@ -1,6 +1,7 @@
 :root{
     --background-color : #202023;
     --couleur-De-Surlignage : #f59012;
+    --couleur-De-Liens : #f59012;
     --couleur-De-Fond-Tab-Active : #696464;
     --couleur-De-Fond-Tab : #37353b;
     --couleur-upperContainer : rgb(32, 32, 35);
@@ -16,6 +17,11 @@ body {
     padding: 0;
     margin: 0;
     overflow-y : var(--overflow);
+}
+a {
+    color : var(--couleur-De-Liens);
+    text-decoration: none;
+    font-weight: bolder;
 }
 table {
     width: 100%;
