@@ -11,5 +11,6 @@
 }
 
 .lienFooter {
+    color : var(--couleur-De-Liens);
     padding: 1%;
 }
