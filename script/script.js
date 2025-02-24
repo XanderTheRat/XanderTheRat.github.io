@@ -1,39 +1,41 @@
-let Case = false;
+let upperCase = false;
+let letter = "";
+
 
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", function(event){
         if (event.key === "Backspace"){
-            document.getElementById("mainDiv").textContent = ""
+            letter = letter.substring(0, letter.length - 1);
+            document.getElementById("mainDiv").textContent = letter;
+        }
+        else if (event.key === "Delete") {
+            letter = "";
+            document.getElementById("mainDiv").textContent = letter;
+        }
+        else if (event.key === "CapsLock") {
+                if (upperCase) {
+                    upperCase = false
+                }else{
+                    upperCase = true;
+                }
+            }
+        else if (event.key === "CapsLock") {
+            if (upperCase) {
+                letter += event.key.toUpperCase();
+            } else {
+                letter += event.key.toLowerCase();
+            }
+
+        }
+        else if (event.key === "Enter") {
+            letter += "\n";
         }
         else {
-            if (event.key === "Shift") {
-                if (Case) {
-                    Case = false
-                }else{
-                    Case = true;
-                }
-            }
-            else {
-                if (event.key === "Enter" || event.key === "Tab" || event.key === "Control" || event.key === "alt"){
-                    if (event.key === "Enter") {
-                        document.getElementById("mainDiv").textContent += "\n";
-                    }
-                    else {
-                        document.getElementById("mainDiv").textContent += "";
-                    }
-                }
-                else{
-                    if (Case) {
-                        document.getElementById("mainDiv").textContent += event.key.toUpperCase();
-                    }
-                    else {
-                        document.getElementById("mainDiv").textContent += event.key.toLowerCase();
-                    }
-                }
-
-
-            }
-
+            letter += event.key;
         }
+        if (letter.length > 255) {
+                letter[1] = event.key;
+        }
+        document.getElementById("mainDiv").textContent = letter;
     })
 });
