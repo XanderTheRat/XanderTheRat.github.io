@@ -43,3 +43,23 @@
 #portfolio{
     width: 50%
 }
+
+:root {
+    --sizeOfText : 300px
+}
+
+.MainConteneur {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    color : #ffffff;
+    font-weight: bolder;
+    font-size: var(--sizeOfText);
+}
+
+#ForStryker {
+    color: #FFFFFF;
+    font-size: 50px;
+}
