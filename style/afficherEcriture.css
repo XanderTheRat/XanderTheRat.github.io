@@ -1,3 +1,7 @@
+:root {
+    --sizeOfText : 300px
+}
+
 .MainConteneur {
     display: flex;
     flex-direction: column;
@@ -6,5 +10,5 @@
     margin-top: 50px;
     color : #ffffff;
     font-weight: bolder;
-    font-size: 300px;
+    font-size: var(--sizeOfText);
 }
