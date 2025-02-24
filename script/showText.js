@@ -2,12 +2,19 @@ let upperCase = false;
 let letter = "";
 let boolNumber = false
 let sizeOfText = 300;
-const exeption = ["Alt", "Control", "Home", "Shift", "End","PageDown","PageUp","F10","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
+const exeption = ["Alt", "Control", "Home", "Shift", "End","PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
 
 
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", function(event){
+        // Afficher/cacher le footer
+        if (letter.toLowerCase().includes("showfoote") && event.key.toLowerCase() === "r") {
+            document.getElementById("footerUselessThing").style.display = "flex";
+        }else if (letter.toLowerCase().includes("hidefoote") && event.key.toLowerCase() === "r") {
+            document.getElementById("footerUselessThing").style.display = "none";
+        }
 
+        //Corps du script
         if (boolNumber) {
             if (event.key <=9 || event.key >= 0) {
                 sizeOfText += event.key;
