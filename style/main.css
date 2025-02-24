@@ -60,6 +60,22 @@
     font-size: var(--sizeOfText);
 }
 
+.consoleDiv {
+    width:94%;
+    display: flex;
+    align-items: flex-start;
+    margin : 1%;
+    padding-left : 2%;
+    padding-right : 2%;
+    color : #4a8e38;
+    font-weight: bolder;
+    background-color: #000000;
+    border-radius : 30px;
+    font-size: 150px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
 #ForStryker {
     color: #FFFFFF;
     font-size: 50px;

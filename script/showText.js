@@ -3,16 +3,30 @@ let letter = "";
 let boolNumber = false
 let sizeOfText = 300;
 const exeption = ["Alt", "Control", "Home", "Shift", "End","PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
-
+const conteneur = document.getElementById("mainDiv");
 
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", function(event){
-        // Afficher/cacher le footer
-        if (letter.toLowerCase().includes("showfoote") && event.key.toLowerCase() === "r") {
-            document.getElementById("footerUselessThing").style.display = "flex";
-        }else if (letter.toLowerCase().includes("hidefoote") && event.key.toLowerCase() === "r") {
-            document.getElementById("footerUselessThing").style.display = "none";
+        //Afficher/cacher console
+        if (conteneur.classList.contains("consoleDiv")) {
+            if (letter.toLowerCase().includes("console.quit()")) {
+                conteneur.classList.remove("consoleDiv");
+                letter = "";
+            }
+            // Afficher/cacher le footer
+            else if (letter.toLowerCase().includes("showfooter(") && event.key.toLowerCase() === ")") {
+                document.getElementById("footerUselessThing").style.display = "flex";
+            }else if (letter.toLowerCase().includes("hidefooter(") && event.key.toLowerCase() === ")") {
+                document.getElementById("footerUselessThing").style.display = "none";
+            }
+        }else {
+            if (letter.toLowerCase().includes("console.add()")) {
+                conteneur.classList.add("consoleDiv");
+                letter = "";
+            }
         }
+
+
 
         //Corps du script
         if (boolNumber) {
@@ -27,11 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             else if (event.key === "Backspace"){
                 sizeOfText = sizeOfText.substring(0, sizeOfText.length - 1);
-                document.getElementById("mainDiv").textContent = letter;
+                conteneur.textContent = letter;
             }
             else if (event.key === "Delete") {
                 sizeOfText = 0;
-                document.getElementById("mainDiv").textContent = letter;
+                conteneur.textContent = letter;
             }
         }
         // Si ce n'est pas un chiffre à rentrer
@@ -48,11 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             else if (event.key === "Backspace"){
                 letter = letter.substring(0, letter.length - 1);
-                document.getElementById("mainDiv").textContent = letter;
+                conteneur.textContent = letter;
             }
             else if (event.key === "Delete") {
                 letter = "";
-                document.getElementById("mainDiv").textContent = letter;
+                conteneur.textContent = letter;
             }
             else if (event.key === "Enter") {
                 letter += "";
@@ -69,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     letter[1] = event.key;
                 }else {
                     letter += event.key;
-                    document.getElementById("mainDiv").textContent = letter;
+                    conteneur.textContent = letter;
                 }
             }
         }
