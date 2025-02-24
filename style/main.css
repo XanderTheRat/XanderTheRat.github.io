@@ -1,5 +1,6 @@
 :root {
-    --sizeOfText : 300px
+    --sizeOfText : 300px;
+    --overflow : auto;
 }
 
 .enLigne {
