@@ -58,12 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 letter += "";
             }
             else {
-                letter += event.key;
-                document.getElementById("mainDiv").textContent = letter;
+                if (letter.length > 9) {
+                    letter[1] = event.key;
+                }else {
+                    letter += event.key;
+                    document.getElementById("mainDiv").textContent = letter;
+                }
             }
-        }
-        if (letter.length > 255) {
-                letter[1] = event.key;
         }
         if (letter.toLowerCase().includes("stryker")) {
             document.getElementById("ForStryker").textContent = "Yo bro. N";
