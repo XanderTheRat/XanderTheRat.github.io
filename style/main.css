@@ -1,3 +1,7 @@
+:root {
+    --sizeOfText : 300px
+}
+
 .enLigne {
     display: inline-block;
 }
@@ -42,10 +46,6 @@
 
 #portfolio{
     width: 50%
-}
-
-:root {
-    --sizeOfText : 300px
 }
 
 .MainConteneur {
