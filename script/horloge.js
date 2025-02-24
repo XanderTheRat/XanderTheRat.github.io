@@ -27,4 +27,4 @@ function DateDuJour() {
 DateDuJour();
 Horloge();
 setInterval(Horloge, 1000);
-setInterval(DateDuJour, 36000000);
+setInterval(DateDuJour, 1000);

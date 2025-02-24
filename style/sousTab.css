@@ -1,15 +1,15 @@
 .sousTabs {
     display: flex;
+    flex-wrap: nowrap;
     margin-bottom: 10px;
     width:100%;
-    height:20%;
+    height:auto;
+    overflow-y: auto;
 }
 
 /*Ici la classe pour les onglets */
 .sousTab {
-    position: relative;
     display: flex;
-    flex:1;
     cursor: pointer;
     text-align: center;
     justify-content: center;
@@ -18,39 +18,28 @@
     border-bottom: 1px solid white;
     background-color: var(--couleur-De-Fond-Tab);
     color:#f4f4f4;
-    width : 6%;
+    width : 40%;
 }
 /* -------------------------------------------------------------------------------------------------------------------- */
 /*Ici la classe pour l'onglet actuellement actif*/
-.sousTab.active {
+.sousTab.sousTabActive {
     background-color: var(--couleur-De-Fond-Tab-Active);
     font-weight: bold;
     border-bottom: 1px solid white;
 }
 
-/*On ajout sous l'onglet actif une fleche de la même couleur que son background color*/
-.sousTab.active::after {
-    content: '';
-    position: absolute;
-    top : 50%;
-    left: -5px;
-    transform: rotate(0.12turn);
-    border-left: 8px solid var(--couleur-De-Fond-Tab-Active);
-    border-right: 8px solid transparent;
-    border-top: 8px solid transparent;
-}
 
 /*Ici c'est le contenue de l'onglet qui est à afficher*/
-.tab-content {
+.sousTab-content {
     padding: 20px;
     display: none;
 }
 
 /*On change son display lorsqu'il est actif*/
-.tab-content.sousTabActive {
+.sousTab-content.sousTabActive {
     display: flex;
     border-radius : 30px;
     background: #fff;
-    height : 150%;
+    height : auto;
     margin: 10%;
 }
