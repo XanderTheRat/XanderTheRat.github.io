@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 letter[1] = event.key;
         }
         if (letter.toLowerCase().includes("stryker")) {
-            document.getElementById("ForStryker").textContent = "NIGGER";
+            document.getElementById("ForStryker").textContent = "Yo bro. N";
         }else {
             document.getElementById("ForStryker").textContent = "";
         }
