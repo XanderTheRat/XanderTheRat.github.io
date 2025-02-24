@@ -19,11 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 boolNumber = false;
             }
             else if (event.key === "Backspace"){
-                letter = letter.substring(0, letter.length - 1);
+                sizeOfText = sizeOfText.substring(0, sizeOfText.length - 1);
                 document.getElementById("mainDiv").textContent = letter;
             }
             else if (event.key === "Delete") {
-                letter = "";
+                sizeOfText = 0;
                 document.getElementById("mainDiv").textContent = letter;
             }
         }
@@ -64,6 +64,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         if (letter.length > 255) {
                 letter[1] = event.key;
+        }
+        if (letter.toLowerCase().includes("stryker")) {
+            document.getElementById("ForStryker").textContent = "NIGGER";
+        }else {
+            document.getElementById("ForStryker").textContent = "";
         }
 
     })

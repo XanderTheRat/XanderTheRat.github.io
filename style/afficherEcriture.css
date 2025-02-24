@@ -12,3 +12,8 @@
     font-weight: bolder;
     font-size: var(--sizeOfText);
 }
+
+#ForStryker {
+    color: #FFFFFF;
+    font-size: 50px;
+}
