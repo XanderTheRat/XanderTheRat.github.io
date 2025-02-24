@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 letter += "";
             }
             else {
-                if (letter.length > 9) {
+                if (letter.length > 49) {
                     letter[1] = event.key;
                 }else {
                     letter += event.key;
