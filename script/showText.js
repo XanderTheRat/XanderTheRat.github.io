@@ -8,7 +8,7 @@ let redValue = 0;
 let greenValue = 0;
 let blueValue = 0;
 let sizeOfText = 300;
-const exeption = ["Alt", "Control", "Home", "Shift", "End","Tab", "PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
+const exeption = ["Alt", "ContextMenu", "Control", "Home", "Shift", "End","Tab", "PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
 const conteneur = document.getElementById("mainDiv");
 
 function setText() {
@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (letter.toLowerCase().includes("console.quit()")) {
                 conteneur.classList.remove("consoleDiv");
                 letter = "";
+                setText();
             }
             // Afficher/cacher le footer
             else if (letter.toLowerCase().includes("showfooter(") && event.key.toLowerCase() === ")") {
@@ -99,12 +100,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }else if (letter.toLowerCase().includes("getred()")) {
                 letter = redValue;
                 setText();
+                letter = "";
             }else if (letter.toLowerCase().includes("getgreen()")) {
                 letter = greenValue;
                 setText();
+                letter = "";
             }else if (letter.toLowerCase().includes("getblue()")) {
                 letter = blueValue;
                 setText();
+                letter = "";
             }
 
             else if (letter.toLowerCase().includes("setbodycolor()")) {
@@ -116,9 +120,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
         else {
-            if (letter.toLowerCase().includes("console.add()")) {
+            if (event.key === "ContextMenu") {
                 conteneur.classList.add("consoleDiv");
                 letter = "";
+                setText();
             }
         }
 
