@@ -50,6 +50,7 @@
 }
 
 .MainConteneur {
+    background-color : none;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,9 +68,9 @@
     margin : 1%;
     padding-left : 2%;
     padding-right : 2%;
-    color : #4a8e38;
+    color : #4a8e38 !important;
     font-weight: bolder;
-    background-color: #000000;
+    background-color: #000000 !important;
     border-radius : 30px;
     font-size: 150px;
     word-wrap: break-word;
