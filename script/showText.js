@@ -1,5 +1,3 @@
-const exeption = ["Alt", "Control", "Home", "Shift", "End","PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
-const conteneur = document.getElementById("mainDiv");
 let upperCase = false;
 let letter = "";
 let boolNumber = false;
@@ -10,6 +8,8 @@ let redValue = 0;
 let greenValue = 0;
 let blueValue = 0;
 let sizeOfText = 300;
+const exeption = ["Alt", "ContextMenu", "Control", "Home", "Shift", "End","Tab", "PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
+const conteneur = document.getElementById("mainDiv");
 
 function setText() {
     conteneur.textContent = letter;
@@ -26,8 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (letter.toLowerCase().includes("console.quit()")) {
                 conteneur.classList.remove("consoleDiv");
-                letter = "";
-                setText();
+                resetText();
             }
             // Afficher/cacher le footer
             else if (letter.toLowerCase().includes("showfooter(") && event.key.toLowerCase() === ")") {
@@ -192,11 +191,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             else if (event.key === "Backspace"){
                 sizeOfText = sizeOfText.substring(0, sizeOfText.length - 1);
-                setText();
+                conteneur.textContent = letter;
             }
             else if (event.key === "Delete") {
                 sizeOfText = 0;
-                setText();
+                conteneur.textContent = letter;
             }
         }
         // Si ce n'est pas un chiffre à rentrer
@@ -213,13 +212,13 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             else if (event.key === "Backspace"){
                 letter = letter.substring(0, letter.length - 1);
-                setText();
+                conteneur.textContent = letter;
             }
             else if (event.key === "Delete") {
                 letter = "";
-                setText()
+                conteneur.textContent = letter;
             }
-            else if (event.key === "Enter" || event.key === "Tab") {
+            else if (event.key === "Enter") {
                 letter += "";
             }
             else if (event.key == "Dead") {
@@ -237,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     letter[1] = event.key;
                 }else {
                     letter += event.key;
-                    setText()
+                    conteneur.textContent = letter;
                 }
             }
         }
