@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", function(event){
         //Afficher/cacher console
         if (conteneur.classList.contains("consoleDiv")) {
+
             if (letter.toLowerCase().includes("console.quit()")) {
                 conteneur.classList.remove("consoleDiv");
                 resetText();
@@ -111,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     conteneur.textContent = greenValue;
                 }
             }
-            if (boolBlue) {
+            else if (boolBlue) {
                 if ((event.key <=9 || event.key >= 0) && redValue <= 255) {
                     blueValue += event.key;
                     conteneur.textContent += blueValue;
@@ -154,10 +155,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 setText();
                 letter = "";
             }
-
             else if (letter.toLowerCase().includes("setbodycolor()")) {
                 document.documentElement.style.setProperty("--radial-background", "rgb(" + redValue + "," + greenValue + "," + blueValue + ")");
                 document.documentElement.style.setProperty("background", "var(--radial-background)");
+                letter = "";
+                setText();
+            }
+            else if (letter.toLowerCase().includes("settextcolor()")) {
+                document.getElementById("mainDiv").style.setProperty("color", "rgb(" + redValue + "," + greenValue + "," + blueValue + ")");
                 letter = "";
                 setText();
             }
