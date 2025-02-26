@@ -8,9 +8,10 @@
     --couleur-ombre-upperContainer : rgba(65, 69, 65, 0.99);
     --document-background-color: 253, 253, 253;
     --darkdocument-background-color: 30, 30, 35;
+    --radial-background : radial-gradient(circle,var(--background-color), #434047);
 }
 body {
-    background: radial-gradient(circle,var(--background-color), #434047);
+    background: var(--radial-background);
     background-size: 100% 100vh;
     height: 100%;
     font-family: Arial, sans-serif;
