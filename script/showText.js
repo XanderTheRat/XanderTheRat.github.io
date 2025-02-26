@@ -14,6 +14,10 @@ const conteneur = document.getElementById("mainDiv");
 function setText() {
     conteneur.textContent = letter;
 }
+function resetText() {
+    letter = "";
+    setText();
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", function(event){
@@ -21,8 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (conteneur.classList.contains("consoleDiv")) {
             if (letter.toLowerCase().includes("console.quit()")) {
                 conteneur.classList.remove("consoleDiv");
-                letter = "";
-                setText();
+                resetText();
             }
             // Afficher/cacher le footer
             else if (letter.toLowerCase().includes("showfooter(") && event.key.toLowerCase() === ")") {
@@ -37,14 +40,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("headerUselessThing").style.display = "none";
             }
             // Paramétrer les couleurs
-            else if (letter.substring(letter.lenght - 8, letter.lenght).includes("setred(") && event.key.toLowerCase() === ")") {
+            else if (letter.toLowerCase().includes("resetred()")) {
+                redValue = redValue - redValue;
+                conteneur.textContent = "> Done.";
+                letter = "";
+            }
+            else if (letter.toLowerCase().includes("resetgreen()")) {
+                greenValue = greenValue - greenValue;
+                conteneur.textContent = "> Done.";
+                letter = "";
+            }
+            else if (letter.toLowerCase().includes("resetblue()")) {
+                blueValue = blueValue - blueValue;
+                conteneur.textContent = "> Done.";
+                letter = "";
+            }
+            else if (letter.toLowerCase().includes("resetcolor()")) {
+                redValue = redValue - redValue;
+                greenValue = greenValue - greenValue;
+                blueValue = blueValue - blueValue;
+                conteneur.textContent = "> Done.";
+                letter = "";
+            }
+            else if (letter.toLowerCase().includes("setred()")) {
                 boolRed = true;
+                resetText();
             }
-            else if (letter.substring(letter.lenght- 9, letter.lenght).includes("setgreen(") && event.key.toLowerCase() === ")") {
+            else if (letter.toLowerCase().includes("setgreen()")) {
                 boolGreen = true;
+                resetText();
             }
-            else if (letter.substring(letter.lenght - 8, letter.lenght).includes("setblue(") && event.key.toLowerCase() === ")") {
+            else if (letter.toLowerCase().includes("setblue()")) {
                 boolBlue = true;
+                resetText();
             }
 
             else if (boolRed) {
@@ -54,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 else if (event.key === "Enter") {
                     boolRed = false;
+                    resetText();
                 }
                 else if (event.key === "Backspace"){
                     redValue = redValue.substring(0, sizeOfText.length - 1);
@@ -61,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 else if (event.key === "Delete") {
                     redValue = 0;
-                    conteneur.textContent += redValue;
+                    conteneur.textContent = redValue;
                 }
             }
             else if (boolGreen) {
@@ -71,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 else if (event.key === "Enter") {
                     boolGreen = false;
+                    resetText();
                 }
                 else if (event.key === "Backspace"){
                     greenValue = redValue.substring(0, sizeOfText.length - 1);
@@ -78,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 else if (event.key === "Delete") {
                     greenValue = 0;
-                    conteneur.textContent += greenValue;
+                    conteneur.textContent = greenValue;
                 }
             }
             if (boolBlue) {
@@ -88,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 else if (event.key === "Enter") {
                     boolBlue = false;
+                    resetText();
                 }
                 else if (event.key === "Backspace"){
                     blueValue = redValue.substring(0, sizeOfText.length - 1);
@@ -95,25 +126,38 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 else if (event.key === "Delete") {
                     blueValue = 0;
-                    conteneur.textContent += blueValue;
+                    conteneur.textContent = blueValue;
                 }
             }else if (letter.toLowerCase().includes("getred()")) {
-                letter = redValue;
+                if (redValue.length > 1) {
+                    letter = redValue.substring(1,redValue.length);
+                }
+                else {
+                    letter = redValue;
+                }
                 setText();
                 letter = "";
             }else if (letter.toLowerCase().includes("getgreen()")) {
-                letter = greenValue;
+                if (greenValue.length > 1) {
+                    letter = greenValue.substring(1,greenValue.length);
+                }else {
+                    letter = greenValue;
+                }
                 setText();
                 letter = "";
             }else if (letter.toLowerCase().includes("getblue()")) {
-                letter = blueValue;
+                if (blueValue.length > 1) {
+                    letter = blueValue.substring(1, blueValue.length);
+                }else {
+                    letter = blueValue;
+                }
                 setText();
                 letter = "";
             }
 
             else if (letter.toLowerCase().includes("setbodycolor()")) {
-                document.documentElement.style.setProperty("--radialGradient", "radial-gradient(circle, rgba(" + redValue + ", " + greenValue + ", " + blueValue + ", 1) 0%, rgba(0, 0, 0, 1) 100%)");
-                document.body.setAttribute("style", "background : auto")
+                document.documentElement.style.setProperty("--radial-background", "rgb(" + redValue + "," + greenValue + "," + blueValue + ")");
+                document.documentElement.style.setProperty("background", "var(--radial-background)");
                 letter = "";
                 setText();
             }
