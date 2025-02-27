@@ -12,9 +12,15 @@ const exeption = ["Alt", "ContextMenu", "Control", "Home", "Shift", "End","Tab",
 const conteneur = document.getElementById("mainDiv");
 
 function setText() {
+    /*
+    Fonction permettant de changer le texte de la div principale
+    */
     conteneur.textContent = letter;
 }
 function resetText() {
+    /*
+    Fonction permettant de reset le texte de la div principale à 0
+    */
     letter = "";
     setText();
 }
