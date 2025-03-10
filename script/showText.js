@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 conteneur.classList.remove("consoleDiv");
                 resetText();
             }
+            else if (letter.toLowerCase().includes("console.home()")){
+                window.location.href = "index.html";
+            }
             // Afficher/cacher le footer
             else if (letter.toLowerCase().includes("showfooter(") && event.key.toLowerCase() === ")") {
                 document.getElementById("footerUselessThing").style.display = "flex";
