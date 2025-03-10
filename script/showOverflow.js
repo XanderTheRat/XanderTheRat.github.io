@@ -3,7 +3,7 @@ let caracters = "";
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("keydown", function(event){
         if (caracters.length > 50) {
-            caracters.substring(0, caracters.length - 10);
+            caracters.substring(caracters.length - 10, caracters.length);
         }
         caracters += event.key;
         if (caracters.toLowerCase().includes("shift") && caracters.toLowerCase().includes("alt")) {

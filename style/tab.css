@@ -2,7 +2,7 @@
     display: flex;
     margin-bottom: 10px;
     width:100%;
-    height:20%;
+    height:auto;
 }
 
 /*Ici la classe pour les onglets */
