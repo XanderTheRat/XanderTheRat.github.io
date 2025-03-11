@@ -77,6 +77,22 @@
     word-break: break-word;
 }
 
+
+.advice{
+    cursor: pointer;
+}
+.consoleGuide {
+    display : none;
+    color : #FFFFFF;
+    font-size: 50px;
+}
+
+#adviceOn {
+    display : none;
+    color : #FFFFFF;
+}
+#consoleDiv {
+}
 #easterEgg {
     color: #FFFFFF;
     font-size: 50px;
