@@ -17,7 +17,8 @@ body {
     font-family: Arial, sans-serif;
     padding: 0;
     margin: 0;
-    overflow-y : var(--overflow);
+    overflow-y : var(--overflowY);
+    overflow-x : var(--overflowX);
 }
 a {
     color : var(--couleur-De-Liens);
@@ -73,4 +74,11 @@ th {
 }
 .bleu {
     color : #384c8e !important;
+}
+
+.gras{
+    font-weight:bold;
+}
+.italique{
+    font-style: italic;
 }

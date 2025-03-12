@@ -9,12 +9,6 @@
     background: var(--couleur-De-Surlignage);
     color: #FFFFFF
 }
-.gras{
-    font-weight:bold;
-}
-.italique{
-    font-style: italic;
-}
 .Presentation{
     font-size:large;
 }
