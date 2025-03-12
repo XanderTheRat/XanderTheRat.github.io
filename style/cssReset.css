@@ -49,6 +49,28 @@ th {
     float : left !important;
 }
 
+.noir{
+    color: #000;
+    font-weight: 400;
+}
 .blanc{
     color : white;
+}
+.rouge{
+    color :#FF0000;
+}
+.rougePur {
+    color : #FF0000;
+}
+.vertPur{
+    color : #00FF00;
+}
+.vert {
+    color : #4a8e38 !important;
+}
+.bleuPur {
+    color : #0000FF;
+}
+.bleu {
+    color : #384c8e !important;
 }

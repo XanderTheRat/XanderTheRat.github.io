@@ -2,6 +2,10 @@
     --sizeOfText : 300px;
     --overflow : auto;
 }
+.retourALaLigne {
+    width : 100%;
+    flex-basis: 100%;
+}
 
 .enLigne {
     display: inline-block;
@@ -50,7 +54,6 @@
 }
 
 .MainConteneur {
-    background-color : none;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,9 +86,20 @@
 }
 .consoleGuide {
     display : none;
+    justify-content: center;
+    align-items: center;
+    padding-left: 12.9%;
     color : #FFFFFF;
-    font-size: 50px;
 }
+.fermerGuide {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+
+
 
 #adviceOn {
     display : none;

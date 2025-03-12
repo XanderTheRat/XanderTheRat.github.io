@@ -28,7 +28,7 @@ function resetText() {
 
 
 document.addEventListener("keydown", function(event){
-    if (!document.getElementById("mainDiv").classList.contains("actif")) return;
+    if (!document.getElementById("mainDiv").classList.contains("actif")) return 1;
     else {
 
 
@@ -173,7 +173,6 @@ document.addEventListener("keydown", function(event){
                 sizeOfText += event.key;
             } else if (event.key === "Enter") {
                 boolNumber = false;
-                // On change la taille du texte saisie
                 document.documentElement.style.setProperty('--sizeOfText', sizeOfText + "px");
                 boolNumber = false;
             } else if (event.key === "Backspace") {
@@ -243,5 +242,12 @@ function showGuide() {
         resetText();
         conteneur.classList.add("actif");
         guide.style.setProperty("display", "none");
+        document.getElementById("showAdvice").style.setProperty("display", "flex");
+        document.querySelectorAll(".sousTab-content").forEach(content => {
+            content.classList.remove("sousTabActive");
+        });
+        document.querySelectorAll(".sousTab").forEach(tab => {
+            tab.classList.remove("sousTabActive");
+        });
     }
 }

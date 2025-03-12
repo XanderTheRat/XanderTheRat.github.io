@@ -38,6 +38,7 @@
 /*On change son display lorsqu'il est actif*/
 .sousTab-content.sousTabActive {
     display: flex;
+    flex-direction: column;
     border-radius : 30px;
     background: #fff;
     height : auto;

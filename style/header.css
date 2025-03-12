@@ -19,20 +19,6 @@
     font-size:large;
 }
 
-/*Les couleurs*/
-.vert{
-    color: #00FF00;
-}
-.rouge{
-    color :#FF0000;
-}
-.noir{
-    color: #000;
-    font-weight: 400;
-}
-.blanc{
-    color : #FFFFFF;
-}
 /*Main*/
 .upperContainer .upperContainerMain{
     display: flex;

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style/cssReset.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/footer.css">
+    <link rel="stylesheet" href="style/sousTab.css">
     <title>Non.</title>
 </head>
 
@@ -15,8 +16,45 @@
     <div class="MainConteneur actif" id="mainDiv">
     </div>
     <div class = "consoleGuide" id = "consoleDiv">
-        <p>LOREM ISPUM</p>
+        <div class="sousTabs">
+            <div class="sousTab" data-tab="Console"><h3>Console</h3></div>
+            <div class="sousTab" data-tab="Page"><h3>Page</h3></div>
+        </div>
+        <a href="javascript:void(0)" class="fermerGuide" onclick="showGuide()">&times;</a>
     </div>
+    <div id = "french">
+        <div class="sousTab-content noir" id="Console">
+            <div class="retourALaLigne"><span class="rouge">Ouvrir la console :</span> Bouton Contextuel</div>
+            <div class="retourALaLigne"><span class="rouge">Fermer la console :</span><span class="vert">console.quit()</span></div>
+            <br>
+            <div data-tab="commandsSomethingUseless">
+                <div class="retourALaLigne">Quitter la console :<span class="vert">console.quit()</span></div>
+                <div class="retourALaLigne">Définir la couleur de text en fonction des valeurs RGB :<span class="vert">setTextColor()</span></div>
+                <div class="retourALaLigne">Définir la couleur de fond en fonction des valeurs RGB :<span class="vert">setBodyColor()</span></div>
+                <div class="retourALaLigne">Cacher le footer :<span class="vert">hideFooter()</span></div>
+                <div class="retourALaLigne">Afficher le footer :<span class="vert">showFooter()</span></div>
+                <div class="retourALaLigne">Cacher le header :<span class="vert">hideHeader()</span></div>
+                <div class="retourALaLigne">Afficher le header :<span class="vert">showHeader()</span></div>
+                <div class="retourALaLigne">Revenir sur le main hub :<span class="vert">console.home()</span></div>
+            </div><br>
+            <div data-tab="couleursSomethingUseless">
+                <div class="retourALaLigne">Changer les valeurs de couleur :</div>
+                <div class="retourALaLigne"><span class="rougePur">Rouge :</span> <span class="vert">setRed()</span></div>
+                <div class="retourALaLigne"><span class="vertPur">Vert :</span> <span class="vert">setGreen()</span></div>
+                <div class="retourALaLigne"><span class="bleuPur">Bleu :</span> <span class="vert">setBlue()</span></div>
+                <br><br>
+                <div class="retourALaLigne">Récupérer les valeurs des couleurs :</div>
+                <div class="retourALaLigne"><span class="rougePur">Rouge :</span> <span class="vert">getRed()</span></div>
+                <div class="retourALaLigne"><span class="vertPur">Vert :</span> <span class="vert">getGreen()</span></div>
+                <div class="retourALaLigne"><span class="bleuPur">Bleu :</span> <span class="vert">getBlue()</span></div>
+                <div></div>
+            </div><br>
+
+
+        </div>
+        <div class="sousTab-content noir" id="Page">page</div>
+    </div>
+
 
 
     <div id="easterEgg">
@@ -24,6 +62,7 @@
 
     <script src="script/showText.js"></script>
     <script src="script/showOverflow.js"></script>
+    <script src="script/tab.js"></script>
 </body>
 <footer>
     <div class="footerMainContainer blanc" id="footerUselessThing">
