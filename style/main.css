@@ -81,8 +81,8 @@
     word-break: break-word;
 }
 
-
 .advice{
+    display: none;
     cursor: pointer;
 }
 .consoleGuide {
@@ -98,10 +98,20 @@
     right: 45px;
     font-size: 60px;
 }
+.telephone {
+    display: none;
+}
 
 
-
-
+.datesSomethingUseless {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin : 1%;
+    padding-left : 4.45%;
+    color : #4a8e38 !important;
+    font-size: 0px;
+}
 #adviceOn {
     display : none;
     color : #FFFFFF;
@@ -109,4 +119,7 @@
 #easterEgg {
     color: #FFFFFF;
     font-size: 50px;
+}
+#dateSomethingUseless {
+    background-color: #000000 !important;
 }

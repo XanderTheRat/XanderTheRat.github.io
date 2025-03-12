@@ -1,4 +1,5 @@
 let upperCase = false;
+let cursor = false;
 let letter = "";
 let boolNumber = false;
 let boolRed = false;
@@ -30,8 +31,6 @@ function resetText() {
 document.addEventListener("keydown", function(event){
     if (!document.getElementById("mainDiv").classList.contains("actif")) return 1;
     else {
-
-
         //Afficher/cacher console
         if (conteneur.classList.contains("consoleDiv")) {
 
@@ -156,6 +155,40 @@ document.addEventListener("keydown", function(event){
                 document.getElementById("mainDiv").style.setProperty("color", "rgb(" + redValue + "," + greenValue + "," + blueValue + ")");
                 letter = "";
                 setText();
+            }else if (letter.toLowerCase().includes("hidehour()")){
+                document.getElementById("dateSomethingUseless").style.setProperty("background-color", "none");
+                document.getElementById("date2").style.setProperty("font-size", "0px");
+                letter = "";
+                setText();
+            }else if (letter.toLowerCase().includes("showhour()")){
+                document.getElementById("dateSomethingUseless").style.setProperty("background-color", "#000000 !important");
+                document.getElementById("date2").style.setProperty("font-size", "30px");
+                letter = "";
+                setText();
+            }else if(letter.toLowerCase().includes("hidedate()")){
+                document.getElementById("dateSomethingUseless").style.setProperty("background-color", "none");
+                document.getElementById("date1").style.setProperty("font-size", "0px");
+                letter = "";
+                setText();
+            }
+            else if (letter.toLowerCase().includes("showdate()")) {
+                document.getElementById("dateSomethingUseless").style.setProperty("background-color", "#000000 !important");
+                document.getElementById("date1").style.setProperty("font-size", "30px");
+                letter = "";
+                setText();
+            }else if (letter.toLowerCase().includes("cursor()")) {
+                cursor = !cursor;
+                letter = "";
+                setText();
+            }
+            else if (letter.toLowerCase().includes("showcursor()")) {
+                cursor = true;
+                letter = "";
+                setText();
+            }else if (letter.toLowerCase().includes("hidecursor()")) {
+                cursor = false
+                letter = "";
+                setText();
             }
 
         } else {
@@ -251,3 +284,10 @@ function showGuide() {
         });
     }
 }
+
+
+function addDisplayToAdvice() {
+    document.getElementById("showAdvice").style.setProperty("display", "flex");
+}
+
+setInterval(addDisplayToAdvice, 120000);

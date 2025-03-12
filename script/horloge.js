@@ -15,7 +15,6 @@ function DateDuJour() {
 
     let jour = date.getDate();
     let mois = date.getMonth() + 1;
-    let annee = date.getFullYear();
 
     afficheJour = jourDeLaSemaine[date.getDay()];
     afficheMois = moisEnString[mois];

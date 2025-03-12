@@ -6,15 +6,26 @@
     <link rel="stylesheet" href="style/cssReset.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/footer.css">
+    <link rel="stylesheet" href="style/horloge.css">
     <link rel="stylesheet" href="style/sousTab.css">
     <title>Non.</title>
 </head>
-
 <header>
+    <div class="datesSomethingUseless" id="dateSomethingUseless">
+        <div class="date enLigne dates" id="date1">
+            <span id="dateHorloge">Aujourd'hui</span>
+        </div>
+        <div class="date enLigne" id="date2">
+            <span id="heure" >00:00:00</span>
+        </div>
+    </div>
 </header>
 <body>
     <div class="MainConteneur actif" id="mainDiv">
     </div>
+
+
+
     <div class = "consoleGuide" id = "consoleDiv">
         <div class="sousTabs">
             <div class="sousTab" data-tab="Console"><h3>Console</h3></div>
@@ -24,18 +35,24 @@
     </div>
     <div id = "french">
         <div class="sousTab-content noir" id="Console">
-            <div class="retourALaLigne"><span class="rouge">Ouvrir la console :</span> Bouton Contextuel</div>
-            <div class="retourALaLigne"><span class="rouge">Fermer la console :</span><span class="vert">console.quit()</span></div>
+            <div class="retourALaLigne"><span class="rouge">Ouvrir la console :</span><span class="gras"> Bouton Contextuel</span></div>
+            <div class="retourALaLigne"><span class="rouge">Fermer la console : </span><span class="vert">console.quit()</span></div>
             <br>
             <div data-tab="commandsSomethingUseless">
-                <div class="retourALaLigne">Quitter la console :<span class="vert">console.quit()</span></div>
-                <div class="retourALaLigne">Définir la couleur de text en fonction des valeurs RGB :<span class="vert">setTextColor()</span></div>
-                <div class="retourALaLigne">Définir la couleur de fond en fonction des valeurs RGB :<span class="vert">setBodyColor()</span></div>
-                <div class="retourALaLigne">Cacher le footer :<span class="vert">hideFooter()</span></div>
-                <div class="retourALaLigne">Afficher le footer :<span class="vert">showFooter()</span></div>
-                <div class="retourALaLigne">Cacher le header :<span class="vert">hideHeader()</span></div>
-                <div class="retourALaLigne">Afficher le header :<span class="vert">showHeader()</span></div>
-                <div class="retourALaLigne">Revenir sur le main hub :<span class="vert">console.home()</span></div>
+                <div class="retourALaLigne">Quitter la console : <span class="vert">console.quit()</span></div>
+                <div class="retourALaLigne">Définir la couleur de text en fonction des valeurs RGB : <span class="vert">setTextColor()</span></div>
+                <div class="retourALaLigne">Définir la couleur de fond en fonction des valeurs RGB : <span class="vert">setBodyColor()</span></div>
+                <div class="retourALaLigne">Cacher le footer : <span class="vert">hideFooter()</span></div>
+                <div class="retourALaLigne">Afficher le footer : <span class="vert">showFooter()</span></div>
+                <div class="retourALaLigne">Cacher le header : <span class="vert">hideHeader()</span></div>
+                <div class="retourALaLigne">Afficher le header : <span class="vert">showHeader()</span></div>
+                <div class="retourALaLigne">Revenir sur le main hub : <span class="vert">console.home()</span></div>
+                <div class="guideHeures">
+                    <div class="retourALaLigne">Afficher l'heure : <span class="vert">showHour()</span></div>
+                    <div class="retourALaLigne">Afficher la date : <span class="vert">showHour()</span></div>
+                    <div class="retourALaLigne">Cacher l'heure : <span class="vert">hideHour()</span></div>
+                    <div class="retourALaLigne">Cacher la date : <span class="vert">hideDate()</span></div>
+                </div>
             </div><br>
             <div data-tab="couleursSomethingUseless">
                 <div class="retourALaLigne">Changer les valeurs de couleur :</div>
@@ -49,8 +66,6 @@
                 <div class="retourALaLigne"><span class="bleuPur">Bleu :</span> <span class="vert">getBlue()</span></div>
                 <div></div>
             </div><br>
-
-
         </div>
         <div class="sousTab-content noir" id="Page">
             <div data-tab="overflowGuide">
@@ -60,10 +75,19 @@
                 <div class="retourALaLigne">Afficher la barre de défilement verticale : <span class="gras">CTRL + ALT + Flèche vers le haut ou Flèche vers le bas</span></div>
                 <div class="retourALaLigne">Cacher la barre de défilement verticale : <span class="gras">SHIFT + ALT + Flèche vers le haut ou Flèche vers le bas</span></div>
             </div><br>
+            <div class="retourALaLigne">Supprimer complètement son texte :<span class="gras"> SUPR</span></div>
+            <div data-tab="textSizeGuide">
+                <div class="retourALaLigne">Changer la taille du texte :<span class="gras"> INSERT</span></div>
+                <div class="retourALaLigne">Saisir la taille :<span class="gras"> N'importe quel nombre</span></div>
+                <div class="retourALaLigne">Valider la taille :<span class="gras"> ENTRER</span></div>
+            </div><br>
+
         </div>
     </div>
 
-
+    <div class="telephone">
+        <p>Rien à voir ici...</p>
+    </div>
 
     <div id="easterEgg">
     </div>
@@ -71,6 +95,7 @@
     <script src="script/showText.js"></script>
     <script src="script/showOverflow.js"></script>
     <script src="script/tab.js"></script>
+    <script src="script/horloge.js"></script>
 </body>
 <footer>
     <div class="footerMainContainer blanc" id="footerUselessThing">
