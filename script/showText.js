@@ -9,7 +9,7 @@ let redValue = 0;
 let greenValue = 0;
 let blueValue = 0;
 let sizeOfText = 300;
-const exeption = ["Alt", "ContextMenu", "Control", "Home", "Shift", "End","Tab", "PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
+const exception = ["Alt", "ContextMenu", "Control", "Home", "Shift", "End","Tab", "PageDown","PageUp","F10", "Meta","F9","F8","F7","F6","F5", "F4", "F3", "F2", "F1"]
 const conteneur = document.getElementById("mainDiv");
 const guide = document.getElementById("consoleDiv");
 
@@ -21,7 +21,7 @@ function setText() {
 }
 function resetText() {
     /**
-    * Fonction permettant de reset le texte de la div principale à 0
+    * Fonction permettant de reset le texte de la div principale à 0.
     */
     letter = "";
     setText();
@@ -240,7 +240,7 @@ document.addEventListener("keydown", function(event){
             } else if (event.key === "Insert") {
                 sizeOfText = 0;
                 boolNumber = true;
-            } else if (exeption.includes(event.key)) {
+            } else if (exception.includes(event.key)) {
                 letter += "";
             } else {
                 if (letter.length > 49) {
