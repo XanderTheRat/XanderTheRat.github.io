@@ -7,7 +7,6 @@
     overflow-y: auto;
 }
 
-/*Ici la classe pour les onglets */
 .sousTab {
     display: flex;
     cursor: pointer;
@@ -21,21 +20,18 @@
     width : 40%;
 }
 /* -------------------------------------------------------------------------------------------------------------------- */
-/*Ici la classe pour l'onglet actuellement actif*/
+
 .sousTab.sousTabActive {
     background-color: var(--couleur-De-Fond-Tab-Active);
     font-weight: bold;
     border-bottom: 1px solid white;
 }
 
-
-/*Ici c'est le contenue de l'onglet qui est à afficher*/
 .sousTab-content {
     padding: 20px;
     display: none;
 }
 
-/*On change son display lorsqu'il est actif*/
 .sousTab-content.sousTabActive {
     display: flex;
     flex-direction: column;
