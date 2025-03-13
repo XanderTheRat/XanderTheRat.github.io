@@ -16,7 +16,7 @@ function DateDuJour() {
     let jour = date.getDate();
     let mois = date.getMonth();
 
-    afficheJour = jourDeLaSemaine[date.getDay() + 1];
+    afficheJour = jourDeLaSemaine[date.getDay() - 1];
     afficheMois = moisEnString[mois];
 
     const dateFormattee = `${afficheJour} ${jour} ${afficheMois}`;
