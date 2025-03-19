@@ -123,8 +123,12 @@
     min-height: 150px;
     max-height: 500px;
 
-    overflow: auto;
+    overflow-x: auto;
+    scrollbar-width : none;
     white-space: nowrap;
+}
+.commande::-webkit-scrollbar {
+    display: none;
 }
 
 #adviceOn {
