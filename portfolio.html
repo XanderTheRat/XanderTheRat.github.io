@@ -36,9 +36,8 @@
                 </aside>
             </div>
         </div>
-
     <div id="projetsInfo" class="tab-content active content noir">
-        <div>
+        <div class="gauche">
             <h1>Projets Informatiques</h1>
             <h3>Lycée</h3>
             <p>Vous trouverez <a href="https://gitlab.com/XanderTheRat/bloc_note">ici</a> l'ensemble des projets informatiques fais au lycée. </p>
@@ -53,7 +52,6 @@
                 <li>
                     SQL
                 </li>
-
             </ul>
             <h3>Première année BUT Informatique</h3>
             <p>Au cours de la première année du BUT, plusieurs langages de programmation ont été vus et apris.</p>
@@ -67,7 +65,15 @@
                 <div class="sousTab" data-tab="CLangage"><h3>C</h3></div>
                 <div class="sousTab" data-tab="PostGreSql"><h3>PostGre SQL</h3></div>
             </div>
-            <div class="sousTab-content noir" id="Python">LOREM ISPUM py</div>
+            <div class="sousTab-content noir" id="Python">
+                <div class="divProg" onclick="setLienDemineur()">
+                    <img src="img/python.svg" alt="Logo Python" class="logo enLigne"><p class="enLigne labelProg gras">Démineur</p>
+                </div>
+                <div class="dividerProg"></div>
+                <div class="divProg" onclick="setLienChronometre()">
+                    <img src="img/python.svg" alt="Logo Python" class="logo enLigne"><p class="enLigne labelProg gras">Chronomètre</p>
+                </div>
+            </div>
             <div class="sousTab-content noir" id="HTML">LOREM ISPUM web</div>
             <div class="sousTab-content noir" id="Linux">LOREM ISPUM Linux</div>
             <div class="sousTab-content noir" id="SQL">LOREM ISPUM sql</div>
@@ -75,12 +81,14 @@
             <div class="sousTab-content noir" id="CLangage">LOREM ISPUM c</div>
             <div class="sousTab-content noir" id="PostGreSql">LOREM ISPUM PGsql</div>
         </div>
+        <aside class="commande droite" id="showProgramme">
+            > ...
+        </aside>
     </div>
-
-
     <script src="script/tab.js"></script>
     <script src="script/horloge.js"></script>
     <script src="script/showOverflow.js"></script>
+    <script src="script/portfolio.js"></script>
 </body>
 <footer>
     <div class="footerMainContainer">
