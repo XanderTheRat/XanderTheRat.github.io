@@ -130,6 +130,32 @@
 .commande::-webkit-scrollbar {
     display: none;
 }
+.logo {
+    width: 8%;
+    vertical-align: baseline;
+}
+.labelProg {
+    vertical-align: baseline;
+}
+.divProg {
+    margin : 3%;
+    display: flex;
+    background-color: #433c3c;
+    box-shadow: 4px 4px 7px #09090b;
+    color: white;
+    border-radius : 10px;
+    font-size: large;
+    width : 150%;
+    cursor: pointer;
+}
+.dividerProg {
+    border: 1px solid #000000;
+    height: 1%;
+    width : 155%;
+}
+
+
+
 
 #adviceOn {
     display : none;
