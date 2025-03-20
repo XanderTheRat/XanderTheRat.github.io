@@ -131,8 +131,10 @@
     display: none;
 }
 .logo {
-    width: 8%;
-    vertical-align: baseline;
+    width: 4%;
+    height: 4%;
+    vertical-align: middle;
+    padding : 1%;
 }
 .labelProg {
     vertical-align: baseline;
