@@ -164,3 +164,5 @@ function collapsible(id) {
         document.getElementById(id + "Collapsible").classList.add("collapsibleMinus")
     }
 }
+
+// Ajouter une fonction qui afficher le texte et le color en fonction des langages
