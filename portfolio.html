@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="img/vnd.icon" href="img/document_icon_transparent.webp">
+    <link rel="icon" type="img/vnd.icon" href="img/icon/document_icon_transparent.webp">
     <link rel="stylesheet" href="style/cssReset.css">
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/footer.css">
@@ -58,7 +58,7 @@
             <p>Vous trouverez ci-dessous une liste des différents langage avec, s'il y a, le projet informatique lui étant lié.</p>
             <div class="sousTabs">
                 <div class="sousTab" data-tab="Python"><h3>Python</h3></div>
-                <div class="sousTab" data-tab="HTML"><h3>Web</h3></div>
+                <div class="sousTab" data-tab="web"><h3>Web</h3></div>
                 <div class="sousTab" data-tab="Linux"><h3>Linux / Bash</h3></div>
                 <div class="sousTab" data-tab="SQL"><h3>SQL</h3></div>
                 <div class="sousTab" data-tab="Java"><h3>Java</h3></div>
@@ -67,40 +67,90 @@
             </div>
             <div class="sousTab-content noir" id="Python">
                 <div class="divProg" onclick="setLienDemineur()">
-                    <img src="img/python.webp" alt="Logo Python" class="logo enLigne"><p class="enLigne labelProg gras">Démineur</p>
+                    <img src="img/python.png" alt="Logo Python" class="logo enLigne"><p class="enLigne labelProg gras">Démineur</p>
                 </div>
                 <div class="dividerProg"></div>
                 <div class="divProg" onclick="setLienChronometre()">
-                    <img src="img/python.webp" alt="Logo Python" class="logo enLigne"><p class="enLigne labelProg gras">Chronomètre</p>
+                    <img src="img/python.png" alt="Logo Python" class="logo enLigne"><p class="enLigne labelProg gras">Chronomètre</p>
                 </div>
             </div>
-            <div class="sousTab-content noir" id="HTML">LOREM ISPUM web</div>
+            <div class="sousTab-content noir" id="web">
+                <p class="collapsible" onclick="collapsible('halloween')" id="halloweenCollapsible">Projet Halloween</p>
+                <div class="collapsibleContent" id="halloween">
+                    <div class="divProg" onclick="setLienIndexHalloween()">
+                        <img src="img/HTML.png" alt="Logo HTML" class="logo enLigne"><p class="enLigne labelProg gras">index.html</p>
+                    </div>
+                    <div class="divProg" onclick="setLienCSSHalloween()">
+                        <img src="img/CSS.png" alt="Logo CSS" class="logo enLigne"><p class="enLigne labelProg gras">CSS</p>
+                    </div>
+                    <div class="divProg" onclick="setLienJSHalloween()">
+                        <img src="img/JS.png" alt="Logo JS" class="logo enLigne" id="halloweenLogoJS"><p class="enLigne labelProg gras">Le script de la page</p>
+                    </div>
+                </div>
+                <p class="collapsible" onclick="collapsible('xanderTheRat')">XanderTheRat.github.io</p>
+                <div class="collapsibleContent" id="xanderTheRat">
+                    <div class="divProg" onclick="setLienIndexXanderTheRat()">
+                        <img src="img/HTML.png" alt="Logo HTML" class="logo enLigne"><p class="enLigne labelProg gras">Main Hub</p>
+                    </div>
+                    <div class="divProg" onclick="setLienPortfolioXanderTheRat()">
+                        <img src="img/HTML.png" alt="Logo HTML" class="logo enLigne"><p class="enLigne labelProg gras">Portfolio</p>
+                    </div>
+                    <div class="divProg" onclick="setLienAfficherTexte()">
+                        <img src="img/HTML.png" alt="Logo HTML" class="logo enLigne"><p class="enLigne labelProg gras">Quelque chose d'inutile</p>
+                    </div>
+                    <div class="divProg" onclick="setLienResetCSS()">
+                        <img src="img/CSS.png" alt="Logo CSS" class="logo enLigne"><p class="enLigne labelProg gras">CSS Reset</p>
+                    </div>
+                    <div class="divProg" onclick="setLienMainCSS()">
+                        <img src="img/CSS.png" alt="Logo CSS" class="logo enLigne"><p class="enLigne labelProg gras">Main CSS</p>
+                    </div>
+                    <div class="divProg" onclick="setLienHorloge()">
+                        <img src="img/JS.png" alt="Logo JS" class="logo enLigne" id="horlogeLogoJS"><p class="enLigne labelProg gras">Script de l'affichage du temps</p>
+                    </div>
+                    <div class="divProg" onclick="setLienPortfolioJS()">
+                        <img src="img/JS.png" alt="Logo JS" class="logo enLigne" id="portfolioXanderJSLogo"><p class="enLigne labelProg gras">Script de la page Portfolio</p>
+                    </div>
+                    <div class="divProg" onclick="setLienShowText()">
+                        <img src="img/JS.png" alt="Logo JS" class="logo enLigne" id="showTextLogoJS"><p class="enLigne labelProg gras">Script de l'affichage du texte</p>
+                    </div>
+                </div>
+            </div>
             <div class="sousTab-content noir" id="Linux">LOREM ISPUM Linux</div>
             <div class="sousTab-content noir" id="SQL">
                 <div id="VGSales">
                     <div class="divProg" onclick="setLienBDD1ACreation()">
-                        <img src="img/sql.webp" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Création de la BDD</p>
+                        <img src="img/sql.png" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Création de la BDD</p>
                     </div>
                     <div class="dividerProg"></div>
                     <div class="divProg" onclick="setLienBDD1AExos()">
-                        <img src="img/sql.webp" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Exercices liés à la BDD</p>
+                        <img src="img/sql.png" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Exercices liés à la BDD</p>
                     </div>
                     <div class="dividerProg"></div>
                     <div class="divProg" onclick="setLienBDD1ACreationTablesVGSales()">
-                        <img src="img/sql.webp" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">BDD principale</p>
+                        <img src="img/sql.png" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">BDD principale</p>
                     </div>
                     <div class="dividerProg"></div>
                     <div class="divProg" onclick="setLienInsertionVGSales()">
-                        <img src="img/sql.webp" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Insertion des données</p>
+                        <img src="img/sql.png" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Insertion des données</p>
                     </div>
                     <div class="dividerProg"></div>
                     <div class="divProg" onclick="setLienBDDRemplirVGSales()">
-                        <img src="img/sql.webp" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Insertion des données vers la BDD principale</p>
+                        <img src="img/sql.png" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Insertion des données vers la BDD principale</p>
                     </div>
                 </div>
             </div>
             <div class="sousTab-content noir" id="Java">LOREM ISPUM java</div>
-            <div class="sousTab-content noir" id="CLangage">LOREM ISPUM c</div>
+            <div class="sousTab-content noir" id="CLangage">
+                <div class="divProg" onclick="setLienTP1C()">
+                    <img src="img/c.png" alt="Logo C" class="logo enLigne"><p class="enLigne labelProg gras">TP1 de C</p>
+                </div>
+                <div class="divProg" onclick="setLienTP2C()">
+                    <img src="img/c.png" alt="Logo C" class="logo enLigne"><p class="enLigne labelProg gras">TP2 de C</p>
+                </div>
+                <div class="divProg" onclick="setLienTP3C()">
+                    <img src="img/c.png" alt="Logo C" class="logo enLigne"><p class="enLigne labelProg gras">TP3 de C</p>
+                </div>
+            </div>
             <div class="sousTab-content noir" id="PostGreSql">LOREM ISPUM PGsql</div>
         </div>
         <aside class="commande droite" id="showProgramme">

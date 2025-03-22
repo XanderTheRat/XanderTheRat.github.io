@@ -3,6 +3,46 @@
     --overflowY : auto;
     --overflowX : auto;
 }
+/*Collapsibles */
+.collapsible {
+    background-color: #37353b;
+    color: white;
+    cursor: pointer;
+    padding : 18px;
+    margin-bottom : 0px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+.collapsible:after {
+    content: '\02795';
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+.collapsibleMinus:after{
+    content: '\02796' !important;
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+.collapsibleContent {
+    padding : 18px;
+    display: none;
+    overflow: hidden;
+    margin-top: 0px;
+    width: 100%;
+    color : #FFFFFF;
+    background-color: #5a5761;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/*Mise en forme des textes*/
 .retourALaLigne {
     width : 100%;
     flex-basis: 100%;
@@ -11,7 +51,18 @@
 .enLigne {
     display: inline-block;
 }
-
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 100%;
+}
+/*Conteneurs principaux */
 .mainChoiceContainer {
     display: flex;
 }
@@ -24,19 +75,6 @@
     height: auto;
     font-size: 14px;
 }
-
-.vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    width: 100%;
-}
-
 .content {
     display: flex;
     border-radius : 30px;
@@ -44,16 +82,10 @@
     height : 150%;
     margin: 10%;
 }
-
 .mainContainer {
     display: flex;
     height : 500%;
 }
-
-#portfolio{
-    width: 50%
-}
-
 .MainConteneur {
     display: flex;
     flex-direction: column;
@@ -65,6 +97,7 @@
     font-size: var(--sizeOfText);
 }
 
+/*Page SomethingUseless */
 .consoleDiv {
     width:94%;
     display: flex;
@@ -80,7 +113,6 @@
     word-wrap: break-word;
     word-break: break-word;
 }
-
 .advice{
     display: none;
     cursor: pointer;
@@ -110,7 +142,6 @@
     color : #4a8e38 !important;
     font-size: 0px;
 }
-
 .commande{
     background-color: #1b1b22;
     color : #c1f3d0;
@@ -130,9 +161,10 @@
 .commande::-webkit-scrollbar {
     display: none;
 }
+
+/*Portfolio */
 .logo {
-    width: 4%;
-    height: 4%;
+    width: 6%;
     vertical-align: middle;
     padding : 1%;
 }
@@ -155,18 +187,39 @@
     height: 1%;
     width : 155%;
 }
+.collapsibleContent > .divProg {
+    width : 90%;
+}
+.collapsibleContent > .divProg > .logo {
+    width : 10%;
+    height: 10%;
+}
+#halloweenLogoJS {
+    border-radius: 2%;
+}
+.collapsibleContent > .divProg {
+    margin-bottom : 3%;
+}
 
 
-
-
+/*Les IDs.*/
+/*Page somethingUseless*/
 #adviceOn {
     display : none;
     color : #FFFFFF;
 }
+
 #easterEgg {
     color: #FFFFFF;
     font-size: 50px;
 }
+
+/*Date*/
 #dateSomethingUseless {
     background-color: #000000 !important;
+}
+
+/*Portfolio*/
+#portfolio{
+    width: 50%
 }
