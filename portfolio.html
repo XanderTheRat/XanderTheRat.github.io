@@ -87,7 +87,7 @@
                         <img src="img/JS.png" alt="Logo JS" class="logo enLigne" id="halloweenLogoJS"><p class="enLigne labelProg gras">Le script de la page</p>
                     </div>
                 </div>
-                <p class="collapsible" onclick="collapsible('xanderTheRat')">XanderTheRat.github.io</p>
+                <p class="collapsible" onclick="collapsible('xanderTheRat')" id="VGSalesCollapsible">XanderTheRat.github.io</p>
                 <div class="collapsibleContent" id="xanderTheRat">
                     <div class="divProg" onclick="setLienIndexXanderTheRat()">
                         <img src="img/HTML.png" alt="Logo HTML" class="logo enLigne"><p class="enLigne labelProg gras">Main Hub</p>
@@ -117,7 +117,8 @@
             </div>
             <div class="sousTab-content noir" id="Linux">LOREM ISPUM Linux</div>
             <div class="sousTab-content noir" id="SQL">
-                <div id="VGSales">
+                <p class="collapsible" onclick="collapsible('VGSales')" id = "VGSalesCollapsible">VGSales</p>
+                <div class="collapsibleContent" id="VGSales">
                     <div class="divProg" onclick="setLienBDD1ACreation()">
                         <img src="img/sql.png" alt="Logo SQL" class="logo enLigne"><p class="enLigne labelProg gras">Création de la BDD</p>
                     </div>

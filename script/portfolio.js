@@ -20,7 +20,7 @@ const lienXanderTheRatShowText = "https://raw.githubusercontent.com/XanderTheRat
 // Liens SQL : VGSales
 const lienBDD1ACreation = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/BDD.sql";
 const lienBBD1AExos = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/Exos.sql";
-const lienInsertionVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/Requetes.sql";
+const lienInsertionVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/Requete.sql";
 const lienBDDRemplirVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/remplissage.sql";
 const lienBDD1ACreationTablesVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/tables.sql";
 //Lien Java : SAÉ Java FX
@@ -156,11 +156,11 @@ function escapeHtml(text) {
 }
 
 function collapsible(id) {
-    if (document.getElementById(id).style.display === "none") {
-        document.getElementById(id).style.display = "block";
-        document.getElementById(id + "Collapsible").classList.add("collapsibleMinus")
-    }else{
+    if (document.getElementById(id).style.display === "block") {
         document.getElementById(id).style.display = "none";
         document.getElementById(id + "Collapsible").classList.remove("collapsibleMinus")
+    }else{
+        document.getElementById(id).style.display = "block";
+        document.getElementById(id + "Collapsible").classList.add("collapsibleMinus")
     }
 }
