@@ -18,6 +18,11 @@
     background-color: var(--couleur-De-Fond-Tab);
     color:#f4f4f4;
     width : 40%;
+    transition : all 1s ease-out;
+}
+.sousTab:hover, .sousTav:focus {
+    color : var(--couleur-De-Fond-Tab);
+    background-color: #f4f4f4;
 }
 /* -------------------------------------------------------------------------------------------------------------------- */
 
