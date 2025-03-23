@@ -15,6 +15,7 @@ div.document {
     background-color: rgb(var(--document-background-color));
     box-shadow: 0px 1px 1.9px -4px rgba(0, 0, 0, 0.1), 0px 6px 15px -4px rgba(0, 0, 0, 0.2);
     color: rgb(50, 50, 53);
+    margin : 5%;
 }
 
 div.darkdocument {
@@ -70,6 +71,18 @@ div.darkdocument::before {
 div.darkdocument::after {
     box-shadow: 0px 1px 1.9px -4px rgba(0, 0, 10, 0.8), 0px 6px 15px -4px rgba(0, 0, 7, 0.05);
 }
+
+.document > .tab-content.active, .document > .centre > .tab-content.active {
+    display: flex;
+    border-radius : 0;
+    background: rgb(var(--document-background-color));
+    height : auto;
+    margin: 10%;
+    box-shadow: none;
+}
+
+
+
 
 .centre{
     text-align: center;
