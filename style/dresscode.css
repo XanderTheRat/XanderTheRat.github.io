@@ -16,7 +16,7 @@ div.document {
     box-shadow: 0px 1px 1.9px -4px rgba(0, 0, 0, 0.1), 0px 6px 15px -4px rgba(0, 0, 0, 0.2);
     color: rgb(50, 50, 53);
     margin : 5%;
-    width: 60%;
+    width: 40%;
 }
 
 div.darkdocument {
@@ -87,7 +87,13 @@ div.darkdocument::after {
 .tab-content.active {
     justify-content: center;
 }
-
+.mainContainerDresscode > .tab-content.active {
+    border-radius : 0;
+    background: none;
+    height : auto;
+    margin: 5%;
+    box-shadow: none;
+}
 
 .centre{
     text-align: center;
@@ -113,4 +119,7 @@ div.darkdocument::after {
 .mainContainerDresscode {
     display : flex;
     justify-content: center;
+}
+.tableDresscode {
+    margin : 2%;
 }

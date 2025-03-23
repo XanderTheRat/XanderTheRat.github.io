@@ -18,31 +18,64 @@
     <div class="mainContainerDresscode">
         <div class="tab-content active document" id="tenuesStandards">
             <div class="centre">
-                <h1>TESADFD</h1>
-                <table>
+                <h1>Tenues Standards</h1>
+                <table class="tableDresscode">
                     <tbody>
-                    <td>
-                        <h1 class="centre">Tenues des Bleus</h1>
-                        <p class="gauche">Cette tenue est obligatoire pour tout opérateur en période de bleu. Elle contient :</p><br>
-                        <ul class="gauche">
-                            <li><span class="gras gauche">Lunettes tactiques : </span><span class="italique gauche"> 2</span></li>
-                            <li><span class="gras gauche">Accessoire de Tête : </span><span class="italique gauche"> Helmet</span></li>
-                            <li><span class="gras gauche">Gomtac : </span><span class="italique gauche"> AFU Opscore Headset 02</span></li>
-                            <li><span class="gras gauche">Cagoule : </span><span class="italique gauche"> Balaclava 2</span></li>
-                            <li><span class="gras gauche">Haut : </span><span class="italique gauche"> G 3 top 01</span></li>
-                            <li><span class="gras gauche">Avs Kit ( au choix ) : </span><span class="italique gauche"> Kit a/Kit d</span></li>
-                            <li><span class="gras gauche">Belt kit : </span><span class="italique gauche"> Belt 02</span></li>
-                            <li><span class="gras gauche">Équipement tactile : </span><span class="italique gauche"> Gloves 01</span></li>
-                        </ul>
-                    </td>
-                    <td class="centre">
-                        <img src="img/dresscode/tenueHommeFace.png" alt="Tenues des Bleus - Homme - Face" id="tenueHommeStandardFace" class="active">
-                        <img src="img/dresscode/tenueHommeDos.png" alt="Tenues des Bleus" id="tenueHommeStandardDos" class="inactif">
-                        <img src="img/dresscode/tenueFemmeFace.png" alt="Tenues des Bleus" id="tenueFemmeStandardFace" class="inactif">
-                        <img src="img/dresscode/tenueFemmeDos.png" alt="Tenues des Bleus" id="tenueFemmeStandardDos" class="inactif"><br>
-                        <p onclick="setActifMoins()" class="enLigne pointer"> < </p>
-                        <p onclick="setActifPlus()" class="enLigne pointer"> > </p>
-                    </td>
+                    <tr>
+                        <td>
+                            <h1 class="centre">Tenues des Bleus</h1>
+                            <p class="gauche">Cette tenue est obligatoire pour tout opérateur en <span class="gras">période de bleu.</span></p><br><br>
+                            <p>Elle contient :</p>
+                            <ul class="gauche">
+                                <li><span class="gras gauche">Lunettes tactiques : </span><span class="italique gauche"> 2</span></li>
+                                <li><span class="gras gauche">Accessoire de Tête : </span><span class="italique gauche"> Helmet</span></li>
+                                <li><span class="gras gauche">Gomtac : </span><span class="italique gauche"> AFU Opscore Headset 02</span></li>
+                                <li><span class="gras gauche">Cagoule : </span><span class="italique gauche"> Balaclava 2</span></li>
+                                <li><span class="gras gauche">Haut : </span><span class="italique gauche"> G 3 top 01</span></li>
+                                <li><span class="gras gauche">Avs Kit ( au choix ) : </span><span class="italique gauche"> Kit a/Kit d</span></li>
+                                <li><span class="gras gauche">Belt kit : </span><span class="italique gauche"> Belt 02</span></li>
+                                <li><span class="gras gauche">Équipement tactile : </span><span class="italique gauche"> Gloves 01</span></li>
+                            </ul><br><br><br><br><br><br><br><br><br>
+                            <p>Cette tenue recouvre complètement l'Opérateur afin de lui garantir l'anonymat, mais sert aussi à reconnaitre facilement les opérateurs en période probatoire.</p>
+                        </td>
+                        <td class="centre">
+                            <img src="img/dresscode/tenueHommeFace.png" alt="Tenues des Bleus - Homme - Face" id="tenueHommeStandardFace" class="active">
+                            <img src="img/dresscode/tenueHommeDos.png" alt="Tenues des Bleus - Homme - Dos" id="tenueHommeStandardDos" class="inactif">
+                            <img src="img/dresscode/tenueFemmeFace.png" alt="Tenues des Bleus - Femme - Face" id="tenueFemmeStandardFace" class="inactif">
+                            <img src="img/dresscode/tenueFemmeDos.png" alt="Tenues des Bleus - Femme - Dos" id="tenueFemmeStandardDos" class="inactif"><br>
+                            <p onclick="setActifMoinsTenuesStandards()" class="enLigne pointer"> < </p>
+                            <p onclick="setActifPlusTenuesStandards()" class="enLigne pointer"> > </p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h1>Tenues des Opérateurs</h1>
+                <table class="tableDresscode">
+                    <tbody>
+                    <tr>
+                        <td>
+                            Les opérateurs de la FIM sont libres de s'habiller selon le modèle décrit ci-dessus, mais ils peuvent aussi changer leur tenue selon leur grè. Il y a cependant des restrictions sur les équipements et les couvre-chefs. Vous trouverez ci-dessous les restrictions sur les couvre-chefs.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="tableDresscode">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <p>Les <span class="gras">bérets</span> peuvent être portés par uniquement les membres du Commandement.</p>
+                            <p>Tout autre couvre-chef peut être porté librement par tout opérateur ayant validé leur période probatoire</p>
+                        </td>
+                        <td class="centre">
+                            <img src="img/dresscode/tenueHommeFace.png" alt="Tenues du Commandement - Homme - Face" id="tenuesHommeCommandementFace" class="active">
+                            <img src="img/dresscode/tenueHommeDos.png" alt="Tenues du Commandement - Homme - Dos" id="tenueHommeCommandementDos" class="inactif">
+                            <img src="img/dresscode/tenueFemmeFace.png" alt="Tenues du Commandement - Femme - Face" id="tenueFemmeCommandementFace" class="inactif">
+                            <img src="img/dresscode/tenueFemmeDos.png" alt="Tenues du Commandement - Femme - Dos" id="tenueFemmeCommandementDos" class="inactif"><br>
+                            <p onclick="setActifMoinsTenuesCommandement()" class="enLigne pointer"> < </p>
+                            <p onclick="setActifPlusTenuesCommandement()" class="enLigne pointer"> > </p>
+                        </td>
+                    </tr>
+
                     </tbody>
                 </table>
             </div>
