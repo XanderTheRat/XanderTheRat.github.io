@@ -5,11 +5,27 @@
     <link rel="stylesheet" href="style/cssReset.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/dresscode.css">
+    <link rel="stylesheet" href="style/tab.css">
     <title>Dresscode</title>
 </head>
 <body>
-    <div class="document">
-      CECI EST UN TEXTE
+
+    <div class="tabs">
+      <div class="tab" data-tab="tab1">LOREM ISPUM</div>
+      <div class="tab" data-tab="tab2">LOREM ISPUM</div>
+      <div class="tab" data-tab="tab3">LOREM ISPUM</div>
     </div>
+
+    <div class="document">
+      <div class="centre">
+        <div class="tab-content" id="tab1">TEXTE ICI. LOREM ISPUM 1</div>
+        <div class="tab-content" id="tab2">TEXTE ICI. LOREM ISPUM 2</div>
+        <div class="tab-content" id="tab3">TEXTE ICI. LOREM ISPUM 3</div>
+      </div>
+    </div>
+
+
+    <script src="script/tab.js"></script>
+    <script src="script/showOverflow.js"></script>
 </body>
 </html>
