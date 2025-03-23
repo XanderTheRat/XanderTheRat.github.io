@@ -11,21 +11,46 @@
 <body>
 
     <div class="tabs">
-      <div class="tab" data-tab="tab1">LOREM ISPUM</div>
-      <div class="tab" data-tab="tab2">LOREM ISPUM</div>
-      <div class="tab" data-tab="tab3">LOREM ISPUM</div>
+      <div class="tab active" data-tab="tenuesStandards">Tenues Standards</div>
+      <div class="tab" data-tab="tenuesOperation">Tenues d'Opération</div>
+      <div class="tab" data-tab="armesEtEquipement">Armes et Équipements</div>
+    </div>
+    <div class="mainContainerDresscode">
+        <div class="tab-content active document" id="tenuesStandards">
+            <div class="centre">
+                <h1>TESADFD</h1>
+                    <div class="contentDressCode">
+                        <h1 class="centre">Tenues des Bleus</h1>
+                        <p class="gauche">Cette tenue est obligatoire pour tout opérateur en période de bleu. Elle contient :</p>
+                        <ul class="gauche">
+                            <li><span class="gras gauche">Lunettes tactiques : </span><span class="italique gauche"> 2</span></li>
+                            <li><span class="gras gauche">Accessoire de Tête : </span><span class="italique gauche"> Helmet</span></li>
+                            <li><span class="gras gauche">Gomtac : </span><span class="italique gauche"> AFU Opscore Headset 02</span></li>
+                            <li><span class="gras gauche">Cagoule : </span><span class="italique gauche"> Balaclava 2</span></li>
+                            <li><span class="gras gauche">Haut : </span><span class="italique gauche"> G 3 top 01</span></li>
+                            <li><span class="gras gauche">Avs Kit ( au choix ) : </span><span class="italique gauche"> Kit a/Kit d</span></li>
+                            <li><span class="gras gauche">Belt kit : </span><span class="italique gauche"> Belt 02</span></li>
+                            <li><span class="gras gauche">Équipement tactile : </span><span class="italique gauche"> Gloves 01</span></li>
+                        </ul>
+                    </div>
+                    <div class="droite contentDressCode">
+                        <img src="img/dresscode/tenue1.png" alt="Tenues des Bleus - Homme - Face" id="tenueHommeStandardFace" class="active">
+                        <img src="img/dresscode/tenue2.png" alt="Tenues des Bleus" id="tenueHommeStandardDos" class="inactif">
+                        <img src="img/dresscode/tenue3.png" alt="Tenues des Bleus" id="tenueFemmeStandardFace" class="inactif">
+                        <img src="img/dresscode/tenue4.png" alt="Tenues des Bleus" id="tenueFemmeStandardDos" class="inactif"><br>
+                        <p onclick="setActifMoins()" class="enLigne pointer"> < </p>
+                        <p onclick="setActifPlus()" class="enLigne pointer"> > </p>
+                    </div>
+            </div>
+                <div class="tab-content" id="tenuesOperation">TEXTE ICI. LOREM ISPUM 2</div>
+                <div class="tab-content" id="armesEtEquipement">TEXTE ICI. LOREM ISPUM 3</div>
+        </div>
     </div>
 
-    <div class="document">
-      <div class="centre">
-        <div class="tab-content" id="tab1">TEXTE ICI. LOREM ISPUM 1</div>
-        <div class="tab-content" id="tab2">TEXTE ICI. LOREM ISPUM 2</div>
-        <div class="tab-content" id="tab3">TEXTE ICI. LOREM ISPUM 3</div>
-      </div>
-    </div>
 
 
     <script src="script/tab.js"></script>
     <script src="script/showOverflow.js"></script>
+    <script src="script/dresscode.js"></script>
 </body>
 </html>

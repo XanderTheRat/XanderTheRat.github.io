@@ -3,7 +3,7 @@
 }
 
 div:is(.document, .darkdocument) {
-    display: block;
+    display: none;
     margin-inline: auto;
     margin-block: 1.5em;
     padding: 1.5rem;
@@ -16,6 +16,7 @@ div.document {
     box-shadow: 0px 1px 1.9px -4px rgba(0, 0, 0, 0.1), 0px 6px 15px -4px rgba(0, 0, 0, 0.2);
     color: rgb(50, 50, 53);
     margin : 5%;
+    width: 60%;
 }
 
 div.darkdocument {
@@ -80,18 +81,36 @@ div.darkdocument::after {
     margin: 10%;
     box-shadow: none;
 }
-
-
+.document > .tab-content.active > .contentDressCode > img {
+    height: 80%;
+}
+.tab-content.active {
+    justify-content: center;
+}
 
 
 .centre{
     text-align: center;
 }
 
-.content{
-    width:100%;
+.actif{
+    display : flex;
+}
+.inactif{
+    display: none;
+}
+.contentDressCode{
+    width:40%;
     border: 1px solid #000000;
+    min-height: 20em;
 }
 .Presentation{
     font-size:large;
+}
+.pointer{
+    cursor: pointer;
+}
+.mainContainerDresscode {
+    display : flex;
+    justify-content: center;
 }
