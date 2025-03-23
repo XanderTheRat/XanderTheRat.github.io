@@ -1,5 +1,5 @@
 const tabTenueStandart = ["tenueHommeStandardFace", "tenueHommeStandardDos", "tenueFemmeStandardFace", "tenueFemmeStandardDos"];
-const tabTenuesCommandement = ["tenuesHommeCommandementFace", "tenueHommeCommandementDos", "tenueFemmeCommandementFace", "tenueFemmeCommandementDos"];
+const tabTenuesCommandement = ["tenuesHommeCommandementFace", "tenueFemmeCommandementFace"];
 let compteurTenuesStandart = 0;
 let compteurTenuesCommandement = 0;
 
@@ -32,7 +32,7 @@ function setActifMoinsTenuesStandards() {
 function setActifPlusTenuesCommandement(){
     document.getElementById(tabTenuesCommandement[compteurTenuesCommandement]).classList.remove('active');
     document.getElementById(tabTenuesCommandement[compteurTenuesCommandement]).classList.add('inactif');
-    if ((compteurTenuesCommandement + 1) === 4) {
+    if ((compteurTenuesCommandement + 1) === 2) {
         compteurTenuesCommandement = 0;
     }
     else {
@@ -46,7 +46,7 @@ function setActifMoinsTenuesCommandement() {
     document.getElementById(tabTenuesCommandement[compteurTenuesCommandement]).classList.remove('active');
     document.getElementById(tabTenuesCommandement[compteurTenuesCommandement]).classList.add('inactif');
     if ((compteurTenuesCommandement) === 0) {
-        compteurTenuesCommandement = 3;
+        compteurTenuesCommandement = 1;
     }
     else {
         compteurTenuesCommandement--;
