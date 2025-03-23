@@ -1,7 +1,9 @@
 const tabTenueStandart = ["tenueHommeStandardFace", "tenueHommeStandardDos", "tenueFemmeStandardFace", "tenueFemmeStandardDos"];
 const tabTenuesCommandement = ["tenuesHommeCommandementFace", "tenueFemmeCommandementFace"];
+const tabTenuesOperations = ["tenuesOperationsFace", "tenuesOperationsDos"];
 let compteurTenuesStandart = 0;
 let compteurTenuesCommandement = 0;
+let compteurTenuesOperations = 0;
 
 function setActifPlusTenuesStandards(){
     document.getElementById(tabTenueStandart[compteurTenuesStandart]).classList.remove('active');
@@ -53,4 +55,30 @@ function setActifMoinsTenuesCommandement() {
     }
     document.getElementById(tabTenuesCommandement[compteurTenuesCommandement]).classList.add('active');
     document.getElementById(tabTenuesCommandement[compteurTenuesCommandement]).classList.remove('inactif');
+}
+
+function setActifPlusTenueOperation(){
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.remove('active');
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.add('inactif');
+    if ((compteurTenuesOperations + 1) === 2) {
+        compteurTenuesOperations = 0;
+    }
+    else {
+        compteurTenuesOperations++;
+    }
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.add('active');
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.remove('inactif');
+}
+
+function setActifMoinsTenueOperation() {
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.remove('active');
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.add('inactif');
+    if ((compteurTenuesOperations) === 0) {
+        compteurTenuesOperations = 1;
+    }
+    else {
+        compteurTenuesOperations--;
+    }
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.add('active');
+    document.getElementById(tabTenuesOperations[compteurTenuesOperations]).classList.remove('inactif');
 }
