@@ -144,12 +144,10 @@
     font-size: 0px;
 }
 .commande{
-    background-color: #1b1b22;
+    background-color: #1b1b22 !important;
     color : #c1f3d0;
     width: 30%;
     margin-left: 15%;
-    padding-left: 1%;
-    padding-top: 1%;
     border-radius: 1%;
     box-shadow: 4px 4px 7px #09090b;
     min-height: 150px;
@@ -158,6 +156,17 @@
     overflow-x: auto;
     scrollbar-width : none;
     white-space: nowrap;
+}
+.commande pre , .commande code.hljs {
+    background-color: inherit !important;
+    color : #cccccc;
+}
+.commande.hljs-section {
+    color : #4a8e38 !important;
+}
+code {
+    overflow-x: auto !important;
+    scrollbar-width : none !important;
 }
 .commande::-webkit-scrollbar {
     display: none;

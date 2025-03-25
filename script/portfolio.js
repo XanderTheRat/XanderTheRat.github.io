@@ -1,4 +1,3 @@
-let lienActif;
 // Liens Python
 const lienDemineur = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/Python/Demineur_upgrade.py";
 const lienChronometre = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/Python/Chronometre_amélioré.py";
@@ -32,97 +31,98 @@ const lienTP3C = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/C/R2.
 //Liens PostGre SQL
 
 // Autres variables
+let lienActif = lienDemineur;
 
 // Fonctions Python
 function setLienDemineur() {
     lienActif = lienDemineur;
-    afficherCode();
+    afficherCode("python");
 }
 function setLienChronometre() {
     lienActif = lienChronometre;
-    afficherCode();
+    afficherCode("python");
 }
 
 // Fonction HTML/CSS/JS
 function setLienIndexHalloween() {
     lienActif = lienHalloweenIndex;
-    afficherCode();
+    afficherCode("html");
 }
 function setLienCSSHalloween() {
     lienActif = lienHalloweenCSS;
-    afficherCode();
+    afficherCode("css");
 }
 function setLienJSHalloween() {
     lienActif = lienHalloweenJS;
-    afficherCode();
+    afficherCode("javascript");
 }
 
 function setLienIndexXanderTheRat() {
     lienActif = lienXanderTheRatIndex;
-    afficherCode();
+    afficherCode("html");
 }
 function setLienPortfolioXanderTheRat() {
     lienActif = lienXanderTheRatPortfolio;
-    afficherCode();
+    afficherCode("html");
 }
 function setLienAfficherTexte() {
     lienActif = lienXanderTheRatAfficherTexte;
-    afficherCode();
+    afficherCode("html");
 }
 function setLienResetCSS() {
     lienActif = lienXanderTheRatResetCSS;
-    afficherCode();
+    afficherCode("css");
 }
 function setLienMainCSS() {
     lienActif = lienXanderTheRatMainCSS;
-    afficherCode();
+    afficherCode("css");
 }
 function setLienHorloge() {
     lienActif = lienXanderTheRatHorloge;
-    afficherCode();
+    afficherCode("css");
 }
 function setLienPortfolioJS() {
     lienActif = lienXanderTheRatPortfolioJS;
-    afficherCode();
+    afficherCode("javascript");
 }
 function setLienShowText() {
     lienActif = lienXanderTheRatShowText;
-    afficherCode();
+    afficherCode("javascript");
 }
 //Fonctions SQL
 function setLienBDD1ACreation() {
     lienActif = lienBDD1ACreation;
-    afficherCode();
+    afficherCode("sql");
 }
 function setLienBDD1AExos() {
     lienActif = lienBBD1AExos;
-    afficherCode();
+    afficherCode("sql");
 }
 function setLienInsertionVGSales() {
     lienActif = lienInsertionVGSales;
-    afficherCode();
+    afficherCode("sql");
 }
 function setLienBDDRemplirVGSales() {
     lienActif = lienBDDRemplirVGSales;
-    afficherCode();
+    afficherCode("sql");
 }
 function setLienBDD1ACreationTablesVGSales() {
     lienActif = lienBDD1ACreationTablesVGSales;
-    afficherCode();
+    afficherCode("sql");
 }
 
 //Fonctions C
 function setLienTP1C() {
     lienActif = lienTP1C;
-    afficherCode();
+    afficherCode("c");
 }
 function setLienTP2C() {
     lienActif = lienTP2C;
-    afficherCode();
+    afficherCode("c");
 }
 function setLienTP3C() {
     lienActif = lienTP3C;
-    afficherCode();
+    afficherCode("c");
 }
 
 
@@ -133,7 +133,7 @@ document.addEventListener("keydown", function(event){
     }
 });
 
-function afficherCode() {
+function afficherCode(lang) {
     fetch(lienActif)
         .then(response => {
             if (!response.ok) {
@@ -142,11 +142,17 @@ function afficherCode() {
             return response.text();
         })
         .then(data => {
-            document.getElementById("showProgramme").innerHTML = `<pre>${escapeHtml(data)}</pre>`;
+            document.querySelector(".commande").innerHTML = `<pre><code class="language-${lang}">${escapeHtml(data)}</code></pre>`;
+            document.querySelector(".commande").classList.add(`language-${lang}`);
+            hljs.highlightElement(document.querySelector(".commande pre code"));
         })
         .catch(error => {
             console.error('Erreur:', error);
         });
+    document.querySelector(".commande").classList.add(`language-${lang}`);
+    hljs.highlightElement(document.querySelector(".commande pre code"));
+
+
 }
 
 function escapeHtml(text) {
@@ -164,5 +170,3 @@ function collapsible(id) {
         document.getElementById(id + "Collapsible").classList.add("collapsibleMinus")
     }
 }
-
-// Ajouter une fonction qui afficher le texte et le color en fonction des langages
