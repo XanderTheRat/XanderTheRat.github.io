@@ -1,33 +1,33 @@
 // Liens Python
-const lienDemineur = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/Python/Demineur_upgrade.py";
-const lienChronometre = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/Python/Chronometre_amélioré.py";
+const lienDemineur = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/Python/Demineur_upgrade.py";
+const lienChronometre = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/Python/Chronometre_amélioré.py";
 //Lien HTML/CSS/JS
-const lienHalloweenIndex = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/web/Halloween/index.html";
-const lienHalloweenCSS = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/web/Halloween/style/style.css";
-const lienHalloweenJS = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/web/Halloween/script/script.js";
+const lienHalloweenIndex = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/web/Halloween/index.html";
+const lienHalloweenCSS = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/web/Halloween/style/style.css";
+const lienHalloweenJS = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/web/Halloween/script/script.js";
 
-const lienXanderTheRatIndex = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/index.html";
-const lienXanderTheRatPortfolio = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/portfolio.html";
-const lienXanderTheRatAfficherTexte = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/afficherText.html";
-const lienXanderTheRatResetCSS = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/style/cssReset.css";
-const lienXanderTheRatMainCSS = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/style/main.css";
-const lienXanderTheRatHorloge = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/script/horloge.js";
-const lienXanderTheRatPortfolioJS = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/script/portfolio.js";
-const lienXanderTheRatShowText = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/main/script/showText.js";
+const lienXanderTheRatIndex = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/index.html";
+const lienXanderTheRatPortfolio = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/portfolio.html";
+const lienXanderTheRatAfficherTexte = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/afficherText.html";
+const lienXanderTheRatResetCSS = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/style/cssReset.css";
+const lienXanderTheRatMainCSS = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/style/main.css";
+const lienXanderTheRatHorloge = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/script/horloge.js";
+const lienXanderTheRatPortfolioJS = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/script/portfolio.js";
+const lienXanderTheRatShowText = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio/script/showText.js";
 //Lien Bash
 
 // Liens SQL : VGSales
-const lienBDD1ACreation = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/BDD.sql";
-const lienBBD1AExos = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/Exos.sql";
-const lienInsertionVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/Requete.sql";
-const lienBDDRemplirVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/remplissage.sql";
-const lienBDD1ACreationTablesVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/SQL/tables.sql";
+const lienBDD1ACreation = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/SQL/BDD.sql";
+const lienBBD1AExos = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/SQL/Exos.sql";
+const lienInsertionVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/SQL/Requete.sql";
+const lienBDDRemplirVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/SQL/remplissage.sql";
+const lienBDD1ACreationTablesVGSales = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/SQL/tables.sql";
 //Lien Java : SAÉ Java FX
 
 //Liens C
-const lienTP1C = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/C/R2.04/TP1/TP1.c";
-const lienTP2C = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/C/R2.04/TP2/tp2.c";
-const lienTP3C = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main/C/R2.04/TP3/TP3.c";
+const lienTP1C = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/C/R2.04/TP1/TP1.c";
+const lienTP2C = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/C/R2.04/TP2/tp2.c";
+const lienTP3C = "https://raw.githubusercontent.com/XanderTheRat/BUT1/portfolio/C/R2.04/TP3/TP3.c";
 //Liens PostGre SQL
 
 // Autres variables
