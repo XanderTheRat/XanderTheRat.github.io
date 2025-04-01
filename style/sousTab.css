@@ -20,9 +20,20 @@
     width : 40%;
     transition : all 1s ease-out;
 }
-.sousTab:hover, .sousTav:focus {
+.sousTab:hover, .sousTab:focus {
     color : var(--couleur-De-Fond-Tab);
     background-color: #f4f4f4;
+}
+.sousTabActive:focus, .sousTabActive:hover {
+    background-color : var(--couleur-De-Surlignage-Tab-Active) !important;
+    color: #000000 !important;
+}
+.sousTab-content.sousTabActive:focus, .sousTab-content.active:hover{
+    background-color: #FFFFFF !important;
+}
+.sousTab-content.noir.sousTabActive:hover {
+    color : #000 !important;
+    background: none !important;
 }
 /* -------------------------------------------------------------------------------------------------------------------- */
 
