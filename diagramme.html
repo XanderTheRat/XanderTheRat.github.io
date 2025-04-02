@@ -13,11 +13,21 @@
 </head>
 <body id="main">
     <svg id="svg">
-        <div id="menuContextuel">
-            <div class="clickable" id="addLine">Ajouter une ligne</div>
-            <div class="clickable" id="addRectangle">Ajouter un rectangle</div>
-        </div>
     </svg>
+    <div id="menuContextuel">
+        <div class="clickable" id="addLine">Ajouter une ligne</div>
+        <div class="clickable" id="addRectangle">Ajouter un rectangle</div>
+    </div>
+    <div id="rectContextMenu">
+        <div class="clickable" id="deleteRect">Supprimer</div>
+        <div class="clickable" id="editRect">Editer</div>
+        <div class="clickable" id="addLineRect">Ajouter une ligne</div>
+    </div>
+    <div id="rectMenuModif">
+        <a href="javascript:void(0)" class="fermerEdit" onclick="fermerEdit()">&times;</a>
+        <div class="clickable" id="round">Arrondir</div>
+        <div class="clickable" id="square">Réinitialiser</div>
+    </div>
   <script src="script/diagramme.js"></script>
 </body>
 </html>
