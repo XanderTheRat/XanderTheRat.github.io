@@ -5,11 +5,13 @@ const rectMenu = document.getElementById("rectContextMenu");
 const contextMenu = document.getElementById("menuContextuel");
 
 let isDrawing = true;
+let modifText = false;
 let draw = "";
 let points = [];
 let nbRect = 0;
-let modifText = false;
 let selectedRect = null;
+let selectedText = null;
+
 
 svg.addEventListener("click", (event) => {
     const x = event.clientX - svg.getBoundingClientRect().left;
@@ -88,60 +90,76 @@ document.getElementById("editRect").addEventListener("click", (event) => {
    }
 });
 document.getElementById("round").addEventListener("click", () => {
-    const x = parseFloat(selectedRect.getAttribute("x"));
-    const y = parseFloat(selectedRect.getAttribute("y"));
-    const width = parseFloat(selectedRect.getAttribute("width"));
-    const height = parseFloat(selectedRect.getAttribute("height"));
-
-    const pathData = `
-            M ${x} ${y} 
-            H ${x + width} 
-            V ${y + height - radius} 
-            Q ${x + width} ${y + height}, ${x + width - radius} ${y + height} 
-            H ${x + radius} 
-            Q ${x} ${y + height}, ${x} ${y + height - radius} 
-            Z
-        `;
-    selectedRect.setAttribute("d", pathData);
+    //TODO
 });
 document.getElementById("square").addEventListener("click", () => {
-    if (document.getElementById("round").classList.contains("roundBox")) {
-        document.getElementById("round").classList.remove("roundBox");
+    // TODO
+});
+document.getElementById("changerCouleurDeFond").addEventListener("click", () => {
+   let couleur = prompt("Entrez la couleur de la boite");
+
+   selectedRect.setAttribute("fill", couleur);
+});
+document.getElementById("changerCouleurDeBordure").addEventListener("click", () => {
+    let couleur = prompt("Entrez la couleur des bordures la boite");
+
+    selectedRect.setAttribute("stroke", couleur);
+});
+document.getElementById("changerCouleurDeTexte").addEventListener("click", () => {
+    let couleur = prompt("Entrez la couleur du texte");
+
+    let text = document.getElementById("text-" + selectedRect.id);
+    if (text) {
+        text.setAttribute("fill", couleur);
     }
 });
 
+document.getElementById("changerTexte").addEventListener("click", () => {
+    if (!selectedRect) {
+        console.log("Aucune boite selectionnée");
+    }
+    let rectId = selectedRect.id
+    let text = document.getElementById("text-" + rectId);
+    if (text) {
+        //text.textContent = prompt("Entrez le texte de la boite") ;
+        text.textContent = "HELLO WORLD"
+    }
+    else {
+        let x = parseFloat(selectedRect.getAttribute("x"));
+        let y = parseFloat(selectedRect.getAttribute("y"));
+        let width = parseFloat(selectedRect.getAttribute("width"));
+        let height = parseFloat(selectedRect.getAttribute("height"));
+
+        text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("id", "text-" + rectId);
+        text.setAttribute("x", x + width / 2);
+        text.setAttribute("y", y + height / 2 + 5);
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "middle");
+        text.setAttribute("fill", "black");
+        text.setAttribute("font-size", "16px");
+        text.textContent = "HELLO WORLD"
+        selectedRect.parentNode.insertBefore(text, selectedRect.nextSibling);
+    }
+    hideMenus();
+});
 
 
 document.getElementById("main").addEventListener("click", function(event) {
-   if (event.target.tagName.toLowerCase() === "rect") {
-       rectId = event.target.id
-       let text = document.getElementById("text-" + rectId);
-       if (modifText){
-           if (text) {
-               text.textContent = prompt("Entrez le texte de la boite");
-           }
-           else {
-               let x = parseFloat(event.target.getAttribute("x"));
-               let y = parseFloat(event.target.getAttribute("y"));
-               let width = parseFloat(event.target.getAttribute("width"));
-               let height = parseFloat(event.target.getAttribute("height"));
+    if (event.target.tagName === "rect") {
+        // Trouver le texte correspondant
+        const rect = event.target;
+        let textElement = rect.nextElementSibling;
 
-               text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-               text.setAttribute("id", "text-" + rectId);
-               text.setAttribute("x", x + width / 2);
-               text.setAttribute("y", y + height / 2 + 5);
-               text.setAttribute("text-anchor", "middle");
-               text.setAttribute("dominant-baseline", "middle");
-               text.setAttribute("fill", "black");
-               text.setAttribute("font-size", "16px");
-               text.textContent = prompt("Entrez le texte de la boite");
-               document.getElementById("svg").appendChild(text);
-           }
-       }
-       console.log("Text changé");
+        if (textElement && textElement.tagName !== "text") {
+            textElement = null;
+        }
 
-
-   }
+        if (textElement) {
+            selectedText = textElement;
+            showMenu(rectMenu, event.pageX, event.pageY);
+        }
+    }
 });
 
 
