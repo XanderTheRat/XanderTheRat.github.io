@@ -10,13 +10,13 @@ function DateDuJour() {
     const date = new Date();
     let afficheJour = "";
     let afficheMois = "";
-    const jourDeLaSemaine = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+    const jourDeLaSemaine = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     const moisEnString = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
 
     let jour = date.getDate();
     let mois = date.getMonth();
 
-    afficheJour = jourDeLaSemaine[date.getDay() - 1];
+    afficheJour = jourDeLaSemaine[date.getDay()];
     afficheMois = moisEnString[mois];
 
     const dateFormattee = `${afficheJour} ${jour} ${afficheMois}`;
