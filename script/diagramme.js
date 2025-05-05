@@ -92,9 +92,6 @@ document.getElementById("editRect").addEventListener("click", (event) => {
 document.getElementById("round").addEventListener("click", () => {
     //TODO
 });
-document.getElementById("square").addEventListener("click", () => {
-    // TODO
-});
 document.getElementById("changerCouleurDeFond").addEventListener("click", () => {
    let couleur = prompt("Entrez la couleur de la boite");
 
@@ -113,7 +110,15 @@ document.getElementById("changerCouleurDeTexte").addEventListener("click", () =>
         text.setAttribute("fill", couleur);
     }
 });
+document.getElementById("square").addEventListener("click", () => {
+    let text = document.getElementById("text-" + selectedRect.id);
+    if (text) {
+        text.setAttribute("fill", "#000000");
+    }
+    selectedRect.setAttribute("fill", "#FFFFFF");
+    selectedRect.setAttribute("stroke", "#FFFFFF");
 
+});
 document.getElementById("changerTexte").addEventListener("click", () => {
     if (!selectedRect) {
         console.log("Aucune boite selectionnée");
@@ -121,8 +126,7 @@ document.getElementById("changerTexte").addEventListener("click", () => {
     let rectId = selectedRect.id
     let text = document.getElementById("text-" + rectId);
     if (text) {
-        //text.textContent = prompt("Entrez le texte de la boite") ;
-        text.textContent = "HELLO WORLD"
+        text.textContent = prompt("Entrez le texte de la boite") ;
     }
     else {
         let x = parseFloat(selectedRect.getAttribute("x"));
@@ -138,7 +142,7 @@ document.getElementById("changerTexte").addEventListener("click", () => {
         text.setAttribute("dominant-baseline", "middle");
         text.setAttribute("fill", "black");
         text.setAttribute("font-size", "16px");
-        text.textContent = "HELLO WORLD"
+        text.textContent = prompt("Entrez le texte de la boite") ;
         selectedRect.parentNode.insertBefore(text, selectedRect.nextSibling);
     }
     hideMenus();
@@ -147,7 +151,6 @@ document.getElementById("changerTexte").addEventListener("click", () => {
 
 document.getElementById("main").addEventListener("click", function(event) {
     if (event.target.tagName === "rect") {
-        // Trouver le texte correspondant
         const rect = event.target;
         let textElement = rect.nextElementSibling;
 
