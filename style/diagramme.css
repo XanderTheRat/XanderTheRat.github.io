@@ -1,34 +1,45 @@
 #svg {
     cursor : crosshair;
     width : 1800px;
-    height: 600px;
+    height: 1800px;
 }
 #menuContextuel {
     position: absolute;
-    background: white;
+    background: linear-gradient(to right, var(--background-color), #213461);
     border: 1px solid #ccc;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
     display: none;
     z-index: 1000;
     min-width: 150px;
+    font-weight: bolder;
+    color: #cccccc;
 }
 #rectContextMenu{
     position: absolute;
-    background: white;
+    background: linear-gradient(to right, var(--background-color), #213461);
     border: 1px solid #ccc;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
     display: none;
     z-index: 1000;
     min-width: 150px;
+    color: #cccccc;
+    font-weight: bolder;
 }
 #rectMenuModif {
     position : absolute;
-    background: white;
+    background: linear-gradient(to right, var(--background-color), #213461);
     box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
     display: none;
     z-index: 1000;
+    font-weight: bolder;
+    color: #cccccc;
 }
 
+
+.rounded{
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
 .clickable {
     cursor: pointer;
 }

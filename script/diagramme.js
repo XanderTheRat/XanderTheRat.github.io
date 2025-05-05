@@ -11,7 +11,8 @@ let points = [];
 let nbRect = 0;
 let selectedRect = null;
 let selectedText = null;
-
+let Lines = [];
+let nbLine = 0;
 
 svg.addEventListener("click", (event) => {
     const x = event.clientX - svg.getBoundingClientRect().left;
@@ -77,6 +78,10 @@ document.getElementById("addRectangle").addEventListener("click", () => {
 });
 document.getElementById("deleteRect").addEventListener("click", () => {
     if (selectedRect) {
+        let text = document.getElementById("text-" + selectedRect.id);
+        if (text) {
+            text.remove();
+        }
         selectedRect.remove();
         hideMenus();
         selectedRect = null;
@@ -85,12 +90,14 @@ document.getElementById("deleteRect").addEventListener("click", () => {
 document.getElementById("editRect").addEventListener("click", (event) => {
    if (!document.getElementById("rectMenuModif").classList.contains("active")) {
        document.getElementById("rectMenuModif").classList.add("active");
-       document.getElementById("rectMenuModif").style.left = event.pageX;
-       document.getElementById("rectMenuModif").style.top = event.pageY;
+       document.getElementById("rectMenuModif").style.left = (event.clientX + 5).toString() + "px";
+       document.getElementById("rectMenuModif").style.top = event.clientY.toString() + "px";
+       console.log("X :" + event.clientX + " Y :" + event.clientY);
+       console.log("X Actif :" + document.getElementById("rectMenuModif").style.left + " Y Actif :" + document.getElementById("rectMenuModif").style.top);
    }
 });
 document.getElementById("round").addEventListener("click", () => {
-    //TODO
+    selectedRect.setAttribute("rx", "50px");
 });
 document.getElementById("changerCouleurDeFond").addEventListener("click", () => {
    let couleur = prompt("Entrez la couleur de la boite");
@@ -114,9 +121,13 @@ document.getElementById("square").addEventListener("click", () => {
     let text = document.getElementById("text-" + selectedRect.id);
     if (text) {
         text.setAttribute("fill", "#000000");
+        text.textContent = "";
     }
     selectedRect.setAttribute("fill", "#FFFFFF");
     selectedRect.setAttribute("stroke", "#FFFFFF");
+    selectedRect.setAttribute("rx", "0px");
+
+    hideMenus();
 
 });
 document.getElementById("changerTexte").addEventListener("click", () => {
@@ -175,6 +186,13 @@ function drawLine(start, end) {
     line.setAttribute("y2", end.y);
     line.setAttribute("stroke", "white");
     line.setAttribute("stroke-width", "2");
+
+    while (Lines.includes(nbLine)) {
+        nbLine++;
+    }
+    Lines.push(nbLine);
+
+    line.setAttribute("id", `line${nbLine}`);
     svg.appendChild(line);
 }
 
