@@ -62,6 +62,9 @@ mainSvg.addEventListener("contextmenu", (event) => {
     hideMenus();
 
     if (event.target.tagName === "rect" || event.target.tagName === "line" || event.target.tagName === "path") {
+        if (event.target.tagName === "rect") {
+            document.getElementById("addChildForRectangle").style.display = "block";
+        }
         selectedRect = event.target;
         showMenu(rectMenu, event.pageX, event.pageY);
     }else {
@@ -109,6 +112,11 @@ document.getElementById("editRect").addEventListener("click", (event) => {
        console.log("X Actif :" + document.getElementById("rectMenuModif").style.left + " Y Actif :" + document.getElementById("rectMenuModif").style.top);
    }
 });
+document.getElementById("addChildForRectangle").addEventListener("click", (event) => {
+
+});
+
+
 document.getElementById("round").addEventListener("click", () => {
     selectedRect.setAttribute("rx", "50px");
 });
@@ -335,15 +343,6 @@ function objectsArePlacedCorrectly() {
     rects.forEach(rect => svg.appendChild(rect));
 }
 
-
-
-
-
-
-
-
-
-
 function showMenu(menu, x, y) {
     menu.style.left = `${x}px`;
     menu.style.top = `${y}px`;
@@ -353,6 +352,8 @@ function showMenu(menu, x, y) {
 function hideMenus() {
     globalMenu.style.display = "none";
     rectMenu.style.display = "none";
+
+    document.getElementById("addChildForRectangle").style.display = "none";
 }
 
 function fermerEdit() {

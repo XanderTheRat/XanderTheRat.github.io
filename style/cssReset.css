@@ -9,6 +9,9 @@
     --document-background-color: 253, 253, 253;
     --darkdocument-background-color: 30, 30, 35;
     --radial-background : radial-gradient(circle,var(--background-color), #434047);
+    --sizeOfText : 300px;
+    --overflowY : auto;
+    --overflowX : auto;
 }
 body {
     background: var(--radial-background);
