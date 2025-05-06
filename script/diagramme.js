@@ -37,6 +37,14 @@ svg.addEventListener("click", (event) => {
                     isDrawing = false;
                 }
                 break;
+            case "curvedLine":
+                points.push({x, y});
+                if (points.length === 2) {
+                    drawCurvedLine(points[0], points[1]);
+                    points = [];
+                    isDrawing = false;
+                }
+                break;
             default:
                 break;
         }
@@ -53,7 +61,7 @@ mainSvg.addEventListener("contextmenu", (event) => {
     event.preventDefault();
     hideMenus();
 
-    if (event.target.tagName === "rect" || event.target.tagName === "line") {
+    if (event.target.tagName === "rect" || event.target.tagName === "line" || event.target.tagName === "path") {
         selectedRect = event.target;
         showMenu(rectMenu, event.pageX, event.pageY);
     }else {
@@ -69,6 +77,11 @@ document.addEventListener("click", () => {
 document.getElementById("addLine").addEventListener("click", () => {
     draw = "line";
     isDrawing = true;
+    contextMenu.style.display = "none";
+});
+document.getElementById("addCurvedLine").addEventListener("click", () => {
+   draw = "curvedLine";
+   isDrawing = true;
     contextMenu.style.display = "none";
 });
 document.getElementById("addRectangle").addEventListener("click", () => {
@@ -244,6 +257,32 @@ function drawLine(start, end) {
     line.setAttribute("x2", end.x);
     line.setAttribute("y2", end.y);
     line.setAttribute("stroke", "white");
+    line.setAttribute("stroke-width", "2");
+
+    while (Lines.includes(nbLine)) {
+        nbLine++;
+    }
+    Lines.push(nbLine);
+
+    line.setAttribute("id", `line${nbLine}`);
+    svg.appendChild(line);
+
+    objectsArePlacedCorrectly();
+}
+
+function drawCurvedLine(start, end) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const dx = start.x + end.x;
+    const dy = start.y - end.y;
+
+    const curve = .3;
+
+    const midX1 = start.x + dx * curve;
+    const midY1 = start.y;
+
+    line.setAttribute("d", `M ${start.x} ${start.y} Q ${midX1} ${midY1}, ${end.x} ${end.y}`);
+    line.setAttribute("stroke", "white");
+    line.setAttribute("fill", "none");
     line.setAttribute("stroke-width", "2");
 
     while (Lines.includes(nbLine)) {
