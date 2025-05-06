@@ -130,20 +130,56 @@ document.getElementById("square").addEventListener("click", () => {
     hideMenus();
 
 });
+
 document.getElementById("changerTexte").addEventListener("click", () => {
     if (!selectedRect) {
-        console.log("Aucune boite selectionnée");
+        console.log("Aucune boîte sélectionnée");
     }
-    let rectId = selectedRect.id
+
+    const savedText = selectedRect.getAttribute("data-text");
+    const rectId = selectedRect.id;
     let text = document.getElementById("text-" + rectId);
-    if (text) {
-        text.textContent = prompt("Entrez le texte de la boite") ;
+    let buffer;
+
+    if (savedText) {
+        buffer = savedText + " ";
     }
     else {
-        let x = parseFloat(selectedRect.getAttribute("x"));
-        let y = parseFloat(selectedRect.getAttribute("y"));
-        let width = parseFloat(selectedRect.getAttribute("width"));
-        let height = parseFloat(selectedRect.getAttribute("height"));
+        buffer = "";
+    }
+
+    const handleKey = function(event) {
+
+        event.preventDefault();
+        if (event.key === "Enter") {
+            event.preventDefault();
+
+            if (event.shiftKey) {
+                buffer += "\n";
+            } else {
+                updateSvgText(buffer, text);
+                document.removeEventListener('keydown', handleKey);
+                selectedRect.setAttribute("data-text", buffer);
+            }
+        } else if (event.code === "Space") {
+            event.preventDefault();
+            buffer += " ";
+        } else if (event.key === "Backspace") {
+            buffer = buffer.slice(0, -1);
+        } else if (event.key === "Delete") {
+            buffer = "";
+        } else if (event.key.length === 1) {
+            buffer += event.key;
+        }
+
+        updateSvgText(buffer, text);
+    };
+
+    if (!text) {
+        const x = parseFloat(selectedRect.getAttribute("x"));
+        const y = parseFloat(selectedRect.getAttribute("y"));
+        const width = parseFloat(selectedRect.getAttribute("width"));
+        const height = parseFloat(selectedRect.getAttribute("height"));
 
         text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         text.setAttribute("id", "text-" + rectId);
@@ -153,11 +189,34 @@ document.getElementById("changerTexte").addEventListener("click", () => {
         text.setAttribute("dominant-baseline", "middle");
         text.setAttribute("fill", "black");
         text.setAttribute("font-size", "16px");
-        text.textContent = prompt("Entrez le texte de la boite") ;
+        text.setAttribute("font-family", "monospace");
+
         selectedRect.parentNode.insertBefore(text, selectedRect.nextSibling);
+    } else {
+        while (text.firstChild) {
+            text.removeChild(text.firstChild);
+        }
     }
+
+    document.addEventListener('keydown', handleKey);
+
     hideMenus();
 });
+
+function updateSvgText(rawText, textElement) {
+    while (textElement.firstChild) {
+        textElement.removeChild(textElement.firstChild);
+    }
+
+    const lines = rawText.split("\n");
+    lines.forEach((line, index) => {
+        const tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+        tspan.setAttribute("x", textElement.getAttribute("x"));
+        tspan.setAttribute("dy", index === 0 ? "0" : "20");
+        tspan.textContent = line;
+        textElement.appendChild(tspan);
+    });
+}
 
 
 document.getElementById("main").addEventListener("click", function(event) {
@@ -194,6 +253,8 @@ function drawLine(start, end) {
 
     line.setAttribute("id", `line${nbLine}`);
     svg.appendChild(line);
+
+    objectsArePlacedCorrectly();
 }
 
 function drawRectangle(start, end) {
@@ -220,7 +281,30 @@ function drawRectangle(start, end) {
     rect.setAttribute("id", `rect${nbRect}`);
     nbRect++;
     svg.appendChild(rect);
+
+    objectsArePlacedCorrectly();
 }
+function objectsArePlacedCorrectly() {
+    const svg = document.querySelector("svg");
+    const lines = Array.from(svg.getElementsByTagName("line"));
+    const rects = Array.from(svg.getElementsByTagName("rect"));
+
+    lines.forEach(line => svg.removeChild(line));
+    rects.forEach(rect => svg.removeChild(rect));
+
+    lines.forEach(line => svg.appendChild(line));
+    rects.forEach(rect => svg.appendChild(rect));
+}
+
+
+
+
+
+
+
+
+
+
 function showMenu(menu, x, y) {
     menu.style.left = `${x}px`;
     menu.style.top = `${y}px`;
