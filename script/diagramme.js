@@ -64,9 +64,11 @@ mainSvg.addEventListener("contextmenu", (event) => {
     if (event.target.tagName === "rect" || event.target.tagName === "line" || event.target.tagName === "path") {
         if (event.target.tagName === "rect") {
             document.getElementById("addChildForRectangle").style.display = "block";
+            document.getElementById("changerTexte").style.display = "block";
         }
-        if (event.target.tagName !== "line" ) {
+        if (event.target.tagName === "rectangle" ) {
             document.getElementById("round").style.display = "block";
+            document.getElementById("changerTexte").style.display = "block";
         }
         selectedRect = event.target;
         showMenu(rectMenu, event.pageX, event.pageY);
