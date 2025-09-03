@@ -65,6 +65,9 @@ mainSvg.addEventListener("contextmenu", (event) => {
         if (event.target.tagName === "rect") {
             document.getElementById("addChildForRectangle").style.display = "block";
         }
+        if (event.target.tagName !== "line" ) {
+            document.getElementById("round").style.display = "block";
+        }
         selectedRect = event.target;
         showMenu(rectMenu, event.pageX, event.pageY);
     }else {
