@@ -305,25 +305,16 @@ function drawCurvedLine(start, end) {
     let curve;
 
     if (start.x > end.x ) {
-        console.log("toto");
         curve = Math.abs(start.x/10000);
     }
     else {
-        console.log("tata");
         curve = Math.abs((end.x-start.x)/1000);
     }
     console.log(`Curve : ${Xend-Xstart}`);
 
     const midX1 = Xstart + dx * curve;
 
-
     const midY1 = Ystart;
-
-    console.log(`X début : ${Xstart}, Y début : ${Ystart}`);
-    console.log(`X fin : ${Xend}, Y fin : ${Yend}`);
-    console.log(`delta X : ${Xstart - Xend}, delta Y : ${Ystart - Yend}`);
-    console.log(`midX : ${midX1}, midY : ${midY1}`);
-    console.log("");
 
     line.setAttribute("d", `M ${start.x} ${start.y} Q ${midX1} ${midY1}, ${end.x} ${end.y}`);
     line.setAttribute("stroke", "white");
