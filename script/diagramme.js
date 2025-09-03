@@ -280,13 +280,50 @@ function drawLine(start, end) {
 
 function drawCurvedLine(start, end) {
     const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    const dx = start.x + end.x;
-    const dy = start.y - end.y;
+    let Xstart;
+    let Xend;
+    let Ystart;
+    let Yend;
+    if ( start.x > end.x ) {
+        Xstart = end.x;
+        Xend = start.x;
+    }
+    else {
+        Xstart = start.x;
+        Xend = end.x;
+    }
+    if ( start.y > end.y ) {
+        Ystart = end.y;
+        Yend = start.y;
+    }
+    else {
+        Ystart = start.y;
+        Yend = end.y;
+    }
+    const dx = Xstart + Xend;
 
-    const curve = .3;
+    let curve;
 
-    const midX1 = start.x + dx * curve;
-    const midY1 = start.y;
+    if (start.x > end.x ) {
+        console.log("toto");
+        curve = Math.abs(start.x/10000);
+    }
+    else {
+        console.log("tata");
+        curve = Math.abs((end.x-start.x)/1000);
+    }
+    console.log(`Curve : ${Xend-Xstart}`);
+
+    const midX1 = Xstart + dx * curve;
+
+
+    const midY1 = Ystart;
+
+    console.log(`X début : ${Xstart}, Y début : ${Ystart}`);
+    console.log(`X fin : ${Xend}, Y fin : ${Yend}`);
+    console.log(`delta X : ${Xstart - Xend}, delta Y : ${Ystart - Yend}`);
+    console.log(`midX : ${midX1}, midY : ${midY1}`);
+    console.log("");
 
     line.setAttribute("d", `M ${start.x} ${start.y} Q ${midX1} ${midY1}, ${end.x} ${end.y}`);
     line.setAttribute("stroke", "white");
