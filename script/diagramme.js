@@ -299,11 +299,9 @@ function drawCurvedLine(start, end) {
     }
     if ( start.y > end.y ) {
         Ystart = end.y;
-        Yend = start.y;
     }
     else {
         Ystart = start.y;
-        Yend = end.y;
     }
     const dx = Xstart + Xend;
 
