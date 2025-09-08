@@ -194,7 +194,9 @@
     height: 1%;
     width: 100%;
 }
-
+.cache{
+    display: none !important;
+}
 
 
 #adviceOn {

@@ -13,11 +13,12 @@ let selectedRect = null;
 let selectedText = null;
 let Lines = [];
 let nbLine = 0;
+let previouslyClickedElement = null;
 
 svg.addEventListener("click", (event) => {
     const x = event.clientX - svg.getBoundingClientRect().left;
     const y = event.clientY - svg.getBoundingClientRect().top;
-
+    previouslyClickedElement = event.target.id;
 
     if (isDrawing){
         switch (draw) {
@@ -63,18 +64,25 @@ mainSvg.addEventListener("contextmenu", (event) => {
 
     if (event.target.tagName === "rect" || event.target.tagName === "line" || event.target.tagName === "path") {
         if (event.target.tagName === "rect") {
-            document.getElementById("addChildForRectangle").style.display = "block";
-            document.getElementById("changerTexte").style.display = "block";
+            document.getElementById("addChildForRectangle").classList.remove("cache");
+            document.getElementById("changerTexte").classList.remove("cache");
+        } else {
+            document.getElementById("addChildForRectangle").classList.add("cache");
+            document.getElementById("changerTexte").classList.add("cache");
         }
-        if (event.target.tagName === "rectangle" ) {
-            document.getElementById("round").style.display = "block";
-            document.getElementById("changerTexte").style.display = "block";
+        if (previouslyClickedElement.includes("rect") ) {
+            document.getElementById("round").classList.remove("cache");
+            document.getElementById("carre").classList.remove("cache");
+            document.getElementById("changerCouleurDeTexte").classList.remove("cache");
+            document.getElementById("changerTexte").classList.remove("cache");
         }
         selectedRect = event.target;
         showMenu(rectMenu, event.pageX, event.pageY);
     }else {
         showMenu(globalMenu, event.pageX, event.pageY);
     }
+
+    previouslyClickedElement= event.target.id;
 });
 document.addEventListener("click", hideMenus);
 document.addEventListener("click", () => {
@@ -113,12 +121,39 @@ document.getElementById("editRect").addEventListener("click", (event) => {
        document.getElementById("rectMenuModif").classList.add("active");
        document.getElementById("rectMenuModif").style.left = (event.clientX + 5).toString() + "px";
        document.getElementById("rectMenuModif").style.top = event.clientY.toString() + "px";
-       console.log("X :" + event.clientX + " Y :" + event.clientY);
-       console.log("X Actif :" + document.getElementById("rectMenuModif").style.left + " Y Actif :" + document.getElementById("rectMenuModif").style.top);
+   }
+   else {
+         document.getElementById("rectMenuModif").classList.remove("active");
+         alert("Le menu est déjà ouvert");
    }
 });
 document.getElementById("addChildForRectangle").addEventListener("click", (event) => {
-    console.log("toto")
+    if (selectedRect) {
+        const rectX = parseFloat(selectedRect.getAttribute("x"));
+        const rectY = parseFloat(selectedRect.getAttribute("y"));
+        const rectWidth = parseFloat(selectedRect.getAttribute("width"));
+        const rectHeight = parseFloat(selectedRect.getAttribute("height"));
+
+        const childX = rectX;
+        const childY = rectY + rectHeight - 50;
+        const childHeight = rectHeight / 2 - 10;
+
+        const childRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        childRect.setAttribute("x", childX + "px" );
+        childRect.setAttribute("y", childY  + "px");
+        childRect.setAttribute("width", rectWidth + "px");
+        childRect.setAttribute("height", childHeight + "px");
+        childRect.setAttribute("fill", "#FFFFFF");
+        childRect.setAttribute("stroke", "white");
+        childRect.setAttribute("stroke-width", "1");
+        childRect.setAttribute("class", "rectangle");
+        childRect.setAttribute("position", "relative");
+        childRect.setAttribute("z-index", "auto");
+        childRect.setAttribute("id", `rect${nbRect}`);
+        nbRect++;
+        svg.appendChild(childRect);
+        svg.insertBefore(childRect, selectedRect);
+    }
 });
 
 
@@ -143,7 +178,7 @@ document.getElementById("changerCouleurDeTexte").addEventListener("click", () =>
         text.setAttribute("fill", couleur);
     }
 });
-document.getElementById("square").addEventListener("click", () => {
+document.getElementById("reset").addEventListener("click", () => {
     let text = document.getElementById("text-" + selectedRect.id);
     if (text) {
         text.setAttribute("fill", "#000000");
@@ -159,7 +194,7 @@ document.getElementById("square").addEventListener("click", () => {
 
 document.getElementById("changerTexte").addEventListener("click", () => {
     if (!selectedRect) {
-        console.log("Aucune boîte sélectionnée");
+        alert("Aucune boîte sélectionnée");
     }
 
     const savedText = selectedRect.getAttribute("data-text");
@@ -314,7 +349,6 @@ function drawCurvedLine(start, end) {
         curve = Math.abs((end.x-start.x)/500);
         dx = Xend - Xstart;
     }
-    console.log(`Curve : ${Xend-Xstart}, yStart : ${Ystart}, dx : ${dx}, curve : ${curve}`);
 
     const midX1 = Xstart + dx * curve;
 
@@ -357,6 +391,8 @@ function drawRectangle(start, end) {
     rect.setAttribute("stroke-width", "1");
     rect.setAttribute("color", "#000000");
     rect.setAttribute("class", "rectangle");
+    rect.setAttribute("position", "absolute");
+    rect.setAttribute("z-index", "10");
     rect.setAttribute("id", `rect${nbRect}`);
     nbRect++;
     svg.appendChild(rect);
