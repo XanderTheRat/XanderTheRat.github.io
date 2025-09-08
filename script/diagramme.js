@@ -118,7 +118,7 @@ document.getElementById("editRect").addEventListener("click", (event) => {
    }
 });
 document.getElementById("addChildForRectangle").addEventListener("click", (event) => {
-
+    console.log("toto")
 });
 
 
@@ -288,7 +288,6 @@ function drawCurvedLine(start, end) {
     let Xstart;
     let Xend;
     let Ystart;
-    let Yend;
     if ( start.x > end.x ) {
         Xstart = end.x;
         Xend = start.x;
@@ -303,17 +302,19 @@ function drawCurvedLine(start, end) {
     else {
         Ystart = start.y;
     }
-    const dx = Xstart + Xend;
 
+    let dx;
     let curve;
 
     if (start.x > end.x ) {
         curve = Math.abs(start.x/10000);
+        dx = Xstart + Xend;
     }
     else {
-        curve = Math.abs((end.x-start.x)/1000);
+        curve = Math.abs((end.x-start.x)/500);
+        dx = Xend - Xstart;
     }
-    console.log(`Curve : ${Xend-Xstart}`);
+    console.log(`Curve : ${Xend-Xstart}, yStart : ${Ystart}, dx : ${dx}, curve : ${curve}`);
 
     const midX1 = Xstart + dx * curve;
 
