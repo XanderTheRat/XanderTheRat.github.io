@@ -73,6 +73,7 @@ mainSvg.addEventListener("contextmenu", (event) => {
         if (previouslyClickedElement.includes("rect") ) {
             document.getElementById("round").classList.remove("cache");
             document.getElementById("carre").classList.remove("cache");
+            document.getElementById("changeFontWeight").classList.remove("cache")
             document.getElementById("changerCouleurDeTexte").classList.remove("cache");
             document.getElementById("changerTexte").classList.remove("cache");
         }
@@ -123,7 +124,7 @@ document.getElementById("editRect").addEventListener("click", (event) => {
        document.getElementById("rectMenuModif").style.top = event.clientY.toString() + "px";
    }
    else {
-         document.getElementById("rectMenuModif").classList.remove("active");
+         fermerEdit();
          alert("Le menu est déjà ouvert");
    }
 });
@@ -191,6 +192,15 @@ document.getElementById("reset").addEventListener("click", () => {
     hideMenus();
 
 });
+document.getElementById("carre").addEventListener("click", () => {
+    selectedRect.setAttribute("rx", "0px");
+})
+document.getElementById("changeFontWeight").addEventListener("click", () => {
+    let fontWeight = prompt("Entrez la convention typographique ( CSS : Bold , Italic , Underline... )");
+
+    selectedRect.setAttribute("font-weight", fontWeight);
+    //TODO Coriger ca
+})
 
 document.getElementById("changerTexte").addEventListener("click", () => {
     if (!selectedRect) {
@@ -427,4 +437,12 @@ function hideMenus() {
 function fermerEdit() {
     document.getElementById("rectMenuModif").classList.remove("active");
     modifText = false;
+
+    document.getElementById("addChildForRectangle").classList.add("cache");
+    document.getElementById("changerTexte").classList.add("cache");
+    document.getElementById("round").classList.add("cache");
+    document.getElementById("carre").classList.add("cache");
+    document.getElementById("changeFontWeight").classList.add("cache");
+    document.getElementById("changerCouleurDeTexte").classList.add("cache");
+    document.getElementById("changerTexte").classList.add("cache");
 }
