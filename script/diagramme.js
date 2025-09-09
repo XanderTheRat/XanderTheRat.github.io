@@ -63,19 +63,23 @@ mainSvg.addEventListener("contextmenu", (event) => {
     hideMenus();
 
     if (event.target.tagName === "rect" || event.target.tagName === "line" || event.target.tagName === "path") {
+        console.log(event.target.tagName)
         if (event.target.tagName === "rect") {
+            console.log("toto")
             document.getElementById("addChildForRectangle").classList.remove("cache");
-            document.getElementById("changerTexte").classList.remove("cache");
+            document.getElementById("changeText").classList.remove("cache");
+            document.getElementById("delText").classList.remove("cache");
         } else {
             document.getElementById("addChildForRectangle").classList.add("cache");
-            document.getElementById("changerTexte").classList.add("cache");
+            document.getElementById("changeText").classList.add("cache");
+            document.getElementById("delText").classList.add("cache");
         }
         if (previouslyClickedElement.includes("rect") ) {
             document.getElementById("round").classList.remove("cache");
             document.getElementById("carre").classList.remove("cache");
             document.getElementById("changeFontWeight").classList.remove("cache")
             document.getElementById("changerCouleurDeTexte").classList.remove("cache");
-            document.getElementById("changerTexte").classList.remove("cache");
+            document.getElementById("changeText").classList.remove("cache");
         }
         selectedRect = event.target;
         showMenu(rectMenu, event.pageX, event.pageY);
@@ -159,7 +163,7 @@ document.getElementById("addChildForRectangle").addEventListener("click", (event
 
 
 document.getElementById("round").addEventListener("click", () => {
-    selectedRect.setAttribute("rx", "50px");
+    selectedRect.setAttribute("rx", "25px");
 });
 document.getElementById("changerCouleurDeFond").addEventListener("click", () => {
    let couleur = prompt("Entrez la couleur de la boite");
@@ -202,22 +206,17 @@ document.getElementById("changeFontWeight").addEventListener("click", () => {
     //TODO Coriger ca
 })
 
-document.getElementById("changerTexte").addEventListener("click", () => {
+document.getElementById("changeText").addEventListener("click", () => {
     if (!selectedRect) {
         alert("Aucune boîte sélectionnée");
+        return;
     }
 
-    const savedText = selectedRect.getAttribute("data-text");
     const rectId = selectedRect.id;
     let text = document.getElementById("text-" + rectId);
-    let buffer;
+    let buffer = selectedRect.getAttribute("data-text") || "";
 
-    if (savedText) {
-        buffer = savedText + " ";
-    }
-    else {
-        buffer = "";
-    }
+    console.log(selectedRect.id);
 
     const handleKey = function(event) {
 
@@ -273,20 +272,32 @@ document.getElementById("changerTexte").addEventListener("click", () => {
 
     hideMenus();
 });
+document.getElementById("delText").addEventListener("click", () => {
+    const rectId = selectedRect.id;
+    let text = document.getElementById("text-" + rectId);
+
+    if (text) {
+        text.remove();
+        selectedRect.removeAttribute("data-text");
+    }
+});
 
 function updateSvgText(rawText, textElement) {
-    while (textElement.firstChild) {
-        textElement.removeChild(textElement.firstChild);
-    }
-
+    const fragment = document.createDocumentFragment();
     const lines = rawText.split("\n");
+
     lines.forEach((line, index) => {
         const tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
         tspan.setAttribute("x", textElement.getAttribute("x"));
         tspan.setAttribute("dy", index === 0 ? "0" : "20");
         tspan.textContent = line;
-        textElement.appendChild(tspan);
+        fragment.appendChild(tspan);
     });
+
+    while (textElement.firstChild) {
+        textElement.removeChild(textElement.firstChild);
+    }
+    textElement.appendChild(fragment);
 }
 
 
@@ -431,7 +442,7 @@ function hideMenus() {
     globalMenu.style.display = "none";
     rectMenu.style.display = "none";
 
-    document.getElementById("addChildForRectangle").style.display = "none";
+    document.getElementById("addChildForRectangle").classList.add("cache");
 }
 
 function fermerEdit() {
@@ -439,10 +450,11 @@ function fermerEdit() {
     modifText = false;
 
     document.getElementById("addChildForRectangle").classList.add("cache");
-    document.getElementById("changerTexte").classList.add("cache");
+    document.getElementById("changeText").classList.add("cache");
+    document.getElementById("delText").classList.add("cache");
     document.getElementById("round").classList.add("cache");
     document.getElementById("carre").classList.add("cache");
     document.getElementById("changeFontWeight").classList.add("cache");
     document.getElementById("changerCouleurDeTexte").classList.add("cache");
-    document.getElementById("changerTexte").classList.add("cache");
+    document.getElementById("changeText").classList.add("cache");
 }
