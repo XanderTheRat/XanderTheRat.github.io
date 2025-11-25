@@ -1,0 +1,106 @@
+body {
+    background: #000000 !important; 
+    overflow-y: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.terminal-window {
+    background-color: #000000;
+    color: #e2e8f0; 
+    font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', monospace; 
+    font-size: 14px; 
+    padding: 10px;
+    margin: 0;
+    width: 100%; 
+    max-width: 100%;
+    height: 85vh; 
+    border-radius: 0;
+    box-shadow: none;
+    overflow-y: auto;
+}
+
+.terminal-window::-webkit-scrollbar {
+    display: none;
+}
+.terminal-window {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.terminal-line {
+    white-space: pre-wrap;
+    margin-bottom: 2px;
+}
+
+.zsh-prompt {
+    font-weight: 500;
+    margin-right: 2px;
+}
+
+.user-host {
+    color: #63b3ed;
+}
+
+.colon {
+    color: #e2e8f0; 
+}
+
+.path {
+    color: #a9f07f; 
+}
+
+.prompt-symbol {
+    color: #ffb86c; 
+}
+
+.command-text {
+    color: #f8f8f2; 
+}
+
+.system-message {
+    color: #50fa7b; 
+    display: block;
+    margin-bottom: 10px;
+}
+
+.bat-highlight-lang {
+    color: #48bb78;
+}
+
+.dir-color {
+    color: #63b3ed;
+    font-weight: bold;
+}
+
+.cpu-color { color: #b794f4; }
+.mem-color { color: #f687b3; } 
+.bat-color-normal { color: #68d391; }
+.bat-color-charge { color: #48bb78; }
+.bat-color-plugged { color: #38b2ac; }
+.bat-color-error { color: #fc8181; }
+.net-color-wifi { color: #63b3ed; }
+.net-color-ipv4 { color: #a78bfa; }
+.net-color-ipv6 { color: #fb923c; }
+
+.interactive-prompt {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#interactive-input {
+    display: inline-block;
+    color: #f8f8f2;
+    background: none;
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    caret-color: #50fa7b; 
+    padding-left: 5px;
+}
+
+#interactive-input:focus {
+    white-space: nowrap;
+    overflow: hidden;
+}
