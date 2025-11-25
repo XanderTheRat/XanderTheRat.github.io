@@ -180,7 +180,10 @@ function formatItemName(item, parentPath) {
 async function handleBat(args) {
     if (args.includes('--help')) {
         return { output: `<span class="system-message">Usage: bat ... [FILE]...</span><br>
-        Display the files passed as attributes.<br><br>` };
+        Display the files passed as attributes.<br><br>
+
+        <span class="bat-highlight-lang">-C</span>  show competences implieds with the project<br>
+    ` };
     }
 
     if (args.length === 0) {
@@ -318,9 +321,9 @@ function handleLs(args) {
 }
 
 function executeSysinfo() { return `<span class="cpu-color">CPU 15%</span> | <span class="mem-color">MEM 45%</span>`; }
-function executeBattery() { return `<span class="bat-color-normal">65% </span>`; }
+function executeBattery() { return `<span class="bat-color-normal">65%</span>`; }
 function executeChangeBatteryMode() { return `<span class="system-message">Mode batterie changé.</span>`; }
-function executeNetworkStatus() { return `<span class="net-color-wifi"> MyWaybarWifi</span>`; }
+function executeNetworkStatus() { return `<span class="net-color-wifi"> PortfolioMartin</span>`; }
 function executeChangeNetworkStatus() { return `<span class="system-message">Mode réseau changé.</span>`; }
 
 function changeDirectory(targetPath) {
