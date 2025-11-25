@@ -130,7 +130,8 @@ function getFileSize(item) {
 
 function generateLsListing(path, options) {
     const content = getPathContent(path);
-    let list = [...content];
+    
+    let list = options.all ? [...content] : content.filter(item => !item.startsWith('.'));
 
     if (options.reverse) {
         list.reverse();
@@ -219,6 +220,10 @@ function handleLs(args) {
                 if (listing) finalOutput.push(listing);
 
                 let content = getPathContent(current);
+                if (!options.all) {
+                    content = content.filter(item => !item.startsWith('.'));
+                }
+                
                 if (options.reverse) content.reverse(); 
 
                 content.forEach(item => {
@@ -298,7 +303,11 @@ function executeCommand(command, args) {
     
     switch (command) {
         case 'help':
-            return { output: `<span class="system-message">Binaires:</span> ${EXECUTABLES.join(' ')}<br><span class="system-message">Shell:</span> ls, cd, clear, usermod, exit` };
+            return { 
+                output: `<span class="system-message">Binaires:</span> ${EXECUTABLES.join(' ')}<br>
+                <span class="system-message">Shell:</span> ls, cd, clear, usermod, exit<br>
+                <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attribut for the command</span><br>` 
+            };
         
         case 'ls':
             return handleLs(args);
