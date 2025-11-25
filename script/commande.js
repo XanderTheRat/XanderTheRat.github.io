@@ -381,7 +381,7 @@ function handleUsermod(args) {
         
         return { output: `<span class="system-message">Utilisateur mis à jour: ${newLogin}. Home: ${newHome}.</span>` };
     }
-    
+
     return { output: `<span class="system-message">Usage: usermod [OPTION]... [VALUE]...</span><br>
         Change the current user and their directory.<br><br>
         <span class="bat-highlight-lang">--login</span>  Needed. This is the new user name<br>
@@ -403,8 +403,7 @@ function executeCommand(command, args) {
     switch (command) {
         case 'help':
             return { 
-                output: `<span class="system-message">Binaires:</span> ${EXECUTABLES.join(' ')}<br>
-                <span class="system-message">Shell:</span> ls, cd, bat, clear, usermod, exit<br>
+                output: `<span class="system-message">Shell:</span> ls, cd, bat, clear, usermod, exit<br>
                 <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command</span><br>` 
             };
         
