@@ -1,5 +1,3 @@
-/* script/terminal.js */
-
 const interactiveInput = document.getElementById('interactive-input');
 const terminalOutput = document.getElementById('terminal-output');
 const currentPathElement = document.getElementById('current-path');
@@ -32,7 +30,6 @@ function appendOutput(html) {
 function appendPrompt(command) {
     appendOutput(`${updatePromptUI()} <span class="command-text">${command}</span>`);
 }
-
 
 interactiveInput.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
