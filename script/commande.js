@@ -336,7 +336,7 @@ function changeDirectory(targetPath) {
         return { error: null };
     }
 
-    return { error: `zsh: cd: no such file or directory: ${targetPath}` };
+    return { error: `zsh: bad patter: ${targetPath}` };
 }
 
 function handleUsermod(args) {
