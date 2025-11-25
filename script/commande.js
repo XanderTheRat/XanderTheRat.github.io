@@ -6,7 +6,7 @@ var shellState = {
 
 const EXECUTABLES = ["sysinfo", "battery", "change_battery_mode", "network_status", "change_network_status"];
 const FILES_MOCK = ['passwd', 'shadow', 'hosts']; 
-const BUILT_IN_COMMANDS = ['help', 'ls', 'cd', 'clear', 'exit', 'usermod'];
+const BUILT_IN_COMMANDS = ['help', 'ls', 'cd','bat', 'clear', 'exit', 'usermod'];
 const HOME_DIR_CONTENT = ['scripts.rs', 'Documents', 'Desktop', 'github'];
 
 const FILESYSTEM = {
@@ -177,6 +177,70 @@ function formatItemName(item, parentPath) {
     }
 }
 
+async function handleBat(args) {
+    if (args.includes('--help')) {
+        return { output: `<span class="system-message">Usage: bat ... [FILE]...</span><br>
+        Display the files passed as attributes.<br><br>` };
+    }
+
+    if (args.length === 0) {
+        return { output: `<span class="bat-color-error">bat: no input file</span>` };
+    }
+
+    const target = args[0];
+    const fullPath = normalizePath(target);
+    
+    const GITHUB_BASE_PATH = "/home/martin/github/BUT1";
+    const GITHUB_RAW_URL = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main";
+
+    if (!fullPath.startsWith(GITHUB_BASE_PATH)) {
+        return { output: `<span class="bat-color-error">bat: only supported for files in ~/github/BUT1 for now.</span>` };
+    }
+
+    const parentDir = fullPath.substring(0, fullPath.lastIndexOf('/'));
+    const fileName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
+    
+    if (!isDirectory(parentDir) || !getPathContent(parentDir).includes(fileName) || isDirectory(fullPath)) {
+         if (isDirectory(fullPath)) return { output: `<span class="bat-color-error">bat: ${target}: Is a directory</span>` };
+         return { output: `<span class="bat-color-error">bat: ${target}: No such file or directory</span>` };
+    }
+
+    const relativePath = fullPath.substring(GITHUB_BASE_PATH.length);
+    const fileUrl = GITHUB_RAW_URL + relativePath;
+
+    try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) throw new Error("File not found on GitHub");
+        let text = await response.text();
+        
+        const extension = fileName.split('.').pop();
+        let language = 'plaintext';
+        if (['c', 'h'].includes(extension)) language = 'c';
+        else if (['java', 'class'].includes(extension)) language = 'java';
+        else if (['py'].includes(extension)) language = 'python';
+        else if (['html', 'xml', 'iml'].includes(extension)) language = 'xml';
+        else if (['css'].includes(extension)) language = 'css';
+        else if (['js'].includes(extension)) language = 'javascript';
+        else if (['sql'].includes(extension)) language = 'sql';
+        else if (['php'].includes(extension)) language = 'php';
+
+        text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+        if (window.hljs) {
+            try {
+                const highlighted = window.hljs.highlight(text, { language: language }).value;
+                return { output: `<pre><code class="hljs language-${language}">${highlighted}</code></pre>` };
+            } catch (e) {
+                return { output: `<pre>${text}</pre>` };
+            }
+        }
+        return { output: `<pre>${text}</pre>` };
+
+    } catch (error) {
+        return { output: `<span class="bat-color-error">bat: error fetching file: ${error.message}</span>` };
+    }
+}
+
 function handleLs(args) {
     if (args.includes('--help')) {
         return { output: `<span class="system-message">Usage: ls [OPTION]... [DIRECTORY]...</span><br>
@@ -315,8 +379,8 @@ function executeCommand(command, args) {
         case 'help':
             return { 
                 output: `<span class="system-message">Binaires:</span> ${EXECUTABLES.join(' ')}<br>
-                <span class="system-message">Shell:</span> ls, cd, clear, usermod, exit<br>
-                <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attribut for the command</span><br>` 
+                <span class="system-message">Shell:</span> ls, cd, bat, clear, usermod, exit<br>
+                <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command</span><br>` 
             };
         
         case 'ls':
@@ -328,6 +392,7 @@ function executeCommand(command, args) {
 
         case 'clear': return { action: 'clear' };
         case 'usermod': return handleUsermod(args);
+        case 'bat': return handleBat(args);
         case 'exit':
             if (shellState.currentPath === '/') return { action: 'redirect', url: 'index.html' };
             return { output: `<span class="bat-color-error">Erreur: 'exit' doit être fait à la racine (/).</span>` };

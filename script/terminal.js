@@ -31,7 +31,7 @@ function appendPrompt(command) {
     appendOutput(`${updatePromptUI()} <span class="command-text">${command}</span>`);
 }
 
-interactiveInput.addEventListener('keydown', function(event) {
+interactiveInput.addEventListener('keydown', async function(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         const cmdLine = interactiveInput.textContent.trim();
@@ -45,14 +45,18 @@ interactiveInput.addEventListener('keydown', function(event) {
             const parts = cmdLine.split(/\s+/).filter(p => p.length > 0);
             
             if (typeof executeCommand === 'function') {
-                const result = executeCommand(parts[0], parts.slice(1));
-                
-                if (result.action === 'clear') {
-                    terminalOutput.innerHTML = '';
-                } else if (result.action === 'redirect') {
-                    window.location.href = result.url;
-                } else if (result.output) {
-                    appendOutput(result.output);
+                try {
+                    const result = await executeCommand(parts[0], parts.slice(1));
+                    
+                    if (result.action === 'clear') {
+                        terminalOutput.innerHTML = '';
+                    } else if (result.action === 'redirect') {
+                        window.location.href = result.url;
+                    } else if (result.output) {
+                        appendOutput(result.output);
+                    }
+                } catch (e) {
+                    appendOutput(`<span class="bat-color-error">Error executing command: ${e.message}</span>`);
                 }
             } else {
                 appendOutput('<span class="bat-color-error">Erreur: commande.js non chargé.</span>');
@@ -92,7 +96,7 @@ interactiveInput.addEventListener('keydown', function(event) {
         const cmd = parts[0];
         
         if (parts.length === 1) {
-            const allOptions = [...BUILT_IN_COMMANDS, ...EXECUTABLES];
+            const allOptions = (typeof BUILT_IN_COMMANDS !== 'undefined' ? BUILT_IN_COMMANDS : []).concat(typeof EXECUTABLES !== 'undefined' ? EXECUTABLES : []);
             const match = allOptions.find(opt => opt.startsWith(cmd));
             if (match) {
                 interactiveInput.textContent = match;
