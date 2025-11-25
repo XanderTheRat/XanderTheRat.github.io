@@ -264,11 +264,6 @@ function executeNetworkStatus() { return `<span class="net-color-wifi"> Portfoli
 function executeChangeNetworkStatus() { return `<span class="system-message">Mode réseau changé.</span>`; }
 
 function changeDirectory(targetPath) {
-    if (args.includes('--help')) {
-        return { output: `<span class="system-message">Usage: cd [DIRECTORY]...</span>
-        <br>Change the current directory.<br><br>
-        Accept absolute and relative path.` };
-    }
     const normalizedPath = normalizePath(targetPath);
     
     if (shellState.currentPath === normalizedPath) return { error: null };
@@ -352,6 +347,11 @@ function executeCommand(command, args) {
             return handleLs(args);
 
         case 'cd':
+            if (args.includes('--help')) {
+                return { output: `<span class="system-message">Usage: cd [DIRECTORY]...</span><br>
+                Change the current directory.<br>
+                Accept absolute and relative path.` };
+            }
             const res = changeDirectory(args[0] || '~');
             return { output: res.error ? `<span class="bat-color-error">${res.error}</span>` : (shellState.currentPath === '/home/martin/scripts.rs' ? `<span class="system-message">Bienvenue dans les binaires Waybar.</span>` : "") };
 
@@ -368,8 +368,8 @@ function executeCommand(command, args) {
         case 'bat': return handleBat(args);
         case 'exit':
             if (args.includes('--help')) {
-                return { output: `<span class="system-message">Usage: exit</span>
-                <br>Exit the Portfolio and go back to home page.<br><br>
+                return { output: `<span class="system-message">Usage: exit</span><br>
+                Exit the Portfolio and go back to home page.<br>
                 Only work on root (/).` };
             }
             if (shellState.currentPath === '/') return { action: 'redirect', url: 'index.html' };
