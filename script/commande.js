@@ -264,6 +264,11 @@ function executeNetworkStatus() { return `<span class="net-color-wifi"> Portfoli
 function executeChangeNetworkStatus() { return `<span class="system-message">Mode réseau changé.</span>`; }
 
 function changeDirectory(targetPath) {
+    if (args.includes('--help')) {
+        return { output: `<span class="system-message">Usage: cd [DIRECTORY]...</span>
+        <br>Change the current directory.<br><br>
+        Accept absolute and relative path.` };
+    }
     const normalizedPath = normalizePath(targetPath);
     
     if (shellState.currentPath === normalizedPath) return { error: null };
@@ -350,12 +355,25 @@ function executeCommand(command, args) {
             const res = changeDirectory(args[0] || '~');
             return { output: res.error ? `<span class="bat-color-error">${res.error}</span>` : (shellState.currentPath === '/home/martin/scripts.rs' ? `<span class="system-message">Bienvenue dans les binaires Waybar.</span>` : "") };
 
-        case 'clear': return { action: 'clear' };
+        case 'clear': {
+            if (args.includes('--help')) {
+                return { output: `<span class="system-message">Usage: clear</span><br>
+                Clear the visual historic of commands in the screen.<br><br>
+                ` };
+            }
+            return { action: 'clear' };
+        }
+
         case 'usermod': return handleUsermod(args);
         case 'bat': return handleBat(args);
         case 'exit':
+            if (args.includes('--help')) {
+                return { output: `<span class="system-message">Usage: exit</span>
+                <br>Exit the Portfolio and go back to home page.<br><br>
+                Only work on root (/).` };
+            }
             if (shellState.currentPath === '/') return { action: 'redirect', url: 'index.html' };
-            return { output: `<span class="bat-color-error">Erreur: 'exit' doit être fait à la racine (/).</span>` };
+            return { output: `<span class="bat-color-error">Error: 'exit' can only be use in the root (/).</span>` };
 
         default: return { output: `<span class="bat-color-error">zsh: command not found: ${command}</span>` };
     }

@@ -1,3 +1,10 @@
+var shellState = {
+    currentUser: "martin",
+    homeDir: "/home/martin",
+    currentPath: "/", 
+};
+
+
 const EXECUTABLES = ["sysinfo", "battery", "change_battery_mode", "network_status", "change_network_status"];
 const FILES_MOCK = ['passwd', 'shadow', 'hosts'];
 const BUILT_IN_COMMANDS = ['help', 'ls', 'cd', 'clear', 'exit', 'usermod', 'bat'];
