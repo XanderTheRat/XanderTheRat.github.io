@@ -336,13 +336,15 @@ function changeDirectory(targetPath) {
         return { error: null };
     }
 
-    return { error: `zsh: bad patter: ${targetPath}` };
+    return { error: `zsh: bad pattern: ${targetPath}` };
 }
 
 function handleUsermod(args) {
+
     let newLogin = shellState.currentUser;
     let newHome = shellState.homeDir;
     let changeMade = false;
+    let homeExplicitlySet = false;
     const oldHome = shellState.homeDir; 
 
     for (let i = 0; i < args.length; i++) {
@@ -352,20 +354,40 @@ function handleUsermod(args) {
         } else if (args[i] === '--home' && i + 1 < args.length) {
             if (!args[i+1].startsWith('/')) return { output: `<span class="bat-color-error">Erreur: Chemin absolu requis.</span>` };
             newHome = args[i + 1];
+            homeExplicitlySet = true;
             i++; changeMade = true;
         }
     }
 
     if (changeMade) {
+        if (!homeExplicitlySet && newLogin !== shellState.currentUser) {
+            newHome = '/home/' + newLogin;
+        }
+
+        Object.keys(FILESYSTEM).forEach(path => {
+            if (path.startsWith(oldHome + '/')) {
+                const newPath = newHome + path.substring(oldHome.length);
+                FILESYSTEM[newPath] = FILESYSTEM[path];
+                delete FILESYSTEM[path];
+            }
+        });
+
         shellState.currentUser = newLogin;
         shellState.homeDir = newHome;
+        
         if (shellState.currentPath.startsWith(oldHome)) {
             shellState.currentPath = newHome + shellState.currentPath.substring(oldHome.length);
         }
+        
         return { output: `<span class="system-message">Utilisateur mis à jour: ${newLogin}. Home: ${newHome}.</span>` };
     }
-    return { output: `<span class="bat-color-error">Usage: usermod --login {user} --home {path}</span>` };
-}
+    
+    return { output: `<span class="system-message">Usage: usermod [OPTION]... [VALUE]...</span><br>
+        Change the current user and their directory.<br><br>
+        <span class="bat-highlight-lang">--login</span>  Needed. This is the new user name<br>
+        <span class="bat-highlight-lang">--home</span>  Optionnal. This is the new user's directory<br><br>` };
+    }
+
 
 function executeCommand(command, args) {
     if (EXECUTABLES.includes(command)) {
