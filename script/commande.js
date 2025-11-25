@@ -178,6 +178,16 @@ function formatItemName(item, parentPath) {
 }
 
 function handleLs(args) {
+    if (args.includes('--help')) {
+        return { output: `<span class="system-message">Usage: ls [OPTION]... [DIRECTORY]...</span><br>
+        List information about the FILEs (the current directory by default).<br><br>
+        <span class="bat-highlight-lang">-a</span>  show every files<br>
+        <span class="bat-highlight-lang">-l</span>  use a long listing format<br>
+        <span class="bat-highlight-lang">-r</span>  reverse printing order<br>
+        <span class="bat-highlight-lang">-R</span>  list subdirectories recursively<br>
+        <span class="bat-highlight-lang">--help</span>  display this help and exit` };
+    }
+
     let options = { recursive: false, reverse: false, long: false, all: false };
     let targets = [];
 
