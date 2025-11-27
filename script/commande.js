@@ -13,9 +13,6 @@ function getPathContent(path) {
     }
     if (path.startsWith(shellState.homeDir + '/')) {
         const subDir = path.substring(shellState.homeDir.length + 1);
-        if (HOME_DIR_CONTENT.includes(subDir) && subDir !== 'github') {
-            return [];
-        }
     }
     return FILESYSTEM[path] || [];
 }
@@ -107,7 +104,7 @@ function formatItemName(item, parentPath) {
     
     if (EXECUTABLES.includes(item) && (parentPath === '/usr/bin' || parentPath === '/bin')) {
         return `<span class="bat-highlight-lang">${item}</span>`;
-    } else if (isDirectory(fullPath)) {
+    } else if (isDirectory(fullPath) || item === '.' || item === '..') {
         return `<span class="dir-color">${item}</span>`;
     } else {
         return `<span class="code-color">${item}</span>`;
@@ -195,18 +192,66 @@ async function handleBat(args) {
     }
 }
 
-function handleLs(args) {
-    if (args.includes('--help')) {
-        return { output: `<span class="system-message">Usage: ls [OPTION]... [DIRECTORY]...</span><br>
-        List information about the FILEs (the current directory by default).<br><br>
-        <span class="bat-highlight-lang">-a</span>  show every files<br>
-        <span class="bat-highlight-lang">-l</span>  use a long listing format<br>
-        <span class="bat-highlight-lang">-r</span>  reverse printing order<br>
-        <span class="bat-highlight-lang">-R</span>  list subdirectories recursively<br>
-        ` };
+function generateLsListing(path, options) {
+    const content = getPathContent(path);
+    let list = [...content];
+
+    if (options.all) {
+        if (path !== '/') {
+             list.unshift('..');
+        }
+        list.unshift('.');
+    } else if (options.almostAll) {}
+     else {
+        list = list.filter(item => !item.startsWith('.'));
     }
 
-    let options = { recursive: false, reverse: false, long: false, all: false };
+    if (options.reverse) {
+        list.reverse();
+    }
+
+    let outputLines = [];
+
+    if (list.length === 0) return "";
+
+    if (options.long) {
+        outputLines.push(`<table style="width:100%; text-align:left;">`);
+        list.forEach(item => {
+            const fullPath = path === '/' ? '/' + item : path + '/' + item;
+            
+            let isDir = (item === '.' || item === '..') ? true : isDirectory(fullPath);
+            
+            const perms = isDir ? "drwxr-xr-x" : "-rwxr-xr-x";
+            const size = (item === '.' || item === '..') ? "4.0KB" : getFileSize(item);
+            const formattedName = formatItemName(item, path);
+            
+            outputLines.push(`<tr>
+                <td class="bat-comment">${perms}</td>
+                <td class="bat-comment">${shellState.currentUser}</td>
+                <td class="bat-comment">${size}</td>
+                <td>${formattedName}</td>
+            </tr>`);
+        });
+        outputLines.push(`</table>`);
+        return outputLines.join('');
+    } else {
+        let formattedItems = list.map(item => formatItemName(item, path));
+        return formattedItems.join('    ');
+    }
+}
+function handleLs(args) {
+    if (args.includes('--help')) {
+        return { output: `<span class="system-message">Usage: ls [OPTION]... [FILE]...</span><br>
+        List information about the FILEs (the current directory by default).<br><br>
+        <span class="bat-highlight-lang">-a</span>  do not ignore entries starting with .<br>
+        <span class="bat-highlight-lang">-A</span>  do not list implied . and ..<br>
+        <span class="bat-highlight-lang">-l</span>  use a long listing format<br>
+        <span class="bat-highlight-lang">-r</span>  reverse order while sorting<br>
+        <span class="bat-highlight-lang">-R</span>  list subdirectories recursively<br>
+        <span class="bat-highlight-lang">--help</span>     display this help and exit` };
+    }
+
+    let options = { recursive: false, reverse: false, long: false, all: false, almostAll: false };
     let targets = [];
 
     args.forEach(arg => {
@@ -215,6 +260,7 @@ function handleLs(args) {
             if (arg.includes('r')) options.reverse = true;
             if (arg.includes('l')) options.long = true;
             if (arg.includes('a')) options.all = true;
+            if (arg.includes('A')) options.almostAll = true;
         } else {
             targets.push(arg);
         }
@@ -229,7 +275,8 @@ function handleLs(args) {
     targets.forEach(target => {
         const fullPath = normalizePath(target);
         
-        if (!isDirectory(fullPath)) {
+        let isSpecial = (target === '.' || target === '..');
+        if (!isSpecial && !isDirectory(fullPath)) {
             finalOutput.push(`<span class="bat-color-error">ls: cannot access '${target}': No such file or directory</span>`);
             return;
         }
@@ -248,7 +295,8 @@ function handleLs(args) {
                 if (listing) finalOutput.push(listing);
 
                 let content = getPathContent(current);
-                if (!options.all) {
+                
+                if (!options.all && !options.almostAll) {
                     content = content.filter(item => !item.startsWith('.'));
                 }
                 
@@ -256,7 +304,7 @@ function handleLs(args) {
 
                 content.forEach(item => {
                     const itemPath = current === '/' ? '/' + item : current + '/' + item;
-                    if (isDirectory(itemPath)) {
+                    if (item !== '.' && item !== '..' && isDirectory(itemPath)) {
                         stack.push(itemPath);
                     }
                 });
@@ -401,7 +449,7 @@ function executeCommand(command, args) {
     switch (command) {
         case 'help':
             return { 
-                output: `<span class="system-message">Shell:</span> ls, cd, bat, clear, usermod<br>
+                output: `<span class="system-message">Commands Shell:</span> ls, cd, bat, clear, usermod<br>
                 <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command<br>In the <span class="command-text">~/github/{project}/README.md </span>file, you can see the competences implieds in the project</span><br>` 
             };
         

@@ -153,7 +153,16 @@ terminalWindow.addEventListener('click', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded',async () => {
     interactiveInput.focus();
     updatePromptUI();
+
+    if (typeof executeCommand === 'function') {
+        const result = await executeCommand('help', []);
+        if (result.output) {
+            appendOutput(result.output);
+        }
+    }
+
+    scrollToBottom();
 });
