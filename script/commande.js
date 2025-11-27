@@ -175,7 +175,8 @@ async function handleBat(args) {
         else if (['js'].includes(extension)) language = 'javascript';
         else if (['sql'].includes(extension)) language = 'sql';
         else if (['php'].includes(extension)) language = 'php';
-        else if (['rust'].includes(extension)) language = 'rust';
+        else if (['rs'].includes(extension)) language = 'rust';
+        else if (['md'].includes(extension)) language = 'markdown';
 
         text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -268,6 +269,54 @@ function handleLs(args) {
     });
 
     return { output: finalOutput.join('<br>') };
+}
+
+function getAutocompleteData(token, isCommand) {
+    let matches = [];
+    let parentPath = ''; 
+
+    if (isCommand) {
+        const allCommands = [...BUILT_IN_COMMANDS, ...EXECUTABLES];
+        matches = allCommands.filter(cmd => cmd.startsWith(token));
+        parentPath = '/bin'; 
+    } else {
+        
+        let dirToSearch = shellState.currentPath; 
+        let partialName = token;
+
+        const lastSlashIndex = token.lastIndexOf('/');
+        
+        if (lastSlashIndex !== -1) {
+            const pathPart = token.substring(0, lastSlashIndex + 1);
+            partialName = token.substring(lastSlashIndex + 1);
+            
+            dirToSearch = normalizePath(pathPart);
+        } else if (token === '~') {
+             dirToSearch = '/home';
+             partialName = shellState.currentUser;
+        }
+
+        if (isDirectory(dirToSearch)) {
+            const content = getPathContent(dirToSearch);
+            let candidates = [...content];
+            matches = candidates.filter(item => item.startsWith(partialName));
+            parentPath = dirToSearch;
+        }
+    }
+
+    return { matches, parentPath };
+}
+
+function getCommonPrefix(strings) {
+    if (!strings.length) return '';
+    let prefix = strings[0];
+    for (let i = 1; i < strings.length; i++) {
+        while (strings[i].indexOf(prefix) !== 0) {
+            prefix = prefix.substring(0, prefix.length - 1);
+            if (!prefix) return '';
+        }
+    }
+    return prefix;
 }
 
 function executeSysinfo() { return `<span class="cpu-color">CPU 15%</span> | <span class="mem-color">MEM 45%</span>`; }

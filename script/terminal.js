@@ -5,6 +5,7 @@ const currentUserElement = document.getElementById('current-user');
 
 const commandHistory = [];
 let historyIndex = -1;
+let lastTabTime = 0;
 
 function updatePromptUI() {
     if (typeof shellState === 'undefined') return;
@@ -91,22 +92,50 @@ interactiveInput.addEventListener('keydown', async function(event) {
     
     else if (event.key === 'Tab') {
         event.preventDefault();
-        const current = interactiveInput.textContent.trim();
-        const parts = current.split(/\s+/);
-        const cmd = parts[0];
+        const now = Date.now();
+        const isDoubleTab = (now - lastTabTime < 300);
+        lastTabTime = now;
+
+        const fullInput = interactiveInput.textContent; 
+
+        const tokens = fullInput.split(/(\s+)/); 
+        const lastToken = tokens[tokens.length - 1];
+        const isCommandPosition = (tokens.filter(t => t.trim().length > 0).length <= 1);
+
+        const data = getAutocompleteData(lastToken.trim(), isCommandPosition);
         
-        if (parts.length === 1) {
-            const allOptions = (typeof BUILT_IN_COMMANDS !== 'undefined' ? BUILT_IN_COMMANDS : []).concat(typeof EXECUTABLES !== 'undefined' ? EXECUTABLES : []);
-            const match = allOptions.find(opt => opt.startsWith(cmd));
-            if (match) {
-                interactiveInput.textContent = match;
-                const range = document.createRange();
-                const sel = window.getSelection();
-                range.selectNodeContents(interactiveInput);
-                range.collapse(false);
-                sel.removeAllRanges();
-                sel.addRange(range);
-            }
+        if (data.matches.length === 0) {
+            return;
+        }
+
+        const commonPrefix = getCommonPrefix(data.matches);
+
+        let prefixToAdd = commonPrefix;
+        let completedToken = "";
+
+        const slashIndex = lastToken.lastIndexOf('/');
+        if (slashIndex !== -1) {
+            completedToken = lastToken.substring(0, slashIndex + 1) + commonPrefix;
+        } else {
+            completedToken = commonPrefix;
+        }
+
+        if (completedToken.length > lastToken.length) {
+            tokens[tokens.length - 1] = completedToken;
+            interactiveInput.textContent = tokens.join('');
+            
+            const range = document.createRange();
+            const sel = window.getSelection();
+            range.selectNodeContents(interactiveInput);
+            range.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+
+        if (isDoubleTab && data.matches.length > 1) {
+            appendPrompt(interactiveInput.textContent);
+            const gridHTML = formatSuggestionGrid(data.matches, data.parentPath);
+            appendOutput(gridHTML);
         }
     }
 });
