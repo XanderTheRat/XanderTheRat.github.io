@@ -402,7 +402,7 @@ function executeCommand(command, args) {
         case 'help':
             return { 
                 output: `<span class="system-message">Shell:</span> ls, cd, bat, clear, usermod<br>
-                <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command</span><br>` 
+                <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command<br>In the <span class="command-text">~/github/{project}/README.md </span>file, you can see the competences implieds in the project</span><br>` 
             };
         
         case 'ls':

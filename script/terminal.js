@@ -15,9 +15,9 @@ function updatePromptUI() {
         : shellState.currentPath;
 
     if (currentPathElement) currentPathElement.textContent = displayPath;
-    if (currentUserElement) currentUserElement.textContent = `${shellState.currentUser}@hostname`;
+    if (currentUserElement) currentUserElement.textContent = `${shellState.currentUser}@portfolio`;
 
-    return `<span class="zsh-prompt user-host">${shellState.currentUser}@hostname</span><span class="zsh-prompt colon">:</span><span class="zsh-prompt path">${displayPath}</span><span class="zsh-prompt prompt-symbol">$</span>`;
+    return `<span class="zsh-prompt user-host">${shellState.currentUser}@portfolio</span><span class="zsh-prompt colon">:</span><span class="zsh-prompt path">${displayPath}</span><span class="zsh-prompt prompt-symbol">$</span>`;
 }
 
 function appendOutput(html) {
