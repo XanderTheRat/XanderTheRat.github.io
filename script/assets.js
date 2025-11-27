@@ -20,7 +20,7 @@ const FILESYSTEM = {
     '/usr/bin': EXECUTABLES,
     '/etc': ['passwd', 'shadow', 'hosts'],
     '/bin': ['ls', 'cd', 'clear', 'exit', 'usermod', 'bat'],
-    '/home/martin/github': ['BUT1'],
+    '/home/martin/github': ['BUT1', 'BUT2','XanderTheRat.github.io'],
     '/home/martin/github/BUT1': ['.gitattributes', 'C', 'Java', 'Python', 'SQL', 'web'],
     '/home/martin/github/BUT1/C': ['C', 'R2.04'],
     '/home/martin/github/BUT1/C/C': ['.idea', 'cmake-build-debug'],
@@ -68,5 +68,11 @@ const FILESYSTEM = {
     '/home/martin/github/BUT1/web/Halloween/img': ['logo.png'],
     '/home/martin/github/BUT1/web/Halloween/msq': ['Musique.mp3'],
     '/home/martin/github/BUT1/web/Halloween/script': ['script.js'],
-    '/home/martin/github/BUT1/web/Halloween/style': ['responsive.css', 'style.css']
+    '/home/martin/github/BUT1/web/Halloween/style': ['responsive.css', 'style.css'],
+    '/home/martin/github/BUT2': [],
+
+    '/home/martin/github/XanderTheRat.github.io': ['script', 'style', 'portfolio.html'],
+    '/home/martin/github/XanderTheRat.github.io/script': ['assets.js', 'commande.js', 'terminal.js'],
+    '/home/martin/github/XanderTheRat.github.io/style': ['terminal.css']
+
 };

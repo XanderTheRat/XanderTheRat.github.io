@@ -130,10 +130,13 @@ async function handleBat(args) {
     const target = args[0];
     const fullPath = normalizePath(target);
     
+    const GITHUB_PAGE_PATH = "/home/martin/github/XanderTheRat.github.io";
+    const GITHUB_PAGE_RAW = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio_V2";
+
     const GITHUB_BASE_PATH = "/home/martin/github/BUT1";
     const GITHUB_RAW_URL = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main";
 
-    if (!fullPath.startsWith(GITHUB_BASE_PATH)) {
+    if (!fullPath.startsWith(GITHUB_BASE_PATH) && !fullPath.startsWith(GITHUB_PAGE_PATH) ){
         return { output: `<span class="bat-color-error">bat: only supported for files in ~/github/BUT1 for now.</span>` };
     }
 
@@ -144,10 +147,19 @@ async function handleBat(args) {
          if (isDirectory(fullPath)) return { output: `<span class="bat-color-error">bat: ${target}: Is a directory</span>` };
          return { output: `<span class="bat-color-error">bat: ${target}: No such file or directory</span>` };
     }
+    let fileUrl;
+    let relativePath;
 
-    const relativePath = fullPath.substring(GITHUB_BASE_PATH.length);
-    const fileUrl = GITHUB_RAW_URL + relativePath;
 
+    if (fullPath.startsWith(GITHUB_BASE_PATH)) {
+        relativePath = fullPath.substring(GITHUB_BASE_PATH.length);
+        fileUrl = GITHUB_RAW_URL + relativePath;    
+    } 
+    if (fullPath.startsWith(GITHUB_PAGE_PATH)) {
+        relativePath = fullPath.substring(GITHUB_PAGE_PATH.length);
+        fileUrl = GITHUB_PAGE_RAW + relativePath;
+    }
+    
     try {
         const response = await fetch(fileUrl);
         if (!response.ok) throw new Error("File not found on GitHub");
@@ -163,6 +175,7 @@ async function handleBat(args) {
         else if (['js'].includes(extension)) language = 'javascript';
         else if (['sql'].includes(extension)) language = 'sql';
         else if (['php'].includes(extension)) language = 'php';
+        else if (['rust'].includes(extension)) language = 'rust';
 
         text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -189,7 +202,7 @@ function handleLs(args) {
         <span class="bat-highlight-lang">-l</span>  use a long listing format<br>
         <span class="bat-highlight-lang">-r</span>  reverse printing order<br>
         <span class="bat-highlight-lang">-R</span>  list subdirectories recursively<br>
-        <span class="bat-highlight-lang">--help</span>  display this help and exit` };
+        ` };
     }
 
     let options = { recursive: false, reverse: false, long: false, all: false };
@@ -339,7 +352,7 @@ function executeCommand(command, args) {
     switch (command) {
         case 'help':
             return { 
-                output: `<span class="system-message">Shell:</span> ls, cd, bat, clear, usermod, exit<br>
+                output: `<span class="system-message">Shell:</span> ls, cd, bat, clear, usermod<br>
                 <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command</span><br>` 
             };
         
@@ -366,14 +379,6 @@ function executeCommand(command, args) {
 
         case 'usermod': return handleUsermod(args);
         case 'bat': return handleBat(args);
-        case 'exit':
-            if (args.includes('--help')) {
-                return { output: `<span class="system-message">Usage: exit</span><br>
-                Exit the Portfolio and go back to home page.<br>
-                Only work on root (/).` };
-            }
-            if (shellState.currentPath === '/') return { action: 'redirect', url: 'index.html' };
-            return { output: `<span class="bat-color-error">Error: 'exit' can only be use in the root (/).</span>` };
 
         default: return { output: `<span class="bat-color-error">zsh: command not found: ${command}</span>` };
     }
