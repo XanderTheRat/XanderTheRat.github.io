@@ -2,6 +2,7 @@ const interactiveInput = document.getElementById('interactive-input');
 const terminalOutput = document.getElementById('terminal-output');
 const currentPathElement = document.getElementById('current-path');
 const currentUserElement = document.getElementById('current-user');
+const terminalWindow = document.querySelector('.terminal-window');
 
 const commandHistory = [];
 let historyIndex = -1;
@@ -19,13 +20,16 @@ function updatePromptUI() {
 
     return `<span class="zsh-prompt user-host">${shellState.currentUser}@portfolio</span><span class="zsh-prompt colon">:</span><span class="zsh-prompt path">${displayPath}</span><span class="zsh-prompt prompt-symbol">$</span>`;
 }
+function scrollToBottom() {
+    terminalWindow.scrollTop = terminalWindow.scrollHeight;
+}
 
 function appendOutput(html) {
     const div = document.createElement('div');
     div.classList.add('terminal-line');
     div.innerHTML = html;
     terminalOutput.appendChild(div);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    scrollToBottom();
 }
 
 function appendPrompt(command) {
@@ -65,6 +69,8 @@ interactiveInput.addEventListener('keydown', async function(event) {
         }
         
         interactiveInput.textContent = '';
+        scrollToBottom();
+        interactiveInput.focus();
         updatePromptUI();
     }
     
@@ -139,6 +145,13 @@ interactiveInput.addEventListener('keydown', async function(event) {
         }
     }
 });
+terminalWindow.addEventListener('click', () => {
+    const selection = window.getSelection();
+    if (selection.toString().length === 0) {
+        interactiveInput.focus({ preventScroll: true });
+    }
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
     interactiveInput.focus();
