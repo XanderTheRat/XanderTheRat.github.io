@@ -383,7 +383,7 @@ function changeDirectory(targetPath) {
         return { error: null };
     }
 
-    return { error: `zsh: bad pattern: ${targetPath}` };
+    return { error: `sh: bad pattern: ${targetPath}` };
 }
 
 function handleUsermod(args) {
@@ -477,6 +477,6 @@ function executeCommand(command, args) {
         case 'usermod': return handleUsermod(args);
         case 'bat': return handleBat(args);
 
-        default: return { output: `<span class="bat-color-error">zsh: command not found: ${command}</span>` };
+        default: return { output: `<span class="bat-color-error">sh: command not found: ${command}</span>` };
     }
 }
