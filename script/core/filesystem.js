@@ -1,7 +1,7 @@
 window.VirtualFileSystem = (function() {
     const EXECUTABLES = ["sysinfo", "battery", "change_battery_mode", "network_status", "change_network_status"];
     const FILES_MOCK = ["passwd", "shadow", "hosts"];
-    const HOME_DIR_CONTENT = ["scripts.rs", "Documents", "Desktop", "github"];
+    const HOME_DIR_CONTENT = ["Documents", "Desktop", "github"];
 
     const filesystem = {
     '/': ['home', 'usr', 'bin'],

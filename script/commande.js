@@ -521,7 +521,7 @@ function executeCommand(command, args) {
             }
             const target = args[0] || '~';
             const res = changeDirectory(target);
-            return { output: res.error ? '<span class="cat-color-error">' + res.error + '</span>' : (shellState.currentPath === '/home/martin/scripts.rs' ? '<span class="system-message">Bienvenue dans les binaires Waybar.</span>' : "") };
+            return { output: res.error ? '<span class="cat-color-error">' + res.error + '</span>' : "" };
         }
         case 'usermod': return handleUsermod(args);
         case 'cat': return handleCat(args);
