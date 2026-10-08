@@ -117,7 +117,7 @@ function generateLsListing(path, options) {
 }
 
 function handleLs(args) {
-    if (args.includes('--help')) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
         return {
             output: '<span class="system-message">Usage: ls [OPTION]... [FILE]...</span><br>' +
                 'List information about the FILEs (the current directory by default).<br><br>' +
@@ -126,7 +126,7 @@ function handleLs(args) {
                 '<span class="cat-highlight-lang">-l</span>  use a long listing format<br>' +
                 '<span class="cat-highlight-lang">-r</span>  reverse order while sorting<br>' +
                 '<span class="cat-highlight-lang">-R</span>  list subdirectories recursively<br>' +
-                '<span class="cat-highlight-lang">--help</span>     display this help and exit'
+                '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
         };
     }
 
@@ -192,11 +192,12 @@ function handleLs(args) {
 }
 
 async function handleCat(args) {
-    if (args.includes('--help')) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
         return {
             output: '<span class="system-message">Usage: cat ... [FILE]...</span><br>' +
                 'Display the files passed as attributes.<br><br>' +
-                '<span class="cat-highlight-lang">-C</span> show competences implied with the project<br>'
+                '<span class="cat-highlight-lang">-C</span> show competences implied with the project<br>' +
+                '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
         };
     }
 
@@ -206,6 +207,11 @@ async function handleCat(args) {
 
     const target = args[0];
     const fullPath = normalizePath(target);
+
+    if (fullPath.startsWith('/bin/') || fullPath.startsWith('/usr/bin/')) {
+        const binName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
+        return executeCommand(binName, ['--help']);
+    }
 
     if (isDirectory(fullPath)) {
         return { output: '<span class="cat-color-error">cat: ' + target + ': Is a directory</span>' };
@@ -291,12 +297,13 @@ async function handleCat(args) {
 const handleBat = handleCat;
 
 function handleTree(args) {
-    if (args.includes('--help')) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
         return {
             output: '<span class="system-message">Usage: tree [DIRECTORY]</span><br>' +
                 'Display an interactive graphical tree view of the filesystem in another window.<br>' +
                 'Click on a branch to navigate to a folder, or click on a leaf to print the file.<br><br>' +
-                '<span class="cat-highlight-lang">DIRECTORY</span>  Optional target directory (current path by default)'
+                '<span class="cat-highlight-lang">DIRECTORY</span>  Optional target directory (current path by default)<br>' +
+                '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
         };
     }
 
@@ -321,6 +328,16 @@ function changeDirectory(targetPath) {
 }
 
 function handleUsermod(args) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
+        return {
+            output: '<span class="system-message">Usage: usermod [OPTION]... [VALUE]...</span><br>' +
+                'Change the current user and their directory.<br><br>' +
+                '<span class="cat-highlight-lang">--login</span>  Needed. This is the new user name<br>' +
+                '<span class="cat-highlight-lang">--home</span>  Optional. This is the new user\'s directory<br><br>' +
+                '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+        };
+    }
+
     let newLogin = shellState.currentUser;
     let newHome = shellState.homeDir;
     let changeMade = false;
@@ -373,15 +390,41 @@ function handleUsermod(args) {
         output: '<span class="system-message">Usage: usermod [OPTION]... [VALUE]...</span><br>' +
             'Change the current user and their directory.<br><br>' +
             '<span class="cat-highlight-lang">--login</span>  Needed. This is the new user name<br>' +
-            '<span class="cat-highlight-lang">--home</span>  Optional. This is the new user\'s directory<br><br>'
+            '<span class="cat-highlight-lang">--home</span>  Optional. This is the new user\'s directory<br><br>' +
+            '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
     };
 }
 
-function executeSysinfo() { return '<span class="cpu-color">CPU 15%</span> | <span class="mem-color">MEM 45%</span>'; }
-function executeBattery() { return '<span class="bat-color-normal">65%</span>'; }
-function executeChangeBatteryMode() { return '<span class="system-message">Mode batterie changé.</span>'; }
-function executeNetworkStatus() { return '<span class="net-color-wifi">PortfolioMartin</span>'; }
-function executeChangeNetworkStatus() { return '<span class="system-message">Mode réseau changé.</span>'; }
+function executeSysinfo(args) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
+        return '<span class="system-message">Usage: sysinfo</span><br>Display current CPU and memory utilization.<br><br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit';
+    }
+    return '<span class="cpu-color">CPU 15%</span> | <span class="mem-color">MEM 45%</span>';
+}
+function executeBattery(args) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
+        return '<span class="system-message">Usage: battery</span><br>Display current battery percentage.<br><br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit';
+    }
+    return '<span class="bat-color-normal">65%</span>';
+}
+function executeChangeBatteryMode(args) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
+        return '<span class="system-message">Usage: change_battery_mode</span><br>Toggle between battery power saving modes.<br><br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit';
+    }
+    return '<span class="system-message">Mode batterie changé.</span>';
+}
+function executeNetworkStatus(args) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
+        return '<span class="system-message">Usage: network_status</span><br>Display active network SSID and state.<br><br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit';
+    }
+    return '<span class="net-color-wifi">PortfolioMartin</span>';
+}
+function executeChangeNetworkStatus(args) {
+    if (args && (args.includes('--help') || args.includes('-h'))) {
+        return '<span class="system-message">Usage: change_network_status</span><br>Toggle network connectivity status.<br><br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit';
+    }
+    return '<span class="system-message">Mode réseau changé.</span>';
+}
 
 function getAutocompleteData(token, isCommand) {
     let matches = [];
@@ -441,26 +484,41 @@ function formatSuggestionGrid(matches, parentPath) {
 }
 
 function executeCommand(command, args) {
+    if (command && command.includes('/')) {
+        command = command.substring(command.lastIndexOf('/') + 1);
+    }
+
     if (typeof EXECUTABLES !== 'undefined' && EXECUTABLES.includes(command)) {
         switch (command) {
-            case 'sysinfo': return { output: executeSysinfo() };
-            case 'battery': return { output: executeBattery() };
-            case 'change_battery_mode': return { output: executeChangeBatteryMode() };
-            case 'network_status': return { output: executeNetworkStatus() };
-            case 'change_network_status': return { output: executeChangeNetworkStatus() };
+            case 'sysinfo': return { output: executeSysinfo(args) };
+            case 'battery': return { output: executeBattery(args) };
+            case 'change_battery_mode': return { output: executeChangeBatteryMode(args) };
+            case 'network_status': return { output: executeNetworkStatus(args) };
+            case 'change_network_status': return { output: executeChangeNetworkStatus(args) };
         }
     }
 
     switch (command) {
         case 'help':
             return {
-                output: '<span class="system-message">Commands Shell:</span> ls, cd, cat, tree, clear, usermod<br>' +
-                    '<span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command<br>In the <span class="command-text">~/github/{project}/README.md </span>file, you can see the competences implied in the project</span><br>'
+                output: '<span class="system-message">Commands Shell:</span> ls, cd, cat, tree, clear, usermod, help<br>' +
+                    '<span class="system-message">Type <span class="command-text">{command} --help</span> or <span class="command-text">{command} -h</span> to show a complete list of attributes for the command<br>In the <span class="command-text">~/github/{project}/README.md</span> file, you can see the competences implied in the project</span><br>'
             };
         case 'ls': return handleLs(args);
-        case 'clear': return { action: 'clear' };
-        case 'exit': return { action: 'redirect', url: 'https://github.com/XanderTheRat' };
+        case 'clear':
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return { output: '<span class="system-message">Usage: clear</span><br>Clear the terminal screen.<br><br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit' };
+            }
+            return { action: 'clear' };
+        case 'exit':
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return { output: '<span class="system-message">Usage: exit</span><br>Exit portfolio session and navigate to GitHub profile.<br><br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit' };
+            }
+            return { action: 'redirect', url: 'https://github.com/XanderTheRat' };
         case 'cd': {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return { output: '<span class="system-message">Usage: cd [DIRECTORY]</span><br>Change current shell directory.<br><br><span class="cat-highlight-lang">DIRECTORY</span>  Target folder (defaults to ~)<br><span class="cat-highlight-lang">--help, -h</span>  display this help and exit' };
+            }
             const target = args[0] || '~';
             const res = changeDirectory(target);
             return { output: res.error ? '<span class="cat-color-error">' + res.error + '</span>' : (shellState.currentPath === '/home/martin/scripts.rs' ? '<span class="system-message">Bienvenue dans les binaires Waybar.</span>' : "") };

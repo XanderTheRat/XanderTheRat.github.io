@@ -25,7 +25,11 @@ window.CommandRegistry = (function() {
     }
 
     async function execute(name, args, context) {
-        const cmd = commands.get(name);
+        let cmd = commands.get(name);
+        if (!cmd && name && name.includes('/')) {
+            const baseName = name.substring(name.lastIndexOf('/') + 1);
+            cmd = commands.get(baseName);
+        }
         if (!cmd) {
             return {
                 output: '<span class="term-error">sh: command not found: ' + (context.path ? context.path.escapeHtml(name) : name) + '</span>'

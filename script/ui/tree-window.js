@@ -14,6 +14,26 @@ window.TreeWindow = (function() {
     let dragStartX = 0;
     let dragStartY = 0;
 
+    function isBinaryPath(filePath) {
+        if (!filePath) return false;
+        if (filePath.startsWith('/bin/') || filePath.startsWith('/usr/bin/')) {
+            return true;
+        }
+        const dir = window.PathUtils ? window.PathUtils.dirname(filePath) : '';
+        if (dir === '/bin' || dir === '/usr/bin') {
+            return true;
+        }
+        const name = window.PathUtils ? window.PathUtils.basename(filePath) : filePath;
+        if (window.VirtualFileSystem) {
+            const executables = window.VirtualFileSystem.getExecutables();
+            if (executables && executables.includes(name)) return true;
+        }
+        if (window.CommandRegistry && window.CommandRegistry.has(name)) {
+            return true;
+        }
+        return false;
+    }
+
     function render() {
         const svg = document.getElementById('tree-svg');
         if (!svg || !treeRootNode) return;
@@ -82,7 +102,15 @@ window.TreeWindow = (function() {
                 iconSvg = '<path d="M 14 2 L 6 2 A 2 2 0 0 0 4 4 L 4 20 A 2 2 0 0 0 6 22 L 18 22 A 2 2 0 0 0 20 20 L 20 8 Z M 14 2 L 14 8 L 20 8" fill="none" stroke="' + iconColor + '" stroke-width="2" transform="translate(10, 10) scale(0.75)" />';
             }
 
-            const tooltip = (n.isDir ? 'Directory (click to cd): ' : 'File (click to cat): ') + n.path;
+            const isBinary = isBinaryPath(n.path);
+            let tooltip = '';
+            if (n.isDir) {
+                tooltip = 'Directory (click to cd): ' + n.path;
+            } else if (isBinary) {
+                tooltip = 'Binary script (click to run --help): ' + n.path;
+            } else {
+                tooltip = 'File (click to cat): ' + n.path;
+            }
 
             return '<g class="' + nodeClass + '" transform="translate(' + n.x + ', ' + n.y + ')" data-path="' + window.PathUtils.escapeHtml(n.path) + '" data-is-dir="' + n.isDir + '">' +
                 '<title>' + window.PathUtils.escapeHtml(tooltip) + '</title>' +
@@ -146,7 +174,11 @@ window.TreeWindow = (function() {
         let output = '';
 
         if (window.TerminalUI && typeof window.TerminalUI.runCommand === 'function') {
-            output = await window.TerminalUI.runCommand('cat ' + filePath);
+            if (isBinaryPath(filePath)) {
+                output = await window.TerminalUI.runCommand(fileName + ' --help');
+            } else {
+                output = await window.TerminalUI.runCommand('cat ' + filePath);
+            }
         }
 
         showPreview(fileName, filePath, output);

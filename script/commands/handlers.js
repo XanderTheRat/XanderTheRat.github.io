@@ -51,7 +51,7 @@
         description: 'List directory contents',
         usage: 'ls [OPTION]... [FILE]...',
         async execute(args, context) {
-            if (args.includes('--help')) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
                 return {
                     output: '<span class="system-message">Usage: ls [OPTION]... [FILE]...</span><br>' +
                         'List information about the FILEs (the current directory by default).<br><br>' +
@@ -60,7 +60,7 @@
                         '<span class="cat-highlight-lang">-l</span>  use a long listing format<br>' +
                         '<span class="cat-highlight-lang">-r</span>  reverse order while sorting<br>' +
                         '<span class="cat-highlight-lang">-R</span>  list subdirectories recursively<br>' +
-                        '<span class="cat-highlight-lang">--help</span>     display this help and exit'
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
                 };
             }
 
@@ -134,10 +134,11 @@
         description: 'Change the working directory',
         usage: 'cd [DIRECTORY]',
         async execute(args, context) {
-            if (args.includes('--help')) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
                 return {
                     output: '<span class="system-message">Usage: cd [DIRECTORY]</span><br>Change current shell directory.<br><br>' +
-                        '<span class="cat-highlight-lang">DIRECTORY</span>  Target folder (defaults to ~)'
+                        '<span class="cat-highlight-lang">DIRECTORY</span>  Target folder (defaults to ~)<br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
                 };
             }
 
@@ -164,11 +165,12 @@
         description: 'Concatenate and display files',
         usage: 'cat [FILE]...',
         async execute(args, context) {
-            if (args.includes('--help')) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
                 return {
                     output: '<span class="system-message">Usage: cat ... [FILE]...</span><br>' +
                         'Display the files passed as attributes.<br><br>' +
-                        '<span class="cat-highlight-lang">-C</span> show competences implied with the project<br>'
+                        '<span class="cat-highlight-lang">-C</span> show competences implied with the project<br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
                 };
             }
 
@@ -178,6 +180,14 @@
 
             const target = args[0];
             const fullPath = context.path.normalize(target, context.state.getCurrentPath(), context.state.getHomeDir());
+
+            if (fullPath.startsWith('/bin/') || fullPath.startsWith('/usr/bin/')) {
+                const binaryName = context.path.basename(fullPath);
+                const regCmd = window.CommandRegistry.get(binaryName);
+                if (regCmd) {
+                    return await regCmd.execute(['--help'], context);
+                }
+            }
 
             if (context.fs.isDirectory(fullPath, context.state)) {
                 return { output: '<span class="cat-color-error">cat: ' + context.path.escapeHtml(target) + ': Is a directory</span>' };
@@ -238,12 +248,13 @@
         description: 'Open visual tree explorer',
         usage: 'tree [DIRECTORY]',
         async execute(args, context) {
-            if (args.includes('--help')) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
                 return {
                     output: '<span class="system-message">Usage: tree [DIRECTORY]</span><br>' +
                         'Display an interactive graphical tree view of the filesystem in another window.<br>' +
                         'Click on a branch to navigate to a folder, or click on a leaf to print the file.<br><br>' +
-                        '<span class="cat-highlight-lang">DIRECTORY</span>  Optional target directory (current path by default)'
+                        '<span class="cat-highlight-lang">DIRECTORY</span>  Optional target directory (current path by default)<br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
                 };
             }
 
@@ -265,7 +276,13 @@
         name: 'clear',
         description: 'Clear the terminal screen',
         usage: 'clear',
-        async execute() {
+        async execute(args) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: clear</span><br>Clear the terminal screen.<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
             return { action: 'clear' };
         }
     };
@@ -274,7 +291,13 @@
         name: 'exit',
         description: 'Exit portfolio session',
         usage: 'exit',
-        async execute() {
+        async execute(args) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: exit</span><br>Exit portfolio session and navigate to GitHub profile.<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
             return { action: 'redirect', url: 'https://github.com/XanderTheRat' };
         }
     };
@@ -286,7 +309,7 @@
         async execute() {
             return {
                 output: '<span class="system-message">Commands Shell:</span> ls, cd, cat, tree, clear, usermod, help<br>' +
-                    '<span class="system-message">Type <span class="command-text">{command} --help</span> to show a complete list of attributes for the command<br>' +
+                    '<span class="system-message">Type <span class="command-text">{command} --help</span> or <span class="command-text">{command} -h</span> to show a complete list of attributes for the command<br>' +
                     'In the <span class="command-text">~/github/{project}/README.md</span> file, you can see the competences implied in the project</span><br>'
             };
         }
@@ -297,6 +320,16 @@
         description: 'Modify user account settings',
         usage: 'usermod [OPTION]... [VALUE]...',
         async execute(args, context) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: usermod [OPTION]... [VALUE]...</span><br>' +
+                        'Change the current user and their directory.<br><br>' +
+                        '<span class="cat-highlight-lang">--login</span>  Needed. This is the new user name<br>' +
+                        '<span class="cat-highlight-lang">--home</span>   Optional. This is the new user\'s directory<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
+
             let newLogin = context.state.getCurrentUser();
             let newHome = context.state.getHomeDir();
             let changeMade = false;
@@ -340,7 +373,8 @@
                 output: '<span class="system-message">Usage: usermod [OPTION]... [VALUE]...</span><br>' +
                     'Change the current user and their directory.<br><br>' +
                     '<span class="cat-highlight-lang">--login</span>  Needed. This is the new user name<br>' +
-                    '<span class="cat-highlight-lang">--home</span>   Optional. This is the new user\'s directory<br><br>'
+                    '<span class="cat-highlight-lang">--home</span>   Optional. This is the new user\'s directory<br><br>' +
+                    '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
             };
         }
     };
@@ -349,7 +383,13 @@
         name: 'sysinfo',
         description: 'Show CPU and memory usage',
         usage: 'sysinfo',
-        async execute() {
+        async execute(args) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: sysinfo</span><br>Display current CPU and memory utilization.<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
             return { output: '<span class="cpu-color">CPU 15%</span> | <span class="mem-color">MEM 45%</span>' };
         }
     };
@@ -358,7 +398,13 @@
         name: 'battery',
         description: 'Show battery level',
         usage: 'battery',
-        async execute() {
+        async execute(args) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: battery</span><br>Display current battery percentage.<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
             return { output: '<span class="bat-color-normal">65%</span>' };
         }
     };
@@ -367,7 +413,13 @@
         name: 'change_battery_mode',
         description: 'Toggle power profiles',
         usage: 'change_battery_mode',
-        async execute() {
+        async execute(args) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: change_battery_mode</span><br>Toggle between battery power saving modes.<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
             return { output: '<span class="system-message">Mode batterie changé.</span>' };
         }
     };
@@ -376,7 +428,13 @@
         name: 'network_status',
         description: 'Show network connection',
         usage: 'network_status',
-        async execute() {
+        async execute(args) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: network_status</span><br>Display active network SSID and state.<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
             return { output: '<span class="net-color-wifi">PortfolioMartin</span>' };
         }
     };
@@ -385,7 +443,13 @@
         name: 'change_network_status',
         description: 'Toggle network connection mode',
         usage: 'change_network_status',
-        async execute() {
+        async execute(args) {
+            if (args && (args.includes('--help') || args.includes('-h'))) {
+                return {
+                    output: '<span class="system-message">Usage: change_network_status</span><br>Toggle network connectivity status.<br><br>' +
+                        '<span class="cat-highlight-lang">--help, -h</span>  display this help and exit'
+                };
+            }
             return { output: '<span class="system-message">Mode réseau changé.</span>' };
         }
     };

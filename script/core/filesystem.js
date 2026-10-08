@@ -1,16 +1,14 @@
 window.VirtualFileSystem = (function() {
     const EXECUTABLES = ["sysinfo", "battery", "change_battery_mode", "network_status", "change_network_status"];
     const FILES_MOCK = ["passwd", "shadow", "hosts"];
-    const HOME_DIR_CONTENT = ["scripts.rs", "Documents", "Desktop", "github", ".release"];
+    const HOME_DIR_CONTENT = ["scripts.rs", "Documents", "Desktop", "github"];
 
     const filesystem = {
-    '/': ['home', 'usr', 'etc', 'bin'],
+    '/': ['home', 'usr', 'bin'],
     '/home': ['martin'],
     '/usr': ['bin', 'share'],
     '/usr/bin': EXECUTABLES,
-    '/etc': ['passwd', 'shadow', 'hosts'],
     '/bin': ['ls', 'cd', 'clear', 'exit', 'usermod', 'cat', 'tree'],
-    '/home/martin/.release': ['release.md'],
     '/home/martin/github': ['BUT1', 'BUT2', 'but2-presentations-r304', 'enseignement-but2-developpement', 'Just-Another-Coffee', 'R5A04', 'waybar', 'XanderTheRat', 'XanderTheRat.github.io'],
     '/home/martin/github/BUT1': ['.gitattributes', 'C', 'Java', 'Python', 'SQL', 'web'],
     '/home/martin/github/BUT1/C': ['C', 'R2.04'],
