@@ -74,7 +74,7 @@ window.TreeWindow = (function() {
                 badge = n.expanded ? '[-]' : '[+' + n.children.length + ']';
             }
 
-            const iconColor = n.isDir ? '#3584e4' : '#26a269';
+            const iconColor = n.isDir ? '#63b3ed' : '#68d391';
             let iconSvg = '';
             if (n.isDir) {
                 iconSvg = '<path d="M 4 5 L 9 5 L 11 8 L 20 8 A 2 2 0 0 1 22 10 L 22 19 A 2 2 0 0 1 20 21 L 4 21 A 2 2 0 0 1 2 19 L 2 7 A 2 2 0 0 1 4 5 Z" fill="none" stroke="' + iconColor + '" stroke-width="2" transform="translate(10, 10) scale(0.75)" />';

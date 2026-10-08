@@ -41,7 +41,8 @@
     };
 
     document.addEventListener('DOMContentLoaded', async () => {
-        if (window.FedoraPanel) window.FedoraPanel.init();
+        if (window.WaybarPanel) window.WaybarPanel.init();
+        else if (window.FedoraPanel) window.FedoraPanel.init();
         if (window.TreeWindow) window.TreeWindow.init();
         if (window.TerminalUI) window.TerminalUI.init();
 

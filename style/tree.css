@@ -1,81 +1,11 @@
-/* Tree Window & Header Styles */
-
-/* Terminal Header Bar with Tree Icon */
-.terminal-header-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 12px;
-    background-color: #161b22;
-    border-bottom: 1px solid #30363d;
-    margin: -10px -10px 10px -10px;
-    user-select: none;
-}
-
-.terminal-header-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.window-dots {
-    display: flex;
-    gap: 6px;
-}
-
-.window-dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.dot-red { background-color: #ff5f56; }
-.dot-yellow { background-color: #ffbd2e; }
-.dot-green { background-color: #27c93f; }
-
-.terminal-header-title {
-    color: #8b949e;
-    font-size: 12px;
-    font-family: 'Noto Sans Mono', monospace;
-    margin-left: 6px;
-}
-
-.tree-open-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #21262d;
-    color: #58a6ff;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 12px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.tree-open-btn:hover {
-    background: #30363d;
-    color: #79c0ff;
-    border-color: #58a6ff;
-    box-shadow: 0 0 8px rgba(88, 166, 255, 0.3);
-}
-
-.tree-open-btn svg {
-    flex-shrink: 0;
-}
-
-/* Tree Window (Separate Window) */
 .tree-window-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(2px);
+    background: rgba(10, 14, 22, 0.75);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,14 +25,14 @@
     max-width: 1300px;
     height: 88vh;
     background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(45, 90, 39, 0.55);
+    border-radius: 10px;
+    box-shadow: 0 24px 65px rgba(0, 0, 0, 0.85), 0 0 25px rgba(45, 90, 39, 0.25);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    font-family: 'Noto Sans Mono', monospace;
-    color: #c9d1d9;
+    font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', monospace;
+    color: #e2e8f0;
     position: relative;
     animation: treeWindowPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -125,14 +55,14 @@
     border-radius: 0;
 }
 
-/* Tree Window Titlebar */
 .tree-titlebar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 14px;
+    padding: 0 14px;
+    height: 38px;
     background: #161b22;
-    border-bottom: 1px solid #30363d;
+    border-bottom: 1px solid #2d3748;
     user-select: none;
     cursor: grab;
 }
@@ -144,7 +74,7 @@
 .tree-titlebar-title {
     font-size: 13px;
     font-weight: 600;
-    color: #e6edf3;
+    color: #e2e8f0;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -157,31 +87,30 @@
 }
 
 .window-ctrl-btn {
-    width: 26px;
-    height: 24px;
+    width: 24px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent;
     border: 1px solid transparent;
     border-radius: 4px;
-    color: #8b949e;
+    color: #a0aec0;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.15s ease;
 }
 
 .window-ctrl-btn:hover {
-    background: #21262d;
-    color: #f0f6fc;
-}
-
-.window-ctrl-btn.close-btn:hover {
-    background: #da3633;
+    background: #2d3748;
     color: #ffffff;
 }
 
-/* Tree Window Toolbar */
+.window-ctrl-btn.close-btn:hover {
+    background: #fc8181;
+    color: #ffffff;
+}
+
 .tree-toolbar {
     display: flex;
     flex-wrap: wrap;
@@ -189,7 +118,7 @@
     justify-content: space-between;
     gap: 8px;
     padding: 8px 14px;
-    background: #0d1117;
+    background: #10151f;
     border-bottom: 1px solid #21262d;
 }
 
@@ -202,90 +131,87 @@
 }
 
 .tree-crumb {
-    color: #58a6ff;
+    color: #63b3ed;
     cursor: pointer;
-    padding: 2px 5px;
+    padding: 2px 6px;
     border-radius: 4px;
     transition: background 0.15s;
 }
 
 .tree-crumb:hover {
-    background: #1f6feb26;
+    background: rgba(99, 179, 237, 0.18);
     text-decoration: underline;
 }
 
 .tree-crumb-separator {
-    color: #484f58;
+    color: #4a5568;
 }
 
 .tree-toolbar-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .tree-btn {
-    background: #21262d;
-    color: #c9d1d9;
-    border: 1px solid #30363d;
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    border: none;
+    border-radius: 8px;
     padding: 4px 10px;
     font-size: 12px;
     cursor: pointer;
     font-family: inherit;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    transition: all 0.15s;
+    gap: 6px;
+    transition: all 0.2s ease;
 }
 
 .tree-btn:hover {
-    background: #30363d;
-    color: #f0f6fc;
-    border-color: #8b949e;
+    background: #386e30;
+    color: #ffffff;
 }
 
 .tree-btn.active {
-    background: #1f6feb;
-    border-color: #388bfd;
+    background: #2d5a27;
     color: #ffffff;
+    font-weight: 600;
 }
 
 .tree-legend {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     font-size: 11px;
-    color: #8b949e;
-    padding: 4px 14px;
-    background: #161b22;
+    color: #a0aec0;
+    padding: 5px 14px;
+    background: #0d1117;
     border-bottom: 1px solid #21262d;
 }
 
 .legend-item {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
 
 .legend-branch {
-    color: #58a6ff;
+    color: #63b3ed;
     font-weight: 600;
 }
 
 .legend-leaf {
-    color: #3fb950;
+    color: #68d391;
     font-weight: 600;
 }
 
-/* Tree Main Viewport */
 .tree-viewport {
     flex: 1;
     position: relative;
     overflow: hidden;
-    background-color: #090d13;
-    background-image: 
-        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-color: #080c12;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
     background-size: 24px 24px;
     cursor: grab;
 }
@@ -303,21 +229,14 @@
     transform-origin: 0 0;
 }
 
-/* SVG Tree Elements */
 .tree-link {
     fill: none;
-    stroke: #30363d;
+    stroke: #2d3748;
     stroke-width: 2px;
     stroke-linecap: round;
     transition: stroke 0.2s, stroke-width 0.2s;
 }
 
-.tree-link.link-active {
-    stroke: #58a6ff;
-    stroke-width: 2.5px;
-}
-
-/* Tree Nodes */
 .tree-node-group {
     cursor: pointer;
     transition: transform 0.15s ease;
@@ -325,7 +244,7 @@
 
 .tree-node-rect {
     fill: #161b22;
-    stroke: #30363d;
+    stroke: #2d3748;
     stroke-width: 1.5px;
     rx: 6px;
     ry: 6px;
@@ -334,67 +253,59 @@
 
 .tree-node-group:hover .tree-node-rect {
     stroke-width: 2px;
-    filter: drop-shadow(0 0 6px rgba(88, 166, 255, 0.4));
+    filter: drop-shadow(0 0 8px rgba(86, 107, 194, 0.45));
 }
 
-/* Branch Node (Directory) */
 .node-branch .tree-node-rect {
-    stroke: #1f6feb;
-    fill: #0d1a2d;
+    stroke: #566bc2;
+    fill: #12192b;
 }
 
 .node-branch:hover .tree-node-rect {
-    stroke: #58a6ff;
-    fill: #142845;
+    stroke: #63b3ed;
+    fill: #1a243d;
 }
 
 .node-branch.current-dir .tree-node-rect {
-    stroke: #a371f7;
-    fill: #1c1533;
-    stroke-width: 2.5px;
-    filter: drop-shadow(0 0 8px rgba(163, 113, 247, 0.5));
+    stroke: #a78bfa;
+    fill: #201a33;
+    stroke-width: 2px;
+    filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.5));
 }
 
-/* Leaf Node (File) */
 .node-leaf .tree-node-rect {
-    stroke: #238636;
-    fill: #0c1c13;
+    stroke: #2d5a27;
+    fill: #0c1a11;
 }
 
 .node-leaf:hover .tree-node-rect {
-    stroke: #3fb950;
+    stroke: #68d391;
     fill: #12281a;
-    filter: drop-shadow(0 0 6px rgba(63, 185, 80, 0.5));
-}
-
-.tree-node-icon {
-    font-size: 14px;
-    user-select: none;
+    filter: drop-shadow(0 0 8px rgba(104, 211, 145, 0.45));
 }
 
 .tree-node-text {
     font-size: 12px;
     font-family: 'Noto Sans Mono', monospace;
-    fill: #c9d1d9;
+    fill: #e2e8f0;
     user-select: none;
 }
 
 .node-branch .tree-node-text {
-    fill: #79c0ff;
+    fill: #63b3ed;
     font-weight: 600;
 }
 
 .node-leaf .tree-node-text {
-    fill: #7ee787;
+    fill: #68d391;
 }
 
 .tree-node-badge {
     font-size: 10px;
-    fill: #8b949e;
+    fill: #a0aec0;
     user-select: none;
 }
 
-/* Preview Drawer (When leaf is clicked) */
 .tree-preview-drawer {
     position: absolute;
     bottom: 0;
@@ -402,8 +313,8 @@
     right: 0;
     height: 48%;
     background: #0d1117;
-    border-top: 2px solid #30363d;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.7);
+    border-top: 2px solid #2d3748;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.75);
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -423,9 +334,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 14px;
+    padding: 0 14px;
+    height: 36px;
     background: #161b22;
-    border-bottom: 1px solid #30363d;
+    border-bottom: 1px solid #2d3748;
 }
 
 .preview-title {
@@ -433,7 +345,7 @@
     align-items: center;
     gap: 8px;
     font-size: 12px;
-    color: #e6edf3;
+    color: #e2e8f0;
     font-weight: 600;
 }
 
@@ -441,17 +353,18 @@
     flex: 1;
     overflow: auto;
     padding: 12px;
-    background: #090d13;
+    background: #080c12;
     font-size: 13px;
     line-height: 1.5;
 }
 
 .preview-body pre {
     margin: 0;
-    font-family: 'Noto Sans Mono', monospace;
+    background: transparent;
+    border: none;
+    padding: 0;
 }
 
-/* Zoom Controls Widget */
 .tree-zoom-widget {
     position: absolute;
     right: 16px;
@@ -460,46 +373,45 @@
     flex-direction: column;
     gap: 4px;
     background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 6px;
+    border: 1px solid #2d3748;
+    border-radius: 8px;
     padding: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
     z-index: 5;
 }
 
 .zoom-btn {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #21262d;
-    color: #c9d1d9;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
     cursor: pointer;
     transition: all 0.15s;
 }
 
 .zoom-btn:hover {
-    background: #30363d;
-    color: #58a6ff;
+    background: #2d5a27;
+    color: #ffffff;
 }
 
-/* Status Bar */
 .tree-statusbar {
-    padding: 4px 12px;
+    padding: 4px 14px;
     background: #161b22;
     border-top: 1px solid #21262d;
     font-size: 11px;
-    color: #8b949e;
+    color: #a0aec0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .status-highlight {
-    color: #58a6ff;
+    color: #63b3ed;
     font-weight: 600;
 }
