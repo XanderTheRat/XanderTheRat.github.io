@@ -1,56 +1,55 @@
 var shellState = {
     currentUser: "martin",
     homeDir: "/home/martin",
-    currentPath: "/", 
+    currentPath: "/",
 };
 
-
 const EXECUTABLES = ["sysinfo", "battery", "change_battery_mode", "network_status", "change_network_status"];
-const FILES_MOCK = ['passwd', 'shadow', 'hosts'];
-const BUILT_IN_COMMANDS = ['help', 'ls', 'cd', 'clear', 'exit', 'usermod', 'cat', 'tree'];
-const HOME_DIR_CONTENT = ['scripts.rs', 'Documents', 'Desktop', 'github', '.release'];
+const FILES_MOCK = ["passwd", "shadow", "hosts"];
+const BUILT_IN_COMMANDS = ["help", "ls", "cd", "clear", "exit", "usermod", "cat", "tree"];
+const HOME_DIR_CONTENT = ["scripts.rs", "Documents", "Desktop", "github", ".release"];
 
 const GITHUB_BASE_PATH = "/home/martin/github/BUT1";
 const GITHUB_RAW_URL = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main";
 
 var GITHUB_PROJECTS = {
-    'BUT1': {
-        path: '/home/martin/github/BUT1',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/BUT1/main'
-    },
-    'BUT2': {
-        path: '/home/martin/github/BUT2',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/BUT2/main'
-    },
-    'but2-presentations-r304': {
-        path: '/home/martin/github/but2-presentations-r304',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/but2-presentations-r304/main'
-    },
-    'enseignement-but2-developpement': {
-        path: '/home/martin/github/enseignement-but2-developpement',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/enseignement-but2-developpement/master'
-    },
-    'Just-Another-Coffee': {
-        path: '/home/martin/github/Just-Another-Coffee',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/Just-Another-Coffee/main'
-    },
-    'R5A04': {
-        path: '/home/martin/github/R5A04',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/R5A04/main'
-    },
-    'waybar': {
-        path: '/home/martin/github/waybar',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/waybar/master'
-    },
-    'XanderTheRat': {
-        path: '/home/martin/github/XanderTheRat',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/XanderTheRat/main'
-    },
-    'XanderTheRat.github.io': {
-        path: '/home/martin/github/XanderTheRat.github.io',
-        raw: 'https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio_V2'
-    }
-};
+        'BUT1': {
+            path: '/home/martin/github/BUT1',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/BUT1/main'
+        },
+        'BUT2': {
+            path: '/home/martin/github/BUT2',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/BUT2/main'
+        },
+        'but2-presentations-r304': {
+            path: '/home/martin/github/but2-presentations-r304',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/but2-presentations-r304/main'
+        },
+        'enseignement-but2-developpement': {
+            path: '/home/martin/github/enseignement-but2-developpement',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/enseignement-but2-developpement/master'
+        },
+        'Just-Another-Coffee': {
+            path: '/home/martin/github/Just-Another-Coffee',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/Just-Another-Coffee/main'
+        },
+        'R5A04': {
+            path: '/home/martin/github/R5A04',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/R5A04/main'
+        },
+        'waybar': {
+            path: '/home/martin/github/waybar',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/waybar/master'
+        },
+        'XanderTheRat': {
+            path: '/home/martin/github/XanderTheRat',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/XanderTheRat/main'
+        },
+        'XanderTheRat.github.io': {
+            path: '/home/martin/github/XanderTheRat.github.io',
+            raw: 'https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio_V2'
+        }
+    };
 
 const FILESYSTEM = {
     '/': ['home', 'usr', 'etc', 'bin'],
@@ -61,10 +60,7 @@ const FILESYSTEM = {
     '/bin': ['ls', 'cd', 'clear', 'exit', 'usermod', 'cat', 'tree'],
     '/home/martin/.release': ['release.md'],
     '/home/martin/github': ['BUT1', 'BUT2', 'but2-presentations-r304', 'enseignement-but2-developpement', 'Just-Another-Coffee', 'R5A04', 'waybar', 'XanderTheRat', 'XanderTheRat.github.io'],
-    
-    // BUT1
     '/home/martin/github/BUT1': ['.gitattributes', 'C', 'Java', 'Python', 'SQL', 'web'],
-    
     '/home/martin/github/BUT1/C': ['C', 'R2.04'],
     '/home/martin/github/BUT1/C/C': ['.idea', 'cmake-build-debug'],
     '/home/martin/github/BUT1/C/R2.04': ['.idea', 'CMakeLists.txt', 'TP1', 'TP1.exe', 'TP2', 'TP2.exe', 'TP3', 'cmake-build-debug'],
@@ -112,9 +108,6 @@ const FILESYSTEM = {
     '/home/martin/github/BUT1/web/Halloween/msq': ['Musique.mp3'],
     '/home/martin/github/BUT1/web/Halloween/script': ['script.js'],
     '/home/martin/github/BUT1/web/Halloween/style': ['responsive.css', 'style.css'],
-    
-
-    // BUT2
     '/home/martin/github/BUT2': ['PHP', 'RUST', 'TP3', 'crypto', 'dev_mobile', 'java', 'rezo'],
     '/home/martin/github/BUT2/PHP': ['controle'],
     '/home/martin/github/BUT2/PHP/controle': ['README.md', 'bdd.sql', 'composer.json', 'public', 'src', 'vendor'],
@@ -253,8 +246,6 @@ const FILESYSTEM = {
     '/home/martin/github/BUT2/rezo': ['TP1', 'TP2'],
     '/home/martin/github/BUT2/rezo/TP1': ['lab.conf', 'pca.startup', 'pcb.startup', 'pcc.startup', 'pcd.startup', 'r1.startup', 'r2.startup'],
     '/home/martin/github/BUT2/rezo/TP2': ['lab.conf', 'r0.startup', 'r1.startup'],
-
-    // but2-presentations-r304
     '/home/martin/github/but2-presentations-r304': ['2024', '2025', 'README.md', 'nweji', 'ressources'],
     '/home/martin/github/but2-presentations-r304/2024': ['presentation', 'qcm', 'resume'],
     '/home/martin/github/but2-presentations-r304/2024/presentation': ['DDDTechnique.pdf', 'adapter.pdf', 'builder.pdf', 'command.pdf', 'composite.pdf', 'decorator.pdf', 'design.pdf', 'immutable.pdf', 'null.pdf', 'observer.pdf', 'state.pdf', 'strategy.pdf', 'visitor.pdf'],
@@ -265,8 +256,6 @@ const FILESYSTEM = {
     '/home/martin/github/but2-presentations-r304/2025/qcm': ['DDDTechniqueQcm.pdf', 'builderQcm.pdf', 'compositeQCM.pdf', 'decoratorQcm.pdf', 'immutableQCM.pdf', 'stateQcm.pdf', 'strategyQcm.pdf', 'visitorQCM.pdf'],
     '/home/martin/github/but2-presentations-r304/2025/resume': ['DDDTechniqueResume.pdf', 'builderResume.pdf', 'compositeResume.pdf', 'decoratorResume.pdf', 'immutableResume.pdf', 'stateResume.pdf', 'strategyResume.pdf', 'visitorResume.pdf'],
     '/home/martin/github/but2-presentations-r304/ressources': ['references_patterns.md', 'resumeGof.pdf'],
-
-    // enseignement-but2-developpement
     '/home/martin/github/enseignement-but2-developpement': ['R303_Analyse_CadrageAgile.md', 'R304_QualiteDeveloppement.md', 'README.md', 'TP', 'cours', 'ressources'],
     '/home/martin/github/enseignement-but2-developpement/TP': ['R3_04'],
     '/home/martin/github/enseignement-but2-developpement/TP/R3_04': ['R3_04_BonnesPratiques_KataTennis.pdf', 'R3_04_CarRacing_SRP_CleanTest_Builder.pdf', 'R3_04_CoR_ATM.pdf', 'R3_04_Composite.pdf', 'R3_04_KataKebab_SauceVisiteur.pdf', 'R3_04_MarsRover.pdf', 'R3_04_Mockito_PriseEnMain.pdf', 'R3_04_SOLID_Kata_Car_Racing.pdf', 'R3_04_SOLID_Polymorphism_KataParrot.pdf', 'R3_04_SOLID_Revue.pdf'],
@@ -330,27 +319,17 @@ const FILESYSTEM = {
     '/home/martin/github/enseignement-but2-developpement/ressources/tirepressuremonitoringsystem/src/test/java/fr/unilim': ['iut'],
     '/home/martin/github/enseignement-but2-developpement/ressources/tirepressuremonitoringsystem/src/test/java/fr/unilim/iut': ['tirepressuremonitoringsystem'],
     '/home/martin/github/enseignement-but2-developpement/ressources/tirepressuremonitoringsystem/src/test/java/fr/unilim/iut/tirepressuremonitoringsystem': ['AlarmTest.java'],
-
-    // Just-Another-Coffee
     '/home/martin/github/Just-Another-Coffee': ['.gitignore', 'Cargo.toml', 'README.md', 'coffee', 'src'],
     '/home/martin/github/Just-Another-Coffee/src': ['asset', 'bin', 'lib.rs'],
     '/home/martin/github/Just-Another-Coffee/src/asset': ['front.rs', 'mod.rs', 'structures.rs'],
     '/home/martin/github/Just-Another-Coffee/src/bin': ['jac.rs'],
-
-    // R5A04
     '/home/martin/github/R5A04': ['src'],
     '/home/martin/github/R5A04/src': ['main.rs'],
-
-    // waybar
     '/home/martin/github/waybar': ['config.jsonc', 'scripts', 'style.css', 'theme.css'],
     '/home/martin/github/waybar/scripts': ['Cargo.toml', 'battery_state', 'network_status', 'src'],
     '/home/martin/github/waybar/scripts/src': ['bin', 'edt.rs', 'lib.rs'],
     '/home/martin/github/waybar/scripts/src/bin': ['battery.rs', 'change_battery_mode.rs', 'change_network_status.rs', 'cpu.rs', 'edt.rs', 'group.rs', 'network_status.rs', 'ram.rs', 'room.rs'],
-
-    // XanderTheRat
     '/home/martin/github/XanderTheRat': ['README.md'],
-
-    // XanderTheRat.github.io
     '/home/martin/github/XanderTheRat.github.io': ['img', 'index.html', 'portfolio.html', 'script', 'style'],
     '/home/martin/github/XanderTheRat.github.io/img': ['C.png', 'CSS.png', 'HTML.png', 'JS.png', 'PostgreSQL.png', 'icon', 'java.png', 'python.png', 'sql.png'],
     '/home/martin/github/XanderTheRat.github.io/img/icon': ['document_icon_transparent.webp', 'main_icon.webp', 'menu_icon_transparent.webp'],
