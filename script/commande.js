@@ -125,6 +125,10 @@ async function handleCat(args) {
     const target = args[0];
     const fullPath = normalizePath(target);
 
+    if (isDirectory(fullPath)) {
+        return { output: `<span class="bat-color-error">cat: ${target}: Is a directory</span>` };
+    }
+
     if (!fullPath.startsWith('/home/martin/github/')) {
         return { output: `<span class="bat-color-error">cat: only supported for files in ~/github/ for now.</span>` };
     }
@@ -132,9 +136,8 @@ async function handleCat(args) {
     const parentDir = fullPath.substring(0, fullPath.lastIndexOf('/'));
     const fileName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
     
-    if (!isDirectory(parentDir) || !getPathContent(parentDir).includes(fileName) || isDirectory(fullPath)) {
-         if (isDirectory(fullPath)) return { output: `<span class="bat-color-error">cat: ${target}: Is a directory</span>` };
-         return { output: `<span class="bat-color-error">cat: ${target}: No such file or directory</span>` };
+    if (!isDirectory(parentDir) || !getPathContent(parentDir).includes(fileName)) {
+        return { output: `<span class="bat-color-error">cat: ${target}: No such file or directory</span>` };
     }
 
     const pathAfterGithub = fullPath.substring('/home/martin/github/'.length);
@@ -477,7 +480,7 @@ function executeCommand(command, args) {
     switch (command) {
         case 'help':
             return { 
-                output: `<span class="system-message">Commands Shell:</span> ls, cd, bat, clear, usermod<br>
+                output: `<span class="system-message">Commands Shell:</span> ls, cd, cat, tree, clear, usermod<br>
                 <span class="system-message">Type <span class="command-text">{command} --help </span>to show a complete list of attributes for the command<br>In the <span class="command-text">~/github/{project}/README.md </span>file, you can see the competences implieds in the project</span><br>` 
             };
         
@@ -503,7 +506,9 @@ function executeCommand(command, args) {
         }
 
         case 'usermod': return handleUsermod(args);
-        case 'bat': return handleBat(args);
+        case 'cat': return handleCat(args);
+        case 'bat': return handleCat(args);
+        case 'tree': return handleTree(args);
 
         default: return { output: `<span class="bat-color-error">sh: command not found: ${command}</span>` };
     }

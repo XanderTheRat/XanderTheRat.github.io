@@ -64,8 +64,12 @@ body {
     margin-bottom: 10px;
 }
 
-.bat-highlight-lang {
+.bat-highlight-lang, .cat-highlight-lang {
     color: #48bb78;
+}
+
+.bat-comment, .cat-comment {
+    color: #6272a4;
 }
 
 .dir-color {
@@ -78,7 +82,7 @@ body {
 .bat-color-normal { color: #68d391; }
 .bat-color-charge { color: #48bb78; }
 .bat-color-plugged { color: #38b2ac; }
-.bat-color-error { color: #fc8181; }
+.bat-color-error, .cat-color-error { color: #fc8181; }
 .net-color-wifi { color: #63b3ed; }
 .net-color-ipv4 { color: #a78bfa; }
 .net-color-ipv6 { color: #fb923c; }

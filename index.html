@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/horloge.css">
     <link rel="stylesheet" href="style/terminal.css">
-    
+    <link rel="stylesheet" href="style/tree.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <title>Portfolio</title>
@@ -15,6 +15,28 @@
 
 <body>
     <div class="terminal-window">
+        <div class="terminal-header-bar">
+            <div class="terminal-header-left">
+                <div class="window-dots">
+                    <span class="window-dot dot-red"></span>
+                    <span class="window-dot dot-yellow"></span>
+                    <span class="window-dot dot-green"></span>
+                </div>
+                <span class="terminal-header-title">martin@portfolio: ~</span>
+            </div>
+            <div class="terminal-header-actions">
+                <button id="open-tree-btn" class="tree-open-btn" title="Open Tree View (or type 'tree')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="5" r="3"></circle>
+                        <circle cx="6" cy="19" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <path d="M12 8v4M12 12l-6 4M12 12l6 4"></path>
+                    </svg>
+                    <span>Tree View</span>
+                </button>
+            </div>
+        </div>
+
         <div id="terminal-output" class="terminal-output">
             <span class="system-message">Portfolio Martin Valet V2.1.17.1 - Type <span class="command-text">help</span> for commands.</span>
         </div>
@@ -23,9 +45,77 @@
             <span class="zsh-prompt user-host" id="current-user">martin@hostname</span><span class="zsh-prompt colon">:</span><span class="zsh-prompt path" id="current-path">/</span><span class="zsh-prompt prompt-symbol">$</span> <span id="interactive-input" contenteditable="true"></span>
         </div>
     </div>
+
+    <!-- Tree Explorer Window Overlay -->
+    <div id="tree-window-overlay" class="tree-window-overlay hidden">
+        <div id="tree-window" class="tree-window">
+            <!-- Window Titlebar -->
+            <div class="tree-titlebar">
+                <div class="tree-titlebar-title">
+                    <div class="window-dots">
+                        <span class="window-dot dot-red"></span>
+                        <span class="window-dot dot-yellow"></span>
+                        <span class="window-dot dot-green"></span>
+                    </div>
+                    <span>🌳 Explorateur d'Arborescence (Tree Explorer)</span>
+                </div>
+                <div class="tree-titlebar-controls">
+                    <button id="tree-max-btn" class="window-ctrl-btn" title="Maximize">⤢</button>
+                    <button id="tree-close-btn" class="window-ctrl-btn close-btn" title="Close (Esc)">✕</button>
+                </div>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="tree-toolbar">
+                <div id="tree-breadcrumbs" class="tree-breadcrumbs"></div>
+                <div class="tree-toolbar-actions">
+                    <button id="jump-github-btn" class="tree-btn" title="Navigate to ~/github">📁 ~/github</button>
+                    <button id="jump-current-btn" class="tree-btn" title="Navigate to current terminal folder">📍 Dossier actuel</button>
+                    <button id="jump-home-btn" class="tree-btn" title="Navigate to /home/martin">🏠 ~</button>
+                    <button id="tree-layout-btn" class="tree-btn" title="Toggle horizontal/vertical layout">↔ Horizontal</button>
+                    <button id="tree-expand-all-btn" class="tree-btn" title="Expand all branches">+</button>
+                    <button id="tree-collapse-all-btn" class="tree-btn" title="Collapse all branches">−</button>
+                </div>
+            </div>
+
+            <!-- Legend & Instructions -->
+            <div class="tree-legend">
+                <span class="legend-item"><span class="legend-branch">🌿 Branche (Dossier)</span> : Cliquez pour naviguer (cd)</span>
+                <span class="legend-item"><span class="legend-leaf">🍃 Feuille (Fichier)</span> : Cliquez pour afficher le code (cat)</span>
+            </div>
+
+            <!-- SVG Viewport -->
+            <div id="tree-viewport" class="tree-viewport">
+                <svg id="tree-svg" class="tree-svg"></svg>
+                
+                <!-- Zoom Widget -->
+                <div class="tree-zoom-widget">
+                    <button id="zoom-in-btn" class="zoom-btn" title="Zoom in">+</button>
+                    <button id="zoom-out-btn" class="zoom-btn" title="Zoom out">−</button>
+                    <button id="zoom-reset-btn" class="zoom-btn" title="Reset zoom">↺</button>
+                </div>
+
+                <!-- Preview Drawer -->
+                <div id="tree-preview-drawer" class="tree-preview-drawer hidden">
+                    <div class="preview-header">
+                        <div id="preview-file-name" class="preview-title">Preview</div>
+                        <button id="preview-close-btn" class="window-ctrl-btn close-btn" title="Close Preview">✕</button>
+                    </div>
+                    <div id="preview-file-body" class="preview-body"></div>
+                </div>
+            </div>
+
+            <!-- Statusbar -->
+            <div class="tree-statusbar">
+                <span>Dossier actif : <span id="tree-status-current" class="status-highlight">/</span></span>
+                <span id="tree-status-count">0 nodes</span>
+            </div>
+        </div>
+    </div>
     
     <script src="script/assets.js"></script>
     <script src="script/commande.js"></script>
+    <script src="script/tree.js"></script>
     <script src="script/terminal.js"></script>
     <script>hljs.highlightAll();</script>
 </body>
