@@ -1,168 +1,36 @@
-const interactiveInput = document.getElementById('interactive-input');
-const terminalOutput = document.getElementById('terminal-output');
-const currentPathElement = document.getElementById('current-path');
-const currentUserElement = document.getElementById('current-user');
-const terminalWindow = document.querySelector('.terminal-window');
-
-const commandHistory = [];
-let historyIndex = -1;
-let lastTabTime = 0;
-
 function updatePromptUI() {
-    if (typeof shellState === 'undefined') return;
-
-    const displayPath = shellState.currentPath.startsWith(shellState.homeDir) && shellState.currentPath !== '/'
-        ? `~${shellState.currentPath.substring(shellState.homeDir.length)}`
-        : shellState.currentPath;
-
-    if (currentPathElement) currentPathElement.textContent = displayPath;
-    if (currentUserElement) currentUserElement.textContent = `${shellState.currentUser}@portfolio`;
-
-    return `<span class="zsh-prompt user-host">${shellState.currentUser}@portfolio</span><span class="zsh-prompt colon">:</span><span class="zsh-prompt path">${displayPath}</span><span class="zsh-prompt prompt-symbol">$</span>`;
-}
-function scrollToBottom() {
-    terminalWindow.scrollTop = terminalWindow.scrollHeight;
+    if (window.TerminalUI && typeof window.TerminalUI.updatePrompt === 'function') {
+        return window.TerminalUI.updatePrompt();
+    }
+    const user = (window.shellState && window.shellState.currentUser) ? window.shellState.currentUser : 'martin';
+    const path = (window.shellState && window.shellState.currentPath) ? window.shellState.currentPath : '/';
+    return '<span class="zsh-prompt user-host">[' + user + '@fedora</span> <span class="zsh-prompt path">' + path + '</span><span class="zsh-prompt prompt-symbol">]$</span>';
 }
 
 function appendOutput(html) {
+    if (window.TerminalUI && typeof window.TerminalUI.appendOutput === 'function') {
+        window.TerminalUI.appendOutput(html);
+        return;
+    }
+    const outputEl = document.getElementById('terminal-output');
+    if (!outputEl) return;
     const div = document.createElement('div');
     div.classList.add('terminal-line');
     div.innerHTML = html;
-    terminalOutput.appendChild(div);
-    scrollToBottom();
+    outputEl.appendChild(div);
+    const win = document.querySelector('.terminal-window');
+    if (win) win.scrollTop = win.scrollHeight;
 }
 
 function appendPrompt(command) {
-    appendOutput(`${updatePromptUI()} <span class="command-text">${command}</span>`);
+    if (window.TerminalUI && typeof window.TerminalUI.appendPrompt === 'function') {
+        window.TerminalUI.appendPrompt(command);
+        return;
+    }
+    appendOutput(updatePromptUI() + ' <span class="command-text">' + command + '</span>');
 }
 
-interactiveInput.addEventListener('keydown', async function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        const cmdLine = interactiveInput.textContent.trim();
-        
-        appendPrompt(cmdLine);
-        
-        if (cmdLine) {
-            commandHistory.push(cmdLine);
-            historyIndex = commandHistory.length;
-            
-            const parts = cmdLine.split(/\s+/).filter(p => p.length > 0);
-            
-            if (typeof executeCommand === 'function') {
-                try {
-                    const result = await executeCommand(parts[0], parts.slice(1));
-                    
-                    if (result.action === 'clear') {
-                        terminalOutput.innerHTML = '';
-                    } else if (result.action === 'redirect') {
-                        window.location.href = result.url;
-                    } else if (result.output) {
-                        appendOutput(result.output);
-                    }
-                } catch (e) {
-                    appendOutput(`<span class="bat-color-error">Error executing command: ${e.message}</span>`);
-                }
-            } else {
-                appendOutput('<span class="bat-color-error">Erreur: commande.js non chargé.</span>');
-            }
-        }
-        
-        interactiveInput.textContent = '';
-        scrollToBottom();
-        interactiveInput.focus();
-        updatePromptUI();
-    }
-    
-    else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-        event.preventDefault();
-        if (commandHistory.length === 0) return;
-        
-        if (event.key === 'ArrowUp') {
-            historyIndex = Math.max(0, historyIndex - 1);
-        } else {
-            historyIndex = Math.min(commandHistory.length, historyIndex + 1);
-        }
-        
-        interactiveInput.textContent = commandHistory[historyIndex] || '';
-        
-        const range = document.createRange();
-        const sel = window.getSelection();
-        if (interactiveInput.childNodes.length > 0) {
-            range.selectNodeContents(interactiveInput);
-            range.collapse(false);
-            sel.removeAllRanges();
-            sel.addRange(range);
-        }
-    }
-    
-    else if (event.key === 'Tab') {
-        event.preventDefault();
-        const now = Date.now();
-        const isDoubleTab = (now - lastTabTime < 300);
-        lastTabTime = now;
-
-        const fullInput = interactiveInput.textContent; 
-
-        const tokens = fullInput.split(/(\s+)/); 
-        const lastToken = tokens[tokens.length - 1];
-        const isCommandPosition = (tokens.filter(t => t.trim().length > 0).length <= 1);
-
-        const data = getAutocompleteData(lastToken.trim(), isCommandPosition);
-        
-        if (data.matches.length === 0) {
-            return;
-        }
-
-        const commonPrefix = getCommonPrefix(data.matches);
-
-        let prefixToAdd = commonPrefix;
-        let completedToken = "";
-
-        const slashIndex = lastToken.lastIndexOf('/');
-        if (slashIndex !== -1) {
-            completedToken = lastToken.substring(0, slashIndex + 1) + commonPrefix;
-        } else {
-            completedToken = commonPrefix;
-        }
-
-        if (completedToken.length > lastToken.length) {
-            tokens[tokens.length - 1] = completedToken;
-            interactiveInput.textContent = tokens.join('');
-            
-            const range = document.createRange();
-            const sel = window.getSelection();
-            range.selectNodeContents(interactiveInput);
-            range.collapse(false);
-            sel.removeAllRanges();
-            sel.addRange(range);
-        }
-
-        if (isDoubleTab && data.matches.length > 1) {
-            appendPrompt(interactiveInput.textContent);
-            const gridHTML = formatSuggestionGrid(data.matches, data.parentPath);
-            appendOutput(gridHTML);
-        }
-    }
-});
-terminalWindow.addEventListener('click', () => {
-    const selection = window.getSelection();
-    if (selection.toString().length === 0) {
-        interactiveInput.focus({ preventScroll: true });
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded',async () => {
-    interactiveInput.focus();
-    updatePromptUI();
-
-    if (typeof executeCommand === 'function') {
-        const result = await executeCommand('help', []);
-        if (result.output) {
-            appendOutput(result.output);
-        }
-    }
-
-    scrollToBottom();
-});
+function scrollToBottom() {
+    const win = document.querySelector('.terminal-window');
+    if (win) win.scrollTop = win.scrollHeight;
+}
