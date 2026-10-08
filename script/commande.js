@@ -111,69 +111,81 @@ function formatItemName(item, parentPath) {
     }
 }
 
-async function handleBat(args) {
+async function handleCat(args) {
     if (args.includes('--help')) {
-        return { output: `<span class="system-message">Usage: bat ... [FILE]...</span><br>
+        return { output: `<span class="system-message">Usage: cat ... [FILE]...</span><br>
         Display the files passed as attributes.<br><br>
-
-        <span class="bat-highlight-lang">-C</span>  show competences implieds with the project<br>
-    ` };
+        <span class="bat-highlight-lang">-C</span> show competences implied with the project<br>` };
     }
 
     if (args.length === 0) {
-        return { output: `<span class="bat-color-error">bat: no input file</span>` };
+        return { output: `<span class="bat-color-error">cat: no input file</span>` };
     }
 
     const target = args[0];
     const fullPath = normalizePath(target);
-    
-    const GITHUB_PAGE_PATH = "/home/martin/github/XanderTheRat.github.io";
-    const GITHUB_PAGE_RAW = "https://raw.githubusercontent.com/XanderTheRat/XanderTheRat.github.io/portfolio_V2";
 
-    const GITHUB_BASE_PATH = "/home/martin/github/BUT1";
-    const GITHUB_RAW_URL = "https://raw.githubusercontent.com/XanderTheRat/BUT1/main";
-
-    if (!fullPath.startsWith(GITHUB_BASE_PATH) && !fullPath.startsWith(GITHUB_PAGE_PATH) ){
-        return { output: `<span class="bat-color-error">bat: only supported for files in ~/github/BUT1 for now.</span>` };
+    if (!fullPath.startsWith('/home/martin/github/')) {
+        return { output: `<span class="bat-color-error">cat: only supported for files in ~/github/ for now.</span>` };
     }
 
     const parentDir = fullPath.substring(0, fullPath.lastIndexOf('/'));
     const fileName = fullPath.substring(fullPath.lastIndexOf('/') + 1);
     
     if (!isDirectory(parentDir) || !getPathContent(parentDir).includes(fileName) || isDirectory(fullPath)) {
-         if (isDirectory(fullPath)) return { output: `<span class="bat-color-error">bat: ${target}: Is a directory</span>` };
-         return { output: `<span class="bat-color-error">bat: ${target}: No such file or directory</span>` };
+         if (isDirectory(fullPath)) return { output: `<span class="bat-color-error">cat: ${target}: Is a directory</span>` };
+         return { output: `<span class="bat-color-error">cat: ${target}: No such file or directory</span>` };
     }
-    let fileUrl;
-    let relativePath;
 
+    const pathAfterGithub = fullPath.substring('/home/martin/github/'.length);
+    const slashIdx = pathAfterGithub.indexOf('/');
+    const repoName = slashIdx === -1 ? pathAfterGithub : pathAfterGithub.substring(0, slashIdx);
+    const relativePath = slashIdx === -1 ? '' : pathAfterGithub.substring(slashIdx);
 
-    if (fullPath.startsWith(GITHUB_BASE_PATH)) {
-        relativePath = fullPath.substring(GITHUB_BASE_PATH.length);
-        fileUrl = GITHUB_RAW_URL + relativePath;    
-    } 
-    if (fullPath.startsWith(GITHUB_PAGE_PATH)) {
-        relativePath = fullPath.substring(GITHUB_PAGE_PATH.length);
-        fileUrl = GITHUB_PAGE_RAW + relativePath;
+    let rawBaseUrl;
+    if (typeof GITHUB_PROJECTS !== 'undefined' && GITHUB_PROJECTS[repoName]) {
+        rawBaseUrl = GITHUB_PROJECTS[repoName].raw;
+    } else {
+        rawBaseUrl = `https://raw.githubusercontent.com/XanderTheRat/${repoName}/main`;
     }
-    
+
+    const fileUrl = rawBaseUrl + relativePath;
+
     try {
+        const extension = fileName.split('.').pop().toLowerCase();
+        
+        if (['png', 'webp', 'jpg', 'jpeg', 'gif', 'ico'].includes(extension)) {
+            return { output: `<img src="${fileUrl}" alt="${fileName}" style="max-width: 100%; max-height: 400px; display: block; margin: 8px 0;">` };
+        }
+        if (extension === 'pdf') {
+            return { output: `<span class="system-message">PDF document: <a href="${fileUrl}" target="_blank" style="color: #61afef; text-decoration: underline;">Open ${fileName} in new tab</a></span>` };
+        }
+
         const response = await fetch(fileUrl);
         if (!response.ok) throw new Error("File not found on GitHub");
         let text = await response.text();
         
-        const extension = fileName.split('.').pop();
         let language = 'plaintext';
-        if (['c', 'h'].includes(extension)) language = 'c';
-        else if (['java', 'class'].includes(extension)) language = 'java';
-        else if (['py'].includes(extension)) language = 'python';
-        else if (['html', 'xml', 'iml'].includes(extension)) language = 'xml';
-        else if (['css'].includes(extension)) language = 'css';
-        else if (['js'].includes(extension)) language = 'javascript';
-        else if (['sql'].includes(extension)) language = 'sql';
-        else if (['php'].includes(extension)) language = 'php';
-        else if (['rs'].includes(extension)) language = 'rust';
-        else if (['md'].includes(extension)) language = 'markdown';
+        const langMap = {
+            'c': 'c', 'h': 'c',
+            'java': 'java',
+            'kt': 'kotlin',
+            'py': 'python',
+            'html': 'xml', 'xml': 'xml', 'iml': 'xml', 'svg': 'xml',
+            'css': 'css',
+            'js': 'javascript',
+            'json': 'json', 'jsonc': 'json',
+            'sql': 'sql',
+            'php': 'php',
+            'rs': 'rust',
+            'md': 'markdown',
+            'toml': 'toml',
+            'sh': 'bash', 'bash': 'bash',
+            'yaml': 'yaml', 'yml': 'yaml',
+            'conf': 'ini', 'properties': 'ini',
+            'gradle': 'groovy'
+        };
+        language = langMap[extension] || 'plaintext';
 
         text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -188,8 +200,24 @@ async function handleBat(args) {
         return { output: `<pre>${text}</pre>` };
 
     } catch (error) {
-        return { output: `<span class="bat-color-error">bat: error fetching file: ${error.message}</span>` };
+        return { output: `<span class="bat-color-error">cat: error fetching file: ${error.message}</span>` };
     }
+}
+const handleBat = handleCat;
+
+function handleTree(args) {
+    if (args.includes('--help')) {
+        return { output: `<span class="system-message">Usage: tree [DIRECTORY]</span><br>
+        Display an interactive graphical tree view of the filesystem in another window.<br>
+        Click on a branch to navigate to a folder, or click on a leaf to print the file.<br><br>
+        <span class="bat-highlight-lang">DIRECTORY</span>  Optional target directory (current path by default)` };
+    }
+
+    const target = args[0] ? normalizePath(args[0]) : shellState.currentPath;
+    if (typeof openTreeWindow === 'function') {
+        openTreeWindow(target);
+    }
+    return { output: `<span class="system-message">🌳 Tree window opened for <span class="path">${target}</span>. Click on a branch to cd, or a leaf to cat the file.</span>` };
 }
 
 function generateLsListing(path, options) {
